@@ -382,7 +382,59 @@ md-list-item.md-3-line, md-list-item.md-3-line>.md-no-style {
   .md-switch.md-default-theme.md-checked.md-primary .md-thumb, md-switch.md-checked.md-primary .md-thumb {
     background-color: #0db9f0 !important;
   }
+  .loaderWhiteframe {
+    height: 100%;    max-height: 100% !important;    width: 100%;    max-width: 100% !important; background-color: snow; display: grid;
+  }
+  .loaderWhiteframe::after {
+    content: "";
+    background-image: url('./img/imageLoading.png');
+    opacity: 0.15;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: 99999;
+  }
+  .md-subheader .md-subheader-inner {
+    display: block;
+    padding: 0px !important;
+    padding-left: 16px !important;
+  }
   /* MAKE CSS AVAILABLE FOR HEIGHT 698 AND WIDTH 1242 */
+  .contentLayers {
+     max-height: 100vh !important;
+  }
+  .contentOptions {
+     max-height: 100vh !important;
+     overflow: hidden !important;
+  }
+  @media (max-height: 890px) {
+    .contentLayers {
+       max-height: 43vh !important;
+    }
+    .contentOptions {
+       max-height: 15vh !important;
+    }
+  }
+  @media (max-height: 790px) {
+    .contentLayers {
+       max-height: 45vh !important;
+    }
+    .contentOptions {
+       max-height: 10vh !important;
+       overflow: auto !important;
+    }
+  }
+  @media (max-height: 690px) {
+    .contentLayers {
+       max-height: 40vh !important;
+    }
+    .contentOptions {
+       max-height: 10vh !important;
+       overflow: auto !important;
+    }
+  }
   </style>
 </head>
 
@@ -404,8 +456,11 @@ md-list-item.md-3-line, md-list-item.md-3-line>.md-no-style {
            <!---->
            <md-toolbar class="md-theme-light" style="background-color: #282828 !important; height: 50px; min-height: 10px !important;"> <h2 class="md-toolbar-tools"> <span>Layers</span> </h2>
           </md-toolbar>
-            <md-content class="md-padding demo checkboxdemoSelectAll" style="padding-top: 10px; width: 310px;">
+            <md-content class="md-padding demo checkboxdemoSelectAll contentLayers" style="padding-top: 10px; width: 310px; font-size: 0.75rem;">
               <md-list>
+                <md-subheader class="md-no-sticky">Activity groups
+                  <md-tooltip md-direction="top">Principal activities of companies.</md-tooltip>
+                </md-subheader>
                 <md-list-item class="md-3-line">
                   <div class="md-list-item-text">
                     <md-checkbox ng-model="data.g1" ng-change="changeGroups()"> Trade, transport and cattering </md-checkbox>
@@ -430,6 +485,10 @@ md-list-item.md-3-line, md-list-item.md-3-line>.md-no-style {
                   </div>
                   <span ng-attr-style="border: 1px solid #333; background: hsl(180, 50%, 60%); height: 20px; width: 25px; margin-top: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 </md-list-item>
+                <md-subheader class="md-no-sticky">Gross Domestic Product per capita
+                  <md-tooltip md-direction="top">This is a monetary measure of the market value of all the final goods and services produced in a period of time.</md-tooltip>
+
+                </md-subheader>
                 <md-list-item class="md-3-line">
                   <div class="md-list-item-text">
                     <md-checkbox  ng-disabled="false" ng-model="data.gdp" ng-init="data.gdp=true"
@@ -453,21 +512,23 @@ md-list-item.md-3-line, md-list-item.md-3-line>.md-no-style {
               <md-toolbar class="md-theme-light" style="background-color: #282828 !important; height: 50px; min-height: 10px !important;"> <h2 class="md-toolbar-tools"> <span>Options</span> </h2>
 
            </md-toolbar>
-           <md-content class="md-padding demo checkboxdemoSelectAll" style="padding-top: 0px; padding-bottom: 0px; overflow: hidden; width: 310px;">
+           <md-content class="md-padding demo checkboxdemoSelectAll contentOptions" style="padding-top: 0px; padding-bottom: 0px; overflow: auto; width: 310px;">
              <md-list>
                <md-list-item class="md-3-line">
                  <div class="md-list-item-text">
                    <md-switch id="buttonOptionStandardized" class="md-primary" ng-model="data.opt1" ng-click="changeOptionStandardized()">
-                     Standardized
+                     Standardized values
                    </md-switch>
                  </div>
+                 <md-tooltip md-direction="right">Number of companies per 1000 inhabitants</md-tooltip>
                </md-list-item>
                <md-list-item class="md-3-line">
                  <div class="md-list-item-text">
                    <md-switch id="buttonOptionUpper" class="md-primary" ng-model="data.opt2" ng-click="changeOptionUpper()">
-                     Highest
+                     Highest group
                    </md-switch>
                  </div>
+                 <md-tooltip md-direction="right">Show the highest group in Spain</md-tooltip>
                </md-list-item>
              </md-list>
              <!--<md-button id="buttonOptionUpper" ng-click="changeOptionUpper()" class="md-raised optionButtonUpper">Highest
@@ -480,11 +541,10 @@ md-list-item.md-3-line, md-list-item.md-3-line>.md-no-style {
           </md-whiteframe>
           <div id="loaderContent" layout="row" layout-padding layout-wrap layout-fill style="position: absolute; z-index: 999999;" ng-cloak>
 
-            <md-whiteframe class="md-whiteframe-24dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout layout-align="center center"
-             style="height: 100%;    max-height: 100% !important;    width: 100%;    max-width: 100% !important;    background-color: snow;     display: grid;">
+            <md-whiteframe class="md-whiteframe-24dp loaderWhiteframe" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout layout-align="center center">
               <span style="padding-left: 50vh;"> {{messageLoader}} </span>
               <br>
-              <div id="messageLoader"></div>
+              <div id="messageLoader" style="font-size: 14px;"></div>
               <div id="myProgress">
                 <div id="myBar"></div>
               </div>
@@ -492,7 +552,7 @@ md-list-item.md-3-line, md-list-item.md-3-line>.md-no-style {
           </div>
 
         </div>
-        <div id="overviewMap" class="md-whiteframe-4dp" style="height:150px;width:300px; left:1em;bottom:1em; position: absolute;  background-color: #e2f2fa; border: #282828 1px solid;"></div>
+        <div id="overviewMap" class="md-whiteframe-4dp" style="height:150px;width:307.5px; left:0.5em;bottom:0.5em; position: absolute;  background-color: #e2f2fa; border: #282828 1px solid;"></div>
       </div>
     </div>
   </div>
