@@ -1,0 +1,24 @@
+{
+"type": "FeatureCollection",
+"name": "regions",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "Codigo": "01", "Texto": "ANDALUCIA", "companies": { "2008": [ 55, 21, 20, 31 ], "2012": [ 50, 15, 18, 31 ], "2017": [ 51, 13, 20, 36 ] } }, "geometry": { "type": "Point", "coordinates": [ -497726.54, 4486477.22 ] } },
+{ "type": "Feature", "properties": { "Codigo": "02", "Texto": "ARAGÓN", "companies": { "2008": [ 55, 28, 20, 40 ], "2012": [ 51, 21, 19, 41 ], "2017": [ 51, 19, 22, 47 ] } }, "geometry": { "type": "Point", "coordinates": [ -76667.834222091536503, 5045017.516703289933503 ] } },
+{ "type": "Feature", "properties": { "Codigo": "03", "Texto": "ASTURIAS", "companies": { "2008": [ 59, 22, 20, 34 ], "2012": [ 55, 10, 19, 36 ], "2017": [ 53, 16, 21, 41 ] } }, "geometry": { "type": "Point", "coordinates": [ -668381.36, 5353242.5 ] } },
+{ "type": "Feature", "properties": { "Codigo": "04", "Texto": "BALEARES", "companies": { "2008": [ 64, 38, 29, 43 ], "2012": [ 57, 27, 27, 42 ], "2017": [ 56, 28, 32, 51 ] } }, "geometry": { "type": "Point", "coordinates": [ 331852.41, 4798049.73 ] } },
+{ "type": "Feature", "properties": { "Codigo": "05", "Texto": "CANARIAS", "companies": { "2008": [ 61, 22, 23, 32 ], "2012": [ 56, 15, 22, 32 ], "2017": [ 55, 14, 25, 40 ] } }, "geometry": { "type": "Point", "coordinates": [ -1751629.55, 3268729.09 ] } },
+{ "type": "Feature", "properties": { "Codigo": "06", "Texto": "CANTABRIA", "companies": { "2008": [ 57, 28, 19, 35 ], "2012": [ 53, 21, 19, 36 ], "2017": [ 52, 19, 21, 42 ] } }, "geometry": { "type": "Point", "coordinates": [ -451583.84, 5334010.99 ] } },
+{ "type": "Feature", "properties": { "Codigo": "07", "Texto": "CASTILLA Y LEÓN", "companies": { "2008": [ 58, 26, 17, 33 ], "2012": [ 55, 21, 17, 35 ], "2017": [ 54, 19, 19, 41 ] } }, "geometry": { "type": "Point", "coordinates": [ -568353.350042100413702, 5098596.899991904385388 ] } },
+{ "type": "Feature", "properties": { "Codigo": "08", "Texto": "CASTILLA-LA MANCHA", "companies": { "2008": [ 56, 32, 14, 33 ], "2012": [ 52, 22, 14, 33 ], "2017": [ 52, 19, 16, 39 ] } }, "geometry": { "type": "Point", "coordinates": [ -294386.928359741403256, 4733112.372278310358524 ] } },
+{ "type": "Feature", "properties": { "Codigo": "09", "Texto": "CATALUÑA", "companies": { "2008": [ 62, 32, 28, 48 ], "2012": [ 58, 22, 27, 49 ], "2017": [ 56, 19, 31, 55 ] } }, "geometry": { "type": "Point", "coordinates": [ 178955.802111045777565, 5118361.764222091063857 ] } },
+{ "type": "Feature", "properties": { "Codigo": "10", "Texto": "COMUNIDAD VALENCIANA", "companies": { "2008": [ 60, 28, 22, 40 ], "2012": [ 55, 19, 21, 39 ], "2017": [ 54, 17, 24, 47 ] } }, "geometry": { "type": "Point", "coordinates": [ -63637.853580101800617, 4763899.816246376372874 ] } },
+{ "type": "Feature", "properties": { "Codigo": "11", "Texto": "EXTREMADURA", "companies": { "2008": [ 58, 20, 15, 30 ], "2012": [ 54, 17, 15, 31 ], "2017": [ 54, 15, 16, 36 ] } }, "geometry": { "type": "Point", "coordinates": [ -663712.899982188246213, 4712649.159972471185029 ] } },
+{ "type": "Feature", "properties": { "Codigo": "12", "Texto": "GALICIA", "companies": { "2008": [ 64, 27, 19, 35 ], "2012": [ 60, 23, 20, 37 ], "2017": [ 59, 22, 23, 44 ] } }, "geometry": { "type": "Point", "coordinates": [ -878187.984487451496534, 5245258.884101105853915 ] } },
+{ "type": "Feature", "properties": { "Codigo": "13", "Texto": "MADRID", "companies": { "2008": [ 55, 27, 38, 46 ], "2012": [ 50, 20, 36, 48 ], "2017": [ 48, 18, 40, 56 ] } }, "geometry": { "type": "Point", "coordinates": [ -412117.06, 4921862.54 ] } },
+{ "type": "Feature", "properties": { "Codigo": "14", "Texto": "MURCIA", "companies": { "2008": [ 56, 30, 19, 35 ], "2012": [ 51, 19, 18, 33 ], "2017": [ 51, 17, 20, 39 ] } }, "geometry": { "type": "Point", "coordinates": [ -153258.340185076463968, 4556280.538259107619524 ] } },
+{ "type": "Feature", "properties": { "Codigo": "15", "Texto": "NAVARRA", "companies": { "2008": [ 55, 27, 23, 37 ], "2012": [ 51, 20, 21, 37 ], "2017": [ 52, 19, 24, 42 ] } }, "geometry": { "type": "Point", "coordinates": [ -171051.548043309943751, 5249492.340601310133934 ] } },
+{ "type": "Feature", "properties": { "Codigo": "16", "Texto": "PAÍS VASCO", "companies": { "2008": [ 63, 29, 24, 46 ], "2012": [ 55, 23, 23, 43 ], "2017": [ 49, 17, 22, 39 ] } }, "geometry": { "type": "Point", "coordinates": [ -276845.163431103224866, 5339159.485258233733475 ] } },
+{ "type": "Feature", "properties": { "Codigo": "17", "Texto": "LA RIOJA", "companies": { "2008": [ 57, 29, 20, 44 ], "2012": [ 53, 21, 19, 46 ], "2017": [ 53, 19, 21, 54 ] } }, "geometry": { "type": "Point", "coordinates": [ -295240.599378689134028, 5172629.477834130637348 ] } }
+]
+}

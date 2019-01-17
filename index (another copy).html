@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>OpenTransport</title>
+  <!-- Bootstrap core CSS-->
+  <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="./vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="./css/sb-admin.css" rel="stylesheet">
+  <link href="./css/ol.css" rel="stylesheet">
+  <!-- ol-ext -->
+  <link rel="stylesheet" href="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.css" />
+
+  <link rel="stylesheet" href="./css/ol-geocoder.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/ol-contextmenu@latest/dist/ol-contextmenu.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/ol-popup.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- ANGULAR MATERIAL -->
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
+  <!-- Angular Material Library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+
+  <!-- jsPanel CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/jspanel.css" rel="stylesheet">
+  <script src="https://files.codepedia.info/files/uploads/iScripts/html2canvas.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.4.1/proj4.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.4.1/proj4-src.js"></script>
+  <!-- JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://use.fontawesome.com/c79e2f3459.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+  <script src="./js/ol-layerswitcher.js"></script>
+  <link rel="stylesheet" href="./css/ol-layerswitcher.css" />
+  <script src="./js/jspdf.min.js"></script>
+  <!-- OL-ext -->
+  <link rel="stylesheet" href="./css/ol-ext.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/6.6.1/rzslider.min.css">
+  <style>
+
+  .navbar-expand-lg .navbar-nav .nav-link{
+    padding-left: 5px;
+    font-size: 15px;
+  }
+  body {
+    font-size: 0.75rem;
+
+  }
+  #collapseComponents11 {
+    margin-bottom: 0;
+    margin-left: -40px;
+  }
+  #collapseComponents12 {
+    margin-bottom: 0;
+    margin-left: -40px;
+  }
+  .navbar-brand {
+    display: block;
+    padding-top: .3125rem;
+    padding-bottom: .3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    line-height: inherit;
+    white-space: nowrap;
+    margin-left: 15px;
+    position: relative;
+    float: left;
+  }
+  .ol-popup {
+    background-color: rgba(0,0,0,0.75);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    display: inline-flex;
+    width: auto;
+  }
+  .ol-popup-content {
+    border: 0px;
+    padding: 0;
+  }
+  .tooltip {
+    position: relative;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    color: white;
+    padding: 4px 8px;
+    opacity: 0.7;
+    white-space: nowrap;
+  }
+  .tooltip-measure {
+    opacity: 1;
+    font-weight: bold;
+  }
+  .tooltip-static {
+    background-color: #ffcc33;
+    color: black;
+    border: 1px solid white;
+  }
+  .tooltip-measure:before,
+  .tooltip-static:before {
+    border-top: 6px solid rgba(0, 0, 0, 0.5);
+    border-right: 6px solid transparent;
+    border-left: 6px solid transparent;
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    margin-left: -7px;
+    left: 50%;
+  }
+  .tooltip-static:before {
+    border-top-color: #ffcc33;
+  }
+  .ol-geocoder.gcd-txt-container {
+    position: fixed;
+    width: 150px;
+    height: 40px;
+    top: 5px;
+    right: 90px;
+    box-sizing: border-box;
+    border: 1px solid #101215;
+    border-radius: 4px;
+    z-index: 9999;
+  }
+  .ol-geocoder ul.gcd-txt-result {
+    top: 45px;
+  }
+  /*sidenav herramientas*/
+
+  .moveSideButtonLayersOpened {
+    position: fixed; top: 40%; left: 275px; font-size: 8px;z-index: 1;
+    transition-timing-function: ease;  transition-duration: 0.25s;
+    height: 90px;
+    width: 45px;
+    border-bottom-right-radius: 90px;
+    border-top-right-radius: 90px;
+    padding-right: 7.5px;
+    cursor: pointer;
+    color: ghostwhite;
+    background-color: #417d97 !important;
+  }
+  .moveSideButtonLayersClosed {
+    position: fixed; top: 40%; left: -5px; font-size: 8px;z-index: 1;
+    transition-timing-function: ease; transition-duration: 0.25s;
+    height: 90px;
+    width: 45px;
+    border-bottom-right-radius: 90px;
+    border-top-right-radius: 90px;
+    padding-right: 7.5px;
+    cursor: pointer;
+    color: ghostwhite;
+    background-color: #417d97 !important;
+  }
+  .moveSideButtonToolsOpened {
+    position: fixed; top: 40%; right: 275px; font-size: 8px;z-index: 1;
+    transition-timing-function: ease;  transition-duration: 0.25s;
+    height: 90px;
+    width: 45px;
+    border-bottom-left-radius: 90px;
+    border-top-left-radius: 90px;
+    padding-left: 7.5px;
+    cursor: pointer;
+    color: ghostwhite;
+    background-color: #417d97 !important;
+
+  }
+  .moveSideButtonToolsClosed {
+    position: fixed; top: 40%; right: -5px; font-size: 8px;z-index: 1;
+    transition-timing-function: ease; transition-duration: 0.25s;
+    height: 90px;
+    width: 45px;
+    border-bottom-left-radius: 90px;
+    border-top-left-radius: 90px;
+    padding-left: 7.5px;
+    cursor: pointer;
+    color: ghostwhite;
+    background-color: #417d97 !important;
+
+  }
+
+  md-sidenav {
+    box-sizing: border-box;
+    position: absolute;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    z-index: 60;
+    width: 275px;
+    max-width: 275px;
+    bottom: 0;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .md-button {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    min-height: 36px;
+    min-width: 46.5px;
+    line-height: 36px;
+    padding-top: 10px;
+  }
+
+  md-checkbox.md-default-theme.md-checked .md-icon, md-checkbox.md-checked .md-icon{
+    background-color: #c4dbdf;
+  }
+
+  .legend {
+    margin-top:5px;margin-bottom:5px;margin-left:2.5px;margin-right:2.5px;
+  }
+
+  .textLogin{
+    display: block;
+    position: absolute;
+    top: 1em;
+    left: 50%;
+    color: white;
+    z-index: 9999;
+    font: italic 14px Verdana;
+
+  }
+
+  .ol-custom-overviewmap,
+  .ol-custom-overviewmap.ol-uncollapsible {
+    top: auto;
+    right: auto;
+    left: 0;
+    bottom: 0;
+  }
+
+  .ol-custom-overviewmap:not(.ol-collapsed)  {
+    border: 1px solid black;
+  }
+
+  .ol-custom-overviewmap .ol-overviewmap-map {
+    border: none;
+    width: 250px;
+  }
+
+  .ol-custom-overviewmap .ol-overviewmap-box {
+    border: 2px solid red;
+  }
+
+  .ol-custom-overviewmap:not(.ol-collapsed) button{
+    bottom: auto;
+    right: auto;
+    left: 1px;
+    bottom: 1px;
+    display: none;
+  }
+  .rzslider {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      height: 4px;
+      margin: 22.5px 15px 15px 15px !important;
+      vertical-align: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      margin-left: 15em !important;
+      margin-right: 15em !important;
+  }
+  #myProgress {
+  width: 100%;
+  background-color: #ddd;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: #282828 ;
+}
+  </style>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top" ng-app="NATURA" ng-controller="naturaController">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="height: 50px !important; background-color: #282828 !important;" id="mainNav">
+    <a class="navbar-brand" href="/">COMPANIES IN SPAIN FROM 2008 TO 2017</a>
+    <ul class="navbar-nav ml-auto" style="margin-right: 70px;">
+      <div id="coor" style="display: none;"></div>
+    </ul>
+  </nav>
+  <div class="content-wrapper main container toolRoute">
+    <div class="container-fluid">
+      <div id="contenedor" style="height:calc(100% - 80px); width:100%; left:0px;top:50px;position:absolute;">
+        <div id="olMap" style="height:100%;width:100%; left:0;top:0; position: absolute; background-color: #417d97;">
+          <div id="loaderContent" layout="row" layout-padding layout-wrap layout-fill style="position: absolute; z-index: 999999;" ng-cloak>
+
+            <md-whiteframe class="md-whiteframe-24dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout layout-align="center center"
+             style="height: 100%;    max-height: 100% !important;    width: 100%;    max-width: 100% !important;    background-color: snow;     display: grid;">
+              <span style="padding-left: 50vh;"> {{messageLoader}} </span>
+              <br>
+              <div id="messageLoader"></div>
+              <div id="myProgress">
+                <div id="myBar"></div>
+              </div>
+            </md-whiteframe>
+          </div>
+
+        </div>
+        <div id="overviewMap" style="height:200px;width:250px; left:1em;bottom:1em; position: absolute;  background-color: #417d97; border: ghostwhite 1px solid;"></div>
+      </div>
+    </div>
+  </div>
+  <div id="scale-line"></div>
+
+  <div id="containerCanvasPIB" style="max-width: 850px; max-height: 550px; width: 850px; height: 550px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas" style="max-width: 400px; max-height: 250px; width: 400px; height: 250px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2008" style="max-width: 400px; max-height: 250px; width: 400px; height: 250px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2009" style="max-width: 400px; max-height: 250px; width: 400px; height: 250px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2010" style="max-width: 400px; max-height: 250px; width: 400px; height: 250px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2011" style="max-width: 400px; max-height: 250px; width: 400px; height: 250px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2012" style="max-width: 400px; max-height: 250px; width: 400px; height: 250px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2013" style="max-width: 400px; max-height: 250px; width: 400px; height: 250px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2014" style="max-width: 400px; max-height: 250px; width: 400px; height: 250px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2015" style="max-width: 400px; max-height: 250px; width: 400px; height: 250px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2016" style="max-width: 400px; max-height: 250px; width: 400px; height: 250px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2017" style="max-width: 400px; max-height: 250px; width: 400px; height: 250px; position: fixed; z-index: -10;"></div>
+  <footer class="sticky-footer" style="background-color: #282828;">
+    <div layout style="margin-top: -10px; width: 90%;">
+      <div flex="10" layout layout-align="center center">
+      </div>
+      <!--<md-slider flex class="md-primary" md-discrete ng-model="yearSelected" ng-change="onChangeYear($event)" step="1" min="2008" max="2017"  aria-label="years">
+      </md-slider>-->
+      <rzslider id="sliderRZ" rz-slider-model="slider.value" rz-slider-options="slider.options"></rzslider>
+    </div>
+    <div class="container">
+      <div class="text-center">
+        <div style="display: none; position: fixed; bottom: -5px; right: 650px; ">Coordenadas WGS84 geográficas	</div>
+        <div id="mouse-position2" style="display: none; position: fixed; bottom: -5px; right: 500px;">	</div>
+        <div style="display: none; position: fixed; bottom: -5px; right: 450px;">UTM </div>
+        <div id="mouse-position3" style="display: none; position: fixed; bottom: -5px; right: 315px; "> </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <!-- Bootstrap core JavaScript-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/6.6.1/rzslider.min.js"></script>
+  <script src="./vendor/jquery/jquery.min.js"></script>
+  <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="./vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="./vendor/chart.js/Chart.min.js"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="./js/sb-admin.min.js"></script>
+
+  <script src="./js/request.js"></script>
+  <script src="./js/main.js"></script>
+  <script src="./js/imagetracer.js"></script>
+  <link rel='stylesheet' href='https://rawgit.com/rzajac/angularjs-slider/master/dist/rzslider.css'>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.js"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/4.0.1/ol.js"></script>
+  <!-- jsPanel JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/jspanel.js"></script>
+  <!-- optionally jsPanel extensions -->
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/extensions/modal/jspanel.modal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/extensions/tooltip/jspanel.tooltip.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/extensions/hint/jspanel.hint.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/extensions/layout/jspanel.layout.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/extensions/contextmenu/jspanel.contextmenu.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/extensions/dock/jspanel.dock.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/ol-contextmenu"></script>
+
+  <script src="https://unpkg.com/ol-popup@3.0.0"></script>
+  <script src="./js/ol-geocoder.js"></script>
+  <script src="./js/featureanimation.js"></script>
+  <script src="./js/zoomanimation.js"></script>
+
+  <script type="text/javascript" src="./js/ol-ext.js"></script>
+  <script type="text/javascript" src="js/regions.js"></script>
+  <script>
+
+  //	ANGULAR
+  var sesion = angular.module('NATURA', ['ngMaterial', 'ngMessages', 'rzModule']);
+  sesion.controller('naturaController',['$scope','$http','$mdSidenav','$mdToast', function ($scope, $http, $mdSidenav, $mdToast) {
+    $scope.yearSelected = 2008;
+
+    function move() {
+      var element = document.getElementById("myBar");
+      var width = 0;
+      var id = setInterval(frame, 100);
+      function frame() {
+        var element = document.getElementById("myBar");
+        var message = document.getElementById("messageLoader");
+        if (width == 0) message.innerHTML = 'Loading...';
+        if (width == 25) message.innerHTML = 'Loading styles...';
+        if (width == 50) message.innerHTML = 'Loading styles...';
+        if (width == 75) message.innerHTML = 'Loading layers...';
+        if (width >= 100) {
+          clearInterval(id);
+          document.getElementById("loaderContent").style.zIndex = '0';
+        } else {
+          width++;
+          element.style.width = width + '%';
+        }
+      }
+    };
+    move();
+
+    var currentdate = new Date();
+    var datetime = "2018-" + currentdate.getMonth() + "-" + currentdate.getDate();
+    var centroids = {
+      "type": "FeatureCollection",
+      "name": "regions",
+      "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+      "features": [
+        { "type": "Feature", "properties": { "Codigo": "01", "Texto": "ANDALUCIA",
+        companies: {"2008": [55, 21, 20, 31], "2009": [0, 0, 0, 0], "2010": [0, 0, 0, 0], "2011": [0, 0, 0, 0], "2012": [50,15,18,31],
+        "2013": [0, 0, 0, 0], "2014": [0, 0, 0, 0], "2015": [0, 0, 0, 0], "2016": [0, 0, 0, 0], "2017": [51,13,20,36]},
+        gdp: {"2008": 18625, "2009": 17747, "2010": 17599, "2011": 17318, "2012": 16666, "2013": 16379, "2014": 16576, "2015": 17271, "2016": 17790, "2017": 18470} },
+        "geometry": { "type": "Point", "coordinates": [-497726.54,4486477.22]}},
+        { "type": "Feature", "properties": { "Codigo": "02", "Texto": "ARAGÓN",
+        companies: {"2008": [55, 28, 20, 40], "2009": [0, 0, 0, 0], "2010": [0, 0, 0, 0], "2011": [0, 0, 0, 0], "2012": [51, 21, 19, 41],
+        "2013": [0, 0, 0, 0], "2014": [0, 0, 0, 0], "2015": [0, 0, 0, 0], "2016": [0, 0, 0, 0], "2017": [51, 19, 22, 47]},
+        gdp: {"2008": 26650, "2009": 25391, "2010": 25603, "2011": 25227, "2012": 24267, "2013": 24417, "2014": 24694, "2015": 25302, "2016": 26097, "2017": 27403} },
+        "geometry": { "type": "Point", "coordinates": [-84974.57,5071322.18]}},
+        { "type": "Feature", "properties": { "Codigo": "03", "Texto": "ASTURIAS",
+        companies: {"2008": [59, 22, 20, 34], "2009": [0, 0, 0, 0], "2010": [0, 0, 0, 0], "2011": [0, 0, 0, 0], "2012": [55, 18, 19, 36],
+        "2013": [0, 0, 0, 0], "2014": [0, 0, 0, 0], "2015": [0, 0, 0, 0], "2016": [0, 0, 0, 0], "2017": [53, 16, 21, 41]},
+        gdp: {"2008": 22336, "2009": 21110, "2010": 21250, "2011": 20895, "2012": 20005, "2013": 19445, "2014": 19508, "2015": 20324, "2016": 20855, "2017": 22046} },
+        "geometry": { "type": "Point", "coordinates": [-668381.36,5353242.50]}},
+        { "type": "Feature", "properties": { "Codigo": "04", "Texto": "BALEARES",
+        companies: {"2008": [64, 38, 29, 43], "2009": [0, 0, 0, 0], "2010": [0, 0, 0, 0], "2011": [0, 0, 0, 0], "2012": [57, 27, 27, 42],
+        "2013": [0, 0, 0, 0], "2014": [0, 0, 0, 0], "2015": [0, 0, 0, 0], "2016": [0, 0, 0, 0], "2017": [56, 28, 32, 51]},
+        gdp: {"2008": 25717, "2009": 24260, "2010": 24084, "2011": 23762, "2012": 23224, "2013": 22924, "2014": 23473, "2015": 24198, "2016": 25063, "2017": 25772} },
+        "geometry": { "type": "Point", "coordinates": [331852.41,4798049.73]}},
+        { "type": "Feature", "properties": { "Codigo": "05", "Texto": "CANARIAS",
+        companies: {"2008": [61, 22, 23, 32], "2009": [0, 0, 0, 0], "2010": [0, 0, 0, 0], "2011": [0, 0, 0, 0], "2012": [56, 15, 22, 32],
+        "2013": [0, 0, 0, 0], "2014": [0, 0, 0, 0], "2015": [0, 0, 0, 0], "2016": [0, 0, 0, 0], "2017": [55, 14, 25, 40]},
+        gdp: {"2008": 21186, "2009": 20006, "2010": 20091, "2011": 19792, "2012": 19017, "2013": 18761, "2014": 18803, "2015": 19233, "2016": 19821, "2017": 20425} },
+        "geometry": { "type": "Point", "coordinates": [-1751629.55,3268729.09]}},
+        { "type": "Feature", "properties": { "Codigo": "06", "Texto": "CANTABRIA",
+        companies: {"2008": [0, 0, 0, 0], "2009": [0, 0, 0, 0], "2010": [0, 0, 0, 0], "2011": [0, 0, 0, 0], "2012": [0, 0, 0, 0],
+        "2013": [0, 0, 0, 0], "2014": [0, 0, 0, 0], "2015": [0, 0, 0, 0], "2016": [0, 0, 0, 0], "2017": [0, 0, 0, 0],},
+        gdp: {"2008": 0, "2009": 0, "2010": 0, "2011": 0, "2012": 0, "2013": 0, "2014": 0, "2015": 0, "2016": 0, "2017": 0} },
+        "geometry": { "type": "Point", "coordinates": [-451583.84,5334010.99]}},
+        { "type": "Feature", "properties": { "Codigo": "07", "Texto": "CASTILLAS Y LEÓN",
+        companies: {"2008": [0, 0, 0, 0], "2009": [0, 0, 0, 0], "2010": [0, 0, 0, 0], "2011": [0, 0, 0, 0], "2012": [0, 0, 0, 0],
+        "2013": [0, 0, 0, 0], "2014": [0, 0, 0, 0], "2015": [0, 0, 0, 0], "2016": [0, 0, 0, 0], "2017": [0, 0, 0, 0],},
+        gdp: {"2008": 0, "2009": 0, "2010": 0, "2011": 0, "2012": 0, "2013": 0, "2014": 0, "2015": 0, "2016": 0, "2017": 0} },
+        "geometry": { "type": "Point", "coordinates": [-527078.35,5106534.40]}},
+        { "type": "Feature", "properties": { "Codigo": "08", "Texto": "CASTILLA-LA MANCHA",
+        companies: {"2008": [0, 0, 0, 0], "2009": [0, 0, 0, 0], "2010": [0, 0, 0, 0], "2011": [0, 0, 0, 0], "2012": [0, 0, 0, 0],
+        "2013": [0, 0, 0, 0], "2014": [0, 0, 0, 0], "2015": [0, 0, 0, 0], "2016": [0, 0, 0, 0], "2017": [0, 0, 0, 0],},
+        gdp: {"2008": 0, "2009": 0, "2010": 0, "2011": 0, "2012": 0, "2013": 0, "2014": 0, "2015": 0, "2016": 0, "2017": 0} },
+        "geometry": { "type": "Point", "coordinates": [-299601.76,4761650.52]}},
+        { "type": "Feature", "properties": { "Codigo": "09", "Texto": "CATALUÑA",
+        companies: {"2008": [0, 0, 0, 0], "2009": [0, 0, 0, 0], "2010": [0, 0, 0, 0], "2011": [0, 0, 0, 0], "2012": [0, 0, 0, 0],
+        "2013": [0, 0, 0, 0], "2014": [0, 0, 0, 0], "2015": [0, 0, 0, 0], "2016": [0, 0, 0, 0], "2017": [0, 0, 0, 0],},
+        gdp: {"2008": 0, "2009": 0, "2010": 0, "2011": 0, "2012": 0, "2013": 0, "2014": 0, "2015": 0, "2016": 0, "2017": 0} },
+        "geometry": { "type": "Point", "coordinates": [183109.17,5126668.50]}},
+        { "type": "Feature", "properties": { "Codigo": "10", "Texto": "COMUNIDAD VALENCIANA",
+        companies: {"2008": [0, 0, 0, 0], "2009": [0, 0, 0, 0], "2010": [0, 0, 0, 0], "2011": [0, 0, 0, 0], "2012": [0, 0, 0, 0],
+        "2013": [0, 0, 0, 0], "2014": [0, 0, 0, 0], "2015": [0, 0, 0, 0], "2016": [0, 0, 0, 0], "2017": [0, 0, 0, 0],},
+        gdp: {"2008": 0, "2009": 0, "2010": 0, "2011": 0, "2012": 0, "2013": 0, "2014": 0, "2015": 0, "2016": 0, "2017": 0} },
+        "geometry": { "type": "Point", "coordinates": [-72867.56,4798049.73]}},
+        { "type": "Feature", "properties": { "Codigo": "11", "Texto": "EXTREMADURA",
+        companies: {"2008": [0, 0, 0, 0], "2009": [0, 0, 0, 0], "2010": [0, 0, 0, 0], "2011": [0, 0, 0, 0], "2012": [0, 0, 0, 0],
+        "2013": [0, 0, 0, 0], "2014": [0, 0, 0, 0], "2015": [0, 0, 0, 0], "2016": [0, 0, 0, 0], "2017": [0, 0, 0, 0],},
+        gdp: {"2008": 0, "2009": 0, "2010": 0, "2011": 0, "2012": 0, "2013": 0, "2014": 0, "2015": 0, "2016": 0, "2017": 0} },
+        "geometry": { "type": "Point", "coordinates": [-681175.40,4739636.66]}},
+        { "type": "Feature", "properties": { "Codigo": "12", "Texto": "GALICIA",
+        companies: {"2008": [0, 0, 0, 0], "2009": [0, 0, 0, 0], "2010": [0, 0, 0, 0], "2011": [0, 0, 0, 0], "2012": [0, 0, 0, 0],
+        "2013": [0, 0, 0, 0], "2014": [0, 0, 0, 0], "2015": [0, 0, 0, 0], "2016": [0, 0, 0, 0], "2017": [0, 0, 0, 0],},
+        gdp: {"2008": 0, "2009": 0, "2010": 0, "2011": 0, "2012": 0, "2013": 0, "2014": 0, "2015": 0, "2016": 0, "2017": 0} },
+        "geometry": { "type": "Point", "coordinates": [-878077.19,5247178.53]}},
+        { "type": "Feature", "properties": { "Codigo": "13", "Texto": "MADRID",
+        companies: {"2008": [0, 0, 0, 0], "2009": [0, 0, 0, 0], "2010": [0, 0, 0, 0], "2011": [0, 0, 0, 0], "2012": [0, 0, 0, 0],
+        "2013": [0, 0, 0, 0], "2014": [0, 0, 0, 0], "2015": [0, 0, 0, 0], "2016": [0, 0, 0, 0], "2017": [0, 0, 0, 0],},
+        gdp: {"2008": 0, "2009": 0, "2010": 0, "2011": 0, "2012": 0, "2013": 0, "2014": 0, "2015": 0, "2016": 0, "2017": 0} },
+        "geometry": { "type": "Point", "coordinates": [-412117.06,4921862.54]}},
+        { "type": "Feature", "properties": { "Codigo": "14", "Texto": "MURCIA",
+        companies: {"2008": [0, 0, 0, 0], "2009": [0, 0, 0, 0], "2010": [0, 0, 0, 0], "2011": [0, 0, 0, 0], "2012": [0, 0, 0, 0],
+        "2013": [0, 0, 0, 0], "2014": [0, 0, 0, 0], "2015": [0, 0, 0, 0], "2016": [0, 0, 0, 0], "2017": [0, 0, 0, 0],},
+        gdp: {"2008": 0, "2009": 0, "2010": 0, "2011": 0, "2012": 0, "2013": 0, "2014": 0, "2015": 0, "2016": 0, "2017": 0} },
+        "geometry": { "type": "Point", "coordinates": [-160180.62,4565971.73]}},
+        { "type": "Feature", "properties": { "Codigo": "15", "Texto": "NAVARRA",
+        companies: {"2008": [0, 0, 0, 0], "2009": [0, 0, 0, 0], "2010": [0, 0, 0, 0], "2011": [0, 0, 0, 0], "2012": [0, 0, 0, 0],
+        "2013": [0, 0, 0, 0], "2014": [0, 0, 0, 0], "2015": [0, 0, 0, 0], "2016": [0, 0, 0, 0], "2017": [0, 0, 0, 0],},
+        gdp: {"2008": 0, "2009": 0, "2010": 0, "2011": 0, "2012": 0, "2013": 0, "2014": 0, "2015": 0, "2016": 0, "2017": 0} },
+        "geometry": { "type": "Point", "coordinates": [-120971.49,5280415.38]}},
+        { "type": "Feature", "properties": { "Codigo": "16", "Texto": "PAÍS VASCO",
+        companies: {"2008": [0, 0, 0, 0], "2009": [0, 0, 0, 0], "2010": [0, 0, 0, 0], "2011": [0, 0, 0, 0], "2012": [0, 0, 0, 0],
+        "2013": [0, 0, 0, 0], "2014": [0, 0, 0, 0], "2015": [0, 0, 0, 0], "2016": [0, 0, 0, 0], "2017": [0, 0, 0, 0],},
+        gdp: {"2008": 0, "2009": 0, "2010": 0, "2011": 0, "2012": 0, "2013": 0, "2014": 0, "2015": 0, "2016": 0, "2017": 0} },
+        "geometry": { "type": "Point", "coordinates": [-289817.82,5325450.04]}},
+        { "type": "Feature", "properties": { "Codigo": "17", "Texto": "LA RIOJA",
+        companies: {"2008": [0, 0, 0, 0], "2009": [0, 0, 0, 0], "2010": [0, 0, 0, 0], "2011": [0, 0, 0, 0], "2012": [0, 0, 0, 0],
+        "2013": [0, 0, 0, 0], "2014": [0, 0, 0, 0], "2015": [0, 0, 0, 0], "2016": [0, 0, 0, 0], "2017": [0, 0, 0, 0],},
+        gdp: {"2008": 0, "2009": 0, "2010": 0, "2011": 0, "2012": 0, "2013": 0, "2014": 0, "2015": 0, "2016": 0, "2017": 0} },
+        "geometry": { "type": "Point", "coordinates": [-284925.85,5177035.84]}}
+      ]
+    };
+
+    console.log(centroids);
+    var options = {
+      legend: {display: false},
+      scaleShowLabels: true,
+      scale: {
+        display: false,
+        ticks: {
+          beginAtZero: true,
+          min: 10, max: 70
+        },
+      },
+      scales: { yAxes: [{ display: false, ticks: { showLabelBackdrop: false, display: false} }],
+      xAxes: [{ display: false, ticks: { showLabelBackdrop: false, display: false} }]}
+    };
+    var optionsPIB = {
+      cutoutPercentage: 90,
+      legend: {display: false},
+    };
+    var options1 = {
+      legend: {display: false},
+      scaleShowLabels: false,
+      scale: {
+        display: false,
+        ticks: {
+          beginAtZero: true,
+          min: 10000,
+          max: 250000,
+        },
+      },
+      scales: { yAxes: [{ display: false, ticks: { showLabelBackdrop: false, display: false, min: 0, max: 800000 }}], xAxes: [{ display: false, ticks: { showLabelBackdrop: false, display: false} }] }
+    };
+    var options2 = {
+      legend: {display: false},
+      scaleShowLabels: false,
+      scale: {
+        display: false,
+        ticks: {
+          beginAtZero: true,
+          min: 500000,
+          max: 800000,
+        },
+      },
+      scales: { yAxes: [{ display: false, ticks: { showLabelBackdrop: false, display: false, min: 0, max: 800000 }}], xAxes: [{ display: false, ticks: { showLabelBackdrop: false, display: false} }] }
+    };
+
+    window.app = {};
+    var app = window.app;
+    //CENTRAR//
+    app.centrar = function(opt_options) {
+      var options = opt_options || {};
+      var button = document.createElement('button');
+      button.className = 'centrar';
+      var this_ = this;
+      var centrar = function() {
+        var center = [-412728.56, 4904308.52];
+        olMap.getView().setCenter(center);
+        olMap.getView().setZoom(7);
+      };
+      button.addEventListener('click', centrar, false);
+      button.addEventListener('touchstart', centrar, false);
+      var element = document.createElement('div');
+      element.className = 'centrar ol-unselectable ol-control';
+      element.appendChild(button);
+      ol.control.Control.call(this, {element: element,target: options.target });
+    };
+    ol.inherits(app.centrar, ol.control.Control);
+
+    var mousePositionControl2 = new ol.control.MousePosition({
+      coordinateFormat: ol.coordinate.createStringXY(6),
+      projection: 'EPSG:4326',
+      className: 'custom-mouse-position',
+      coordinateFormat: ol.coordinate.toStringHDMS,
+      target: document.getElementById('mouse-position2'),
+      undefinedHTML: ''
+    });
+    var mousePositionControl3 = new ol.control.MousePosition({
+      target: document.getElementById('mouse-position3'),
+      className: 'custom-mouse-position',
+      undefinedHTML: '',
+      projection: myProjection,
+      coordinateFormat : ol.coordinate.createStringXY(2),
+    });
+
+    var source_capabase = new ol.source.XYZ({  url: 'https://{1-4}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'});
+    var capabase = new ol.layer.Tile({source: source_capabase,name: 'LIGHT',description: 'CARTO',visible: true, crossOrigin: 'Anonymous',
+    baseLayer: true, displayInLayerSwitcher: true,});
+    //AERIAL BING
+    var OSM = new ol.layer.Tile({ source: new ol.source.OSM(), visible:true,
+      baseLayer: true, displayInLayerSwitcher: true,  });
+      var stamen = new ol.layer.Tile({
+        source: new ol.source.Stamen({
+          layer: 'terrain'
+        }), baseLayer: true, displayInLayerSwitcher: true,
+      });
+      var source_aerial_bing = new ol.source.BingMaps({
+        key: 'ArI8uCPDtw0y4e58IBL66Qc-RmfMG3DvBCNS9Kdzj4BUS9SW6xNlRz9FRmW9NzKZ',
+        imagerySet: 'AerialWithLabels'
+      });
+      var aerial = new ol.layer.Tile({name:'aerial_bing',title: 'aerial_bing',
+      baseLayer: true, displayInLayerSwitcher: true,
+      preload: Infinity, description: 'Aerial',visible: true, source: source_aerial_bing});
+
+      var myProjectionName = 'EPSG:3857';
+      var myProjection = ol.proj.get(myProjectionName);
+      // --- Se define el MAPA ---
+      var overviewMap = new ol.Map({
+        interactions: ol.interaction.defaults().extend([new ol.interaction.DragRotateAndZoom()]),
+        layers: [capabase],
+        controls: [mousePositionControl2,mousePositionControl3],
+        view: new ol.View({
+          projection: myProjection,
+          center: [-1767006.43, 3278070.10],
+          zoom: 6
+        }),
+        target: document.getElementById('overviewMap'),
+      });
+      var olMap = new ol.Map({
+        interactions: ol.interaction.defaults().extend([new ol.interaction.DragRotateAndZoom()]),
+        layers: [capabase],
+        view: new ol.View({
+          projection: myProjection,
+          center: [-412728.56, 4924308.52],
+          zoom: 6.5
+        }),
+        units: 'm',
+        controls: ol.control.defaults().extend ([
+          new ol.control.ScaleLine(),
+          mousePositionControl2, mousePositionControl3,
+          new ol.control.FullScreen(),
+          new app.centrar()
+        ]),
+        target: document.getElementById('olMap'),
+      });
+      var layerSwitcher = new ol.control.LayerSwitcher({
+        tipLabel: 'Legend' // Optional label for button
+    });
+    olMap.addControl(layerSwitcher);
+
+/* BUILDING CHARTS */
+
+function buildChartsAllYears(i, ccaa) {
+  var years = [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017];
+  years.forEach(function(year) {
+    var id = ccaa + year;
+    var container = 'containerCanvas' + year;
+    var canvas = document.createElement('canvas'); canvas.id = id; canvas.style.display = 'block';
+    canvas.style.width = 800; canvas.style.height = 400; document.getElementById(container).appendChild(canvas);
+    var ctx = document.getElementById(id).getContext('2d');
+    var dataset = [{label: year, data: centroids.features[i].properties.companies[year], type: "radar", backgroundColor: ['rgba(0,0,0, 1)'], borderColor: ['rgb(248,248,255, 1)'] }];
+    var chart = new Chart(ctx, {type: 'radar', data: { labels: ["G1", "G2", "G3", "G4"], datasets: dataset}, options: options });
+    let pie = new ol.Overlay({
+      position: centroids.features[i].geometry.coordinates,
+      positioning: 'center-center',
+      element: canvas
+    });
+    olMap.addOverlay(pie);
+      setTimeout(() => {
+        var data = canvas.toDataURL('image/png',1);
+        if (year == 2008) charts2008.push(new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({anchor: [0.5, 0.5], src: data})));
+        if (year == 2009) charts2009.push(new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({anchor: [0.5, 0.5], src: data})));
+        if (year == 2010) charts2010.push(new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({anchor: [0.5, 0.5], src: data})));
+        if (year == 2011) charts2011.push(new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({anchor: [0.5, 0.5], src: data})));
+        if (year == 2012) charts2012.push(new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({anchor: [0.5, 0.5], src: data})));
+        if (year == 2013) charts2013.push(new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({anchor: [0.5, 0.5], src: data})));
+        if (year == 2014) charts2014.push(new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({anchor: [0.5, 0.5], src: data})));
+        if (year == 2015) charts2015.push(new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({anchor: [0.5, 0.5], src: data})));
+        if (year == 2016) charts2016.push(new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({anchor: [0.5, 0.5], src: data})));
+        if (year == 2017) charts2017.push(new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({anchor: [0.5, 0.5], src: data})));
+        var gdp = centroids.features[i].properties['gdp'];
+        let colorGDP;
+        if (gdp[newValue] < 17000) colorGDP = 'rgb(255, 255, 0)'; // Yellow
+        if (gdp[newValue] > 17000 && gdp[newValue] < 22000) colorGDP = 'rgb(218, 178, 0)'; // Golden
+        if (gdp[newValue] > 22000 && gdp[newValue] < 25000) colorGDP = 'rgb(255, 145, 0)'; // Orange
+        if (gdp[newValue] > 25000 && gdp[newValue] < 28000) colorGDP = 'rgb(184, 67, 0)'; // Red
+        if (gdp[newValue] > 28000) colorGDP = 'rgb(112, 41, 0)'; // Brown
+        if (gdp[newValue] == 0) colorGDP = 'rgba(255, 255, 255, 0)'; // No color
+        var newStyle = new ol.style.Style({stroke: new ol.style.Stroke({color: 'blue',width: 1}),fill: new ol.style.Fill({color: colorGDP}) });
+        coropleths.push(newStyle);
+        if (year == 2008) coropleths2008.push(newStyle);
+        if (year == 2009) coropleths2009.push(newStyle);
+        if (year == 2010) coropleths2010.push(newStyle);
+        if (year == 2011) coropleths2011.push(newStyle);
+        if (year == 2012) coropleths2012.push(newStyle);
+        if (year == 2013) coropleths2013.push(newStyle);
+        if (year == 2014) coropleths2014.push(newStyle);
+        if (year == 2015) coropleths2015.push(newStyle);
+        if (year == 2016) coropleths2016.push(newStyle);
+        if (year == 2017) coropleths2017.push(newStyle);
+        setTimeout(() => {
+        }, 1000);
+      }, 5000);
+  });
+}
+
+/* BUILDING CHARTS */
+var newValue = 2008;
+var charts = [];
+var charts2008 = []; var coropleths2008 = [];
+var charts2009 = []; var coropleths2009 = [];
+var charts2010 = []; var coropleths2010 = [];
+var charts2011 = []; var coropleths2011 = [];
+var charts2012 = []; var coropleths2012 = [];
+var charts2013 = []; var coropleths2013 = [];
+var charts2014 = []; var coropleths2014 = [];
+var charts2015 = []; var coropleths2015 = [];
+var charts2016 = []; var coropleths2016 = [];
+var charts2017 = []; var coropleths2017 = [];
+var coropleths = [];
+var layersToRemove = [];
+
+$mdToast.show($mdToast.simple().content("Year: " + newValue).position("bottom right").hideDelay(1500));
+
+for (var i = 0; i<centroids.features.length; i++) {
+  var feature = centroids.features[i].properties['Texto'];
+  buildChartsAllYears(i, feature);
+}
+/* BUILDING LAYER */
+setTimeout(() => {
+  /*
+  var years = [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017];
+  for (var i = 0; i<centroids.features.length; i++) {
+    var feature = centroids.features[i].properties['Texto'];
+    var nameCanvas = feature;
+    console.log(feature);
+    var data = document.getElementById(feature).toDataURL('image/png',1);
+    charts.push(new ol.style.Icon(({anchor: [0.5, 0.5], src: data})));
+    var gdp = centroids.features[i].properties['gdp'];
+    let colorGDP;
+    if (gdp[newValue] < 17000) colorGDP = 'rgb(255, 255, 0)'; // Yellow
+    if (gdp[newValue] > 17000 && gdp[newValue] < 22000) colorGDP = 'rgb(218, 178, 0)'; // Golden
+    if (gdp[newValue] > 22000 && gdp[newValue] < 25000) colorGDP = 'rgb(255, 145, 0)'; // Orange
+    if (gdp[newValue] > 25000 && gdp[newValue] < 28000) colorGDP = 'rgb(184, 67, 0)'; // Red
+    if (gdp[newValue] > 28000) colorGDP = 'rgb(112, 41, 0)'; // Brown
+    if (gdp[newValue] == 0) colorGDP = 'rgba(255, 255, 255, 0)'; // No color
+    var newStyle = new ol.style.Style({stroke: new ol.style.Stroke({color: 'blue',width: 1}),fill: new ol.style.Fill({color: colorGDP}) });
+    coropleths.push(newStyle);
+  }*/
+var styles2008 = {
+  '01': new ol.style.Style({image: charts2008[0]}),  '02': new ol.style.Style({image: charts2008[1]}),  '03': new ol.style.Style({image: charts2008[2]}),
+  '04': new ol.style.Style({image: charts2008[3]}),  '05': new ol.style.Style({image: charts2008[4]}),  '06': new ol.style.Style({image: charts2008[5]}),
+  '07': new ol.style.Style({image: charts2008[6]}),  '08': new ol.style.Style({image: charts2008[7]}),  '09': new ol.style.Style({image: charts2008[8]}),
+  '10': new ol.style.Style({image: charts2008[9]}),  '11': new ol.style.Style({image: charts2008[10]}),  '12': new ol.style.Style({image: charts2008[11]}),
+  '13': new ol.style.Style({image: charts2008[12]}),  '14': new ol.style.Style({image: charts2008[13]}),  '15': new ol.style.Style({image: charts2008[14]}),
+  '16': new ol.style.Style({image: charts2008[15]}),  '17': new ol.style.Style({image: charts2008[16]})
+};
+var styles2009 = {
+  '01': new ol.style.Style({image: charts2009[0]}),  '02': new ol.style.Style({image: charts2009[1]}),  '03': new ol.style.Style({image: charts2009[2]}),
+  '04': new ol.style.Style({image: charts2009[3]}),  '05': new ol.style.Style({image: charts2009[4]}),  '06': new ol.style.Style({image: charts2009[5]}),
+  '07': new ol.style.Style({image: charts2009[6]}),  '08': new ol.style.Style({image: charts2009[7]}),  '09': new ol.style.Style({image: charts2009[8]}),
+  '10': new ol.style.Style({image: charts2009[9]}),  '11': new ol.style.Style({image: charts2009[10]}),  '12': new ol.style.Style({image: charts2009[11]}),
+  '13': new ol.style.Style({image: charts2009[12]}),  '14': new ol.style.Style({image: charts2009[13]}),  '15': new ol.style.Style({image: charts2009[14]}),
+  '16': new ol.style.Style({image: charts2009[15]}),  '17': new ol.style.Style({image: charts2009[16]})
+};
+var styles2010 = {
+  '01': new ol.style.Style({image: charts2010[0]}),  '02': new ol.style.Style({image: charts2010[1]}),  '03': new ol.style.Style({image: charts2010[2]}),
+  '04': new ol.style.Style({image: charts2010[3]}),  '05': new ol.style.Style({image: charts2010[4]}),  '06': new ol.style.Style({image: charts2010[5]}),
+  '07': new ol.style.Style({image: charts2010[6]}),  '08': new ol.style.Style({image: charts2010[7]}),  '09': new ol.style.Style({image: charts2010[8]}),
+  '10': new ol.style.Style({image: charts2010[9]}),  '11': new ol.style.Style({image: charts2010[10]}),  '12': new ol.style.Style({image: charts2010[11]}),
+  '13': new ol.style.Style({image: charts2010[12]}),  '14': new ol.style.Style({image: charts2010[13]}),  '15': new ol.style.Style({image: charts2010[14]}),
+  '16': new ol.style.Style({image: charts2010[15]}),  '17': new ol.style.Style({image: charts2010[16]})
+};
+var styles2011 = {
+  '01': new ol.style.Style({image: charts2011[0]}),  '02': new ol.style.Style({image: charts2011[1]}),  '03': new ol.style.Style({image: charts2011[2]}),
+  '04': new ol.style.Style({image: charts2011[3]}),  '05': new ol.style.Style({image: charts2011[4]}),  '06': new ol.style.Style({image: charts2011[5]}),
+  '07': new ol.style.Style({image: charts2011[6]}),  '08': new ol.style.Style({image: charts2011[7]}),  '09': new ol.style.Style({image: charts2011[8]}),
+  '10': new ol.style.Style({image: charts2011[9]}),  '11': new ol.style.Style({image: charts2011[10]}),  '12': new ol.style.Style({image: charts2011[11]}),
+  '13': new ol.style.Style({image: charts2011[12]}),  '14': new ol.style.Style({image: charts2011[13]}),  '15': new ol.style.Style({image: charts2011[14]}),
+  '16': new ol.style.Style({image: charts2011[15]}),  '17': new ol.style.Style({image: charts2011[16]})
+};
+var styles2012 = {
+  '01': new ol.style.Style({image: charts2012[0]}),  '02': new ol.style.Style({image: charts2012[1]}),  '03': new ol.style.Style({image: charts2012[2]}),
+  '04': new ol.style.Style({image: charts2012[3]}),  '05': new ol.style.Style({image: charts2012[4]}),  '06': new ol.style.Style({image: charts2012[5]}),
+  '07': new ol.style.Style({image: charts2012[6]}),  '08': new ol.style.Style({image: charts2012[7]}),  '09': new ol.style.Style({image: charts2012[8]}),
+  '10': new ol.style.Style({image: charts2012[9]}),  '11': new ol.style.Style({image: charts2012[10]}),  '12': new ol.style.Style({image: charts2012[11]}),
+  '13': new ol.style.Style({image: charts2012[12]}),  '14': new ol.style.Style({image: charts2012[13]}),  '15': new ol.style.Style({image: charts2012[14]}),
+  '16': new ol.style.Style({image: charts2012[15]}),  '17': new ol.style.Style({image: charts2012[16]})
+};
+var styles2013 = {
+  '01': new ol.style.Style({image: charts2013[0]}),  '02': new ol.style.Style({image: charts2013[1]}),  '03': new ol.style.Style({image: charts2013[2]}),
+  '04': new ol.style.Style({image: charts2013[3]}),  '05': new ol.style.Style({image: charts2013[4]}),  '06': new ol.style.Style({image: charts2013[5]}),
+  '07': new ol.style.Style({image: charts2013[6]}),  '08': new ol.style.Style({image: charts2013[7]}),  '09': new ol.style.Style({image: charts2013[8]}),
+  '10': new ol.style.Style({image: charts2013[9]}),  '11': new ol.style.Style({image: charts2013[10]}),  '12': new ol.style.Style({image: charts2013[11]}),
+  '13': new ol.style.Style({image: charts2013[12]}),  '14': new ol.style.Style({image: charts2013[13]}),  '15': new ol.style.Style({image: charts2013[14]}),
+  '16': new ol.style.Style({image: charts2013[15]}),  '17': new ol.style.Style({image: charts2013[16]})
+};
+var styles2014 = {
+  '01': new ol.style.Style({image: charts2014[0]}),  '02': new ol.style.Style({image: charts2014[1]}),  '03': new ol.style.Style({image: charts2014[2]}),
+  '04': new ol.style.Style({image: charts2014[3]}),  '05': new ol.style.Style({image: charts2014[4]}),  '06': new ol.style.Style({image: charts2014[5]}),
+  '07': new ol.style.Style({image: charts2014[6]}),  '08': new ol.style.Style({image: charts2014[7]}),  '09': new ol.style.Style({image: charts2014[8]}),
+  '10': new ol.style.Style({image: charts2014[9]}),  '11': new ol.style.Style({image: charts2014[10]}),  '12': new ol.style.Style({image: charts2014[11]}),
+  '13': new ol.style.Style({image: charts2014[12]}),  '14': new ol.style.Style({image: charts2014[13]}),  '15': new ol.style.Style({image: charts2014[14]}),
+  '16': new ol.style.Style({image: charts2014[15]}),  '17': new ol.style.Style({image: charts2014[16]})
+};
+var styles2015 = {
+  '01': new ol.style.Style({image: charts2015[0]}),  '02': new ol.style.Style({image: charts2015[1]}),  '03': new ol.style.Style({image: charts2015[2]}),
+  '04': new ol.style.Style({image: charts2015[3]}),  '05': new ol.style.Style({image: charts2015[4]}),  '06': new ol.style.Style({image: charts2015[5]}),
+  '07': new ol.style.Style({image: charts2015[6]}),  '08': new ol.style.Style({image: charts2015[7]}),  '09': new ol.style.Style({image: charts2015[8]}),
+  '10': new ol.style.Style({image: charts2015[9]}),  '11': new ol.style.Style({image: charts2015[10]}),  '12': new ol.style.Style({image: charts2015[11]}),
+  '13': new ol.style.Style({image: charts2015[12]}),  '14': new ol.style.Style({image: charts2015[13]}),  '15': new ol.style.Style({image: charts2015[14]}),
+  '16': new ol.style.Style({image: charts2015[15]}),  '17': new ol.style.Style({image: charts2015[16]})
+};
+var styles2016 = {
+  '01': new ol.style.Style({image: charts2016[0]}),  '02': new ol.style.Style({image: charts2016[1]}),  '03': new ol.style.Style({image: charts2016[2]}),
+  '04': new ol.style.Style({image: charts2016[3]}),  '05': new ol.style.Style({image: charts2016[4]}),  '06': new ol.style.Style({image: charts2016[5]}),
+  '07': new ol.style.Style({image: charts2016[6]}),  '08': new ol.style.Style({image: charts2016[7]}),  '09': new ol.style.Style({image: charts2016[8]}),
+  '10': new ol.style.Style({image: charts2016[9]}),  '11': new ol.style.Style({image: charts2016[10]}),  '12': new ol.style.Style({image: charts2016[11]}),
+  '13': new ol.style.Style({image: charts2016[12]}),  '14': new ol.style.Style({image: charts2016[13]}),  '15': new ol.style.Style({image: charts2016[14]}),
+  '16': new ol.style.Style({image: charts2016[15]}),  '17': new ol.style.Style({image: charts2016[16]})
+};
+var styles2017 = {
+  '01': new ol.style.Style({image: charts2017[0]}),  '02': new ol.style.Style({image: charts2017[1]}),  '03': new ol.style.Style({image: charts2017[2]}),
+  '04': new ol.style.Style({image: charts2017[3]}),  '05': new ol.style.Style({image: charts2017[4]}),  '06': new ol.style.Style({image: charts2017[5]}),
+  '07': new ol.style.Style({image: charts2017[6]}),  '08': new ol.style.Style({image: charts2017[7]}),  '09': new ol.style.Style({image: charts2017[8]}),
+  '10': new ol.style.Style({image: charts2017[9]}),  '11': new ol.style.Style({image: charts2017[10]}),  '12': new ol.style.Style({image: charts2017[11]}),
+  '13': new ol.style.Style({image: charts2017[12]}),  '14': new ol.style.Style({image: charts2017[13]}),  '15': new ol.style.Style({image: charts2017[14]}),
+  '16': new ol.style.Style({image: charts2017[15]}),  '17': new ol.style.Style({image: charts2017[16]})
+};
+
+var stylesPIB = {  '01': coropleths[0],  '02': coropleths[1],  '03':  coropleths[2],  '04':  coropleths[3],  '05':  coropleths[4],  '06':  coropleths[5],
+  '07':  coropleths[6],  '08':  coropleths[7],  '09':  coropleths[8],  '10':  coropleths[9], '11':  coropleths[10],  '12':  coropleths[11],  '13':  coropleths[12],
+  '14':  coropleths[13],  '15':  coropleths[14],  '16':  coropleths[15],  '17': coropleths[16]
+};
+var stylesPIB2008 = {  '01': coropleths2008[0],  '02': coropleths2008[1],  '03':  coropleths2008[2],  '04':  coropleths2008[3],  '05':  coropleths2008[4],  '06':  coropleths2008[5],
+  '07':  coropleths2008[6],  '08':  coropleths2008[7],  '09':  coropleths2008[8],  '10':  coropleths2008[9], '11':  coropleths2008[10],  '12':  coropleths2008[11],  '13':  coropleths2008[12],
+  '14':  coropleths2008[13],  '15':  coropleths2008[14],  '16':  coropleths2008[15],  '17': coropleths2008[16]
+};
+var stylesPIB2009 = {  '01': coropleths2009[0],  '02': coropleths2009[1],  '03':  coropleths2009[2],  '04':  coropleths2009[3],  '05':  coropleths2009[4],  '06':  coropleths2009[5],
+  '07':  coropleths2009[6],  '08':  coropleths2009[7],  '09':  coropleths2009[8],  '10':  coropleths2009[9], '11':  coropleths2009[10],  '12':  coropleths2009[11],  '13':  coropleths2009[12],
+  '14':  coropleths2009[13],  '15':  coropleths2009[14],  '16':  coropleths2009[15],  '17': coropleths2009[16]
+};
+var stylesPIB2010 = {  '01': coropleths2010[0],  '02': coropleths2010[1],  '03':  coropleths2010[2],  '04':  coropleths2010[3],  '05':  coropleths2010[4],  '06':  coropleths2010[5],
+  '07':  coropleths2010[6],  '08':  coropleths2010[7],  '09':  coropleths2010[8],  '10':  coropleths2010[9], '11':  coropleths2010[10],  '12':  coropleths2010[11],  '13':  coropleths2010[12],
+  '14':  coropleths2010[13],  '15':  coropleths2010[14],  '16':  coropleths2010[15],  '17': coropleths2010[16]
+};
+var stylesPIB2011 = {  '01': coropleths2011[0],  '02': coropleths2011[1],  '03':  coropleths2011[2],  '04':  coropleths2011[3],  '05':  coropleths2011[4],  '06':  coropleths2011[5],
+  '07':  coropleths2011[6],  '08':  coropleths2011[7],  '09':  coropleths2011[8],  '10':  coropleths2011[9], '11':  coropleths2011[10],  '12':  coropleths2011[11],  '13':  coropleths2011[12],
+  '14':  coropleths2011[13],  '15':  coropleths2011[14],  '16':  coropleths2011[15],  '17': coropleths2011[16]
+};
+var stylesPIB2012 = {  '01': coropleths2012[0],  '02': coropleths2012[1],  '03':  coropleths2012[2],  '04':  coropleths2012[3],  '05':  coropleths2012[4],  '06':  coropleths2012[5],
+  '07':  coropleths2012[6],  '08':  coropleths2012[7],  '09':  coropleths2012[8],  '10':  coropleths2012[9], '11':  coropleths2012[10],  '12':  coropleths2012[11],  '13':  coropleths2012[12],
+  '14':  coropleths2012[13],  '15':  coropleths2012[14],  '16':  coropleths2012[15],  '17': coropleths2012[16]
+};
+var stylesPIB2013 = {  '01': coropleths2013[0],  '02': coropleths2013[1],  '03':  coropleths2013[2],  '04':  coropleths2013[3],  '05':  coropleths2013[4],  '06':  coropleths2013[5],
+  '07':  coropleths2013[6],  '08':  coropleths2013[7],  '09':  coropleths2013[8],  '10':  coropleths2013[9], '11':  coropleths2013[10],  '12':  coropleths2013[11],  '13':  coropleths2013[12],
+  '14':  coropleths2013[13],  '15':  coropleths2013[14],  '16':  coropleths2013[15],  '17': coropleths2013[16]
+};
+var stylesPIB2014 = {  '01': coropleths2014[0],  '02': coropleths2014[1],  '03':  coropleths2014[2],  '04':  coropleths2014[3],  '05':  coropleths2014[4],  '06':  coropleths2014[5],
+  '07':  coropleths2014[6],  '08':  coropleths2014[7],  '09':  coropleths2014[8],  '10':  coropleths2014[9], '11':  coropleths2014[10],  '12':  coropleths2014[11],  '13':  coropleths2014[12],
+  '14':  coropleths2014[13],  '15':  coropleths2014[14],  '16':  coropleths2014[15],  '17': coropleths2014[16]
+};
+var stylesPIB2015 = {  '01': coropleths2015[0],  '02': coropleths2015[1],  '03':  coropleths2015[2],  '04':  coropleths2015[3],  '05':  coropleths2015[4],  '06':  coropleths2015[5],
+  '07':  coropleths2015[6],  '08':  coropleths2015[7],  '09':  coropleths2015[8],  '10':  coropleths2015[9], '11':  coropleths2015[10],  '12':  coropleths2015[11],  '13':  coropleths2015[12],
+  '14':  coropleths2015[13],  '15':  coropleths2015[14],  '16':  coropleths2015[15],  '17': coropleths2015[16]
+};
+var stylesPIB2016 = {  '01': coropleths2016[0],  '02': coropleths2016[1],  '03':  coropleths2016[2],  '04':  coropleths2016[3],  '05':  coropleths2016[4],  '06':  coropleths2016[5],
+  '07':  coropleths2016[6],  '08':  coropleths2016[7],  '09':  coropleths2016[8],  '10':  coropleths2016[9], '11':  coropleths2016[10],  '12':  coropleths2016[11],  '13':  coropleths2016[12],
+  '14':  coropleths2016[13],  '15':  coropleths2016[14],  '16':  coropleths2016[15],  '17': coropleths2016[16]
+};
+var stylesPIB2017 = {  '01': coropleths2017[0],  '02': coropleths2017[1],  '03':  coropleths2017[2],  '04':  coropleths2017[3],  '05':  coropleths2017[4],  '06':  coropleths2017[5],
+  '07':  coropleths2017[6],  '08':  coropleths2017[7],  '09':  coropleths2017[8],  '10':  coropleths2017[9], '11':  coropleths2017[10],  '12':  coropleths2017[11],  '13':  coropleths2017[12],
+  '14':  coropleths2017[13],  '15':  coropleths2017[14],  '16':  coropleths2017[15],  '17': coropleths2017[16]
+};
+
+window.styleFunction = function(feature) {
+  var year = $scope.slider.value;
+  if (year == 2008) return styles2008[feature.getProperties()['Codigo']];
+  if (year == 2009) return styles2009[feature.getProperties()['Codigo']];
+  if (year == 2010) return styles2010[feature.getProperties()['Codigo']];
+  if (year == 2011) return styles2011[feature.getProperties()['Codigo']];
+  if (year == 2012) return styles2012[feature.getProperties()['Codigo']];
+  if (year == 2013) return styles2013[feature.getProperties()['Codigo']];
+  if (year == 2014) return styles2014[feature.getProperties()['Codigo']];
+  if (year == 2015) return styles2015[feature.getProperties()['Codigo']];
+  if (year == 2016) return styles2016[feature.getProperties()['Codigo']];
+  if (year == 2017) return styles2017[feature.getProperties()['Codigo']];
+};
+window.styleFunctionCCAA = function(feature) {
+  var year = $scope.slider.value;
+  if (year == 2008) return stylesPIB2008[feature.getProperties()['Codigo']];
+  if (year == 2009) return stylesPIB2009[feature.getProperties()['Codigo']];
+  if (year == 2010) return stylesPIB2010[feature.getProperties()['Codigo']];
+  if (year == 2011) return stylesPIB2011[feature.getProperties()['Codigo']];
+  if (year == 2012) return stylesPIB2012[feature.getProperties()['Codigo']];
+  if (year == 2013) return stylesPIB2013[feature.getProperties()['Codigo']];
+  if (year == 2014) return stylesPIB2014[feature.getProperties()['Codigo']];
+  if (year == 2015) return stylesPIB2015[feature.getProperties()['Codigo']];
+  if (year == 2016) return stylesPIB2016[feature.getProperties()['Codigo']];
+  if (year == 2017) return stylesPIB2017[feature.getProperties()['Codigo']];
+};
+
+// var styleFunctionCCAA = function(feature) {  return stylesPIB[feature.getProperties()['Codigo']]; };
+// Vector layer for CCAA
+var vectorSource = new ol.source.Vector({
+  features: (new ol.format.GeoJSON()).readFeatures(geojsonSpain)
+});
+var vectorLayer = new ol.layer.Vector({
+  name: 'ccaaLayer',
+  source: vectorSource,
+  style: styleFunctionCCAA,
+  crossOrigin: 'Anonymous',
+});
+// Vector layer for centroids
+var vectorSourceCentroids = new ol.source.Vector({
+  features: (new ol.format.GeoJSON()).readFeatures(centroids)
+});
+var vectorLayerCentroids = new ol.layer.Vector({
+  name: 'companiesLayer',
+  source: vectorSourceCentroids,
+  style: styleFunction,
+  crossOrigin: 'Anonymous',
+});
+olMap.addLayer(vectorLayer);
+olMap.addLayer(vectorLayerCentroids); // olMap.addLayer(vectorLayerPIB);
+overviewMap.addLayer(vectorLayer);
+overviewMap.addLayer(vectorLayerCentroids); // overviewMap.addLayer(vectorLayerPIB);
+}, 5000);
+/* CHANGING SLIDER TIME */
+$scope.slider = {
+    value: 2008,
+    min: 2008,
+    max: 2017,
+    options: {
+        step: 1,
+        floor: 2008,
+        ceil: 2017,
+        minLimit: 2008,
+        maxLimit: 2017,
+        onChange: function() {
+            console.log('On change ' + $scope.slider.value);
+            olMap.getLayers().forEach(function(layer) {
+              if (layer.get('name') == 'companiesLayer') {
+                layer.setStyle(window.styleFunction);
+              }
+              if (layer.get('name') == 'ccaaLayer') {
+                layer.setStyle(window.styleFunctionCCAA);
+              }
+            });
+        }
+    }
+};
+/*
+$scope.$watch('yearSelected',
+  function(newValue) {
+    var charts = [];
+    var coropleths = [];
+    var layersToRemove = [];
+    olMap.getLayers().forEach(function (layer) {
+      if (layer.get('name') != undefined && layer.get('name') === 'ccaaLayer') {
+        layersToRemove.push(layer);
+      }
+      if (layer.get('name') != undefined && layer.get('name') === 'companiesLayer') {
+        layersToRemove.push(layer);
+      }
+    });
+
+    var len = layersToRemove.length;
+    for(var i = 0; i < len; i++) {
+      olMap.removeLayer(layersToRemove[i]);
+      overviewMap.removeLayer(layersToRemove[i]);
+    }
+    var myNode = document.getElementById("containerCanvas");
+    while (myNode.firstChild) {
+      myNode.removeChild(myNode.firstChild);
+    }
+    $mdToast.show($mdToast.simple().content("Year: " + newValue).position("bottom right").hideDelay(1500));
+    for (var i = 0; i<centroids.features.length; i++) {
+      var feature = centroids.features[i].properties['Texto'];
+      buildCharts(i, feature, newValue);
+    }
+  setTimeout(() => {
+    for (var i = 0; i<centroids.features.length; i++) {
+      var feature = centroids.features[i].properties['Texto'];
+      var data = document.getElementById(feature).toDataURL('image/png',1);
+      charts.push(new ol.style.Icon( ({anchor: [0.5, 0.5], src: data})));
+      var gdp = centroids.features[i].properties['gdp'];
+      let colorGDP;
+      if (gdp[newValue] < 17000) colorGDP = 'rgb(255, 255, 0)'; // Yellow
+      if (gdp[newValue] > 17000 && gdp[newValue] < 22000) colorGDP = 'rgb(218, 178, 0)'; // Golden
+      if (gdp[newValue] > 22000 && gdp[newValue] < 25000) colorGDP = 'rgb(255, 145, 0)'; // Orange
+      if (gdp[newValue] > 25000 && gdp[newValue] < 28000) colorGDP = 'rgb(184, 67, 0)'; // Red
+      if (gdp[newValue] > 28000) colorGDP = 'rgb(112, 41, 0)'; // Brown
+      if (gdp[newValue] == 0) colorGDP = 'rgba(255, 255, 255, 0)'; // No color
+      var newStyle = new ol.style.Style({stroke: new ol.style.Stroke({color: 'blue',width: 1}),fill: new ol.style.Fill({color: colorGDP}) });
+      coropleths.push(newStyle);
+    }
+    var styles = {
+      '01': new ol.style.Style({image: charts[0]}),
+      '02': new ol.style.Style({image: charts[1]}),
+      '03': new ol.style.Style({image: charts[2]}),
+      '04': new ol.style.Style({image: charts[3]}),
+      '05': new ol.style.Style({image: charts[4]}),
+      '06': new ol.style.Style({image: charts[5]}),
+      '07': new ol.style.Style({image: charts[6]}),
+      '08': new ol.style.Style({image: charts[7]}),
+      '09': new ol.style.Style({image: charts[8]}),
+      '10': new ol.style.Style({image: charts[9]}),
+      '11': new ol.style.Style({image: charts[10]}),
+      '12': new ol.style.Style({image: charts[11]}),
+      '13': new ol.style.Style({image: charts[12]}),
+      '14': new ol.style.Style({image: charts[13]}),
+      '15': new ol.style.Style({image: charts[14]}),
+      '16': new ol.style.Style({image: charts[15]}),
+      '17': new ol.style.Style({image: charts[16]})
+    };
+
+    var stylesPIB = {
+      '01': coropleths[0],
+      '02': coropleths[1],
+      '03':  coropleths[2],
+      '04':  coropleths[3],
+      '05':  coropleths[4],
+      '06':  coropleths[5],
+      '07':  coropleths[6],
+      '08':  coropleths[7],
+      '09':  coropleths[8],
+      '10':  coropleths[9],
+      '11':  coropleths[10],
+      '12':  coropleths[11],
+      '13':  coropleths[12],
+      '14':  coropleths[13],
+      '15':  coropleths[14],
+      '16':  coropleths[15],
+      '17': coropleths[16]
+    };
+    var styleFunction = function(feature) {
+      return styles[feature.getProperties()['Codigo']];
+    };
+    var styleFunctionCCAA = function(feature) {
+      return stylesPIB[feature.getProperties()['Codigo']];
+    };
+    // Vector layer for CCAA
+    var vectorSource = new ol.source.Vector({
+      features: (new ol.format.GeoJSON()).readFeatures(geojsonSpain)
+    });
+    var vectorLayer = new ol.layer.Vector({
+      name: 'ccaaLayer',
+      source: vectorSource,
+      style: styleFunctionCCAA,
+      crossOrigin: 'Anonymous',
+    });
+    // Vector layer for centroids
+    var vectorSourceCentroids = new ol.source.Vector({
+      features: (new ol.format.GeoJSON()).readFeatures(centroids)
+    });
+    var vectorLayerCentroids = new ol.layer.Vector({
+      name: 'companiesLayer',
+      source: vectorSourceCentroids,
+      style: styleFunction,
+      crossOrigin: 'Anonymous',
+    });
+    olMap.addLayer(vectorLayer);
+    olMap.addLayer(vectorLayerCentroids); // olMap.addLayer(vectorLayerPIB);
+    overviewMap.addLayer(vectorLayer);
+    overviewMap.addLayer(vectorLayerCentroids); // overviewMap.addLayer(vectorLayerPIB);
+
+
+
+  }, 1000);
+}, true);
+*/
+/* CHANGING SLIDER TIME */
+/*
+var select = new ol.interaction.Select({source: vectorLayerCentroids.getSource()});
+var selectOverview = new ol.interaction.Select({source: vectorLayerCentroids.getSource()});
+select.on('select', function(e) { // console.log(e);
+  if (e.selected[0]) {
+    if (e.selected[0].I) {
+      var selectedFeature = e.selected[0].I;
+      var texto = selectedFeature.Texto;
+      console.log(selectedFeature);
+      var coordinate = e.mapBrowserEvent.coordinate;
+      $mdToast.show($mdToast.simple().hideDelay(15000).textContent(texto).position('bottom right'));
+    }
+  }
+});
+selectOverview.on('select', function(e) {
+  if (e.selected[0]) {
+    if (e.selected[0].I) {
+      var selectedFeature = e.selected[0].I;
+      var texto = selectedFeature.Texto
+      var coordinate = e.mapBrowserEvent.coordinate;
+      $mdToast.show($mdToast.simple().hideDelay(15000).textContent(texto).position('bottom right'));
+    }
+  }
+});
+  olMap.addInteraction(select); overviewMap.addInteraction(selectOverview);
+*/
+/* olMap.getView().on('change:center', function(evt){
+overviewMap.getView().setCenter(olMap.getView().getCenter());
+}); */
+var popup = new Popup();
+olMap.addOverlay(popup);
+
+// Change VIEW
+// aaa
+olMap.on('click', function(evt) {
+  res = olMap.getView().getResolution();
+});
+
+var feature2string = function (feature)  {
+  if (feature){
+    var str = '';
+    var propiedades = feature.getProperties();
+    var geomname = feature.getGeometryName();
+    var thing = feature.get('elemento');
+    str = '<p style="text-align:center; font-size:14px; font-weight:700; border-bottom:1px solid #000000; color:black;">'+thing+'</p>';
+    for (var p in propiedades) {
+      if (p != geomname) {
+
+        str +=  p + ': ' + feature.get(p)+ ' <br> ';
+      }
+    }
+    return str;
+  }
+}
+var TextInfo = document.getElementById('TextInfo');
+
+
+}]);
+
+</script>
+</body>
+
+</html>

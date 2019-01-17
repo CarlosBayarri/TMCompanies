@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>OpenTransport</title>
+  <!-- Bootstrap core CSS-->
+  <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="./vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="./css/sb-admin.css" rel="stylesheet">
+  <link href="./css/ol.css" rel="stylesheet">
+  <!-- ol-ext -->
+  <link rel="stylesheet" href="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.css" />
+
+  <link rel="stylesheet" href="./css/ol-geocoder.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/ol-contextmenu@latest/dist/ol-contextmenu.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://unpkg.com/ol-popup@3.0.0/src/ol-popup.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- ANGULAR MATERIAL -->
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
+  <!-- Angular Material Library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+
+  <!-- jsPanel CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/jspanel.css" rel="stylesheet">
+  <script src="https://files.codepedia.info/files/uploads/iScripts/html2canvas.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.4.1/proj4.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.4.1/proj4-src.js"></script>
+          <!-- JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://use.fontawesome.com/c79e2f3459.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+  <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+  <!-- OL-ext -->
+<link rel="stylesheet" href="./css/ol-ext.css" />
+  <style>
+
+  .navbar-expand-lg .navbar-nav .nav-link{
+    padding-left: 5px;
+    font-size: 15px;
+  }
+  body {
+    font-size: 0.75rem;
+
+  }
+  #collapseComponents11 {
+      margin-bottom: 0;
+      margin-left: -40px;
+  }
+  #collapseComponents12 {
+      margin-bottom: 0;
+      margin-left: -40px;
+  }
+  .navbar-brand {
+    display: block;
+padding-top: .3125rem;
+padding-bottom: .3125rem;
+margin-right: 1rem;
+font-size: 1.25rem;
+line-height: inherit;
+white-space: nowrap;
+margin-left: 15px;
+position: relative;
+float: left;
+}
+.ol-popup {
+    background-color: rgba(0,0,0,0.75);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    display: inline-flex;
+    width: auto;
+}
+.ol-popup-content {
+    border: 0px;
+    padding: 0;
+}
+.tooltip {
+        position: relative;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 4px;
+        color: white;
+        padding: 4px 8px;
+        opacity: 0.7;
+        white-space: nowrap;
+      }
+      .tooltip-measure {
+        opacity: 1;
+        font-weight: bold;
+      }
+      .tooltip-static {
+        background-color: #ffcc33;
+        color: black;
+        border: 1px solid white;
+      }
+      .tooltip-measure:before,
+      .tooltip-static:before {
+        border-top: 6px solid rgba(0, 0, 0, 0.5);
+        border-right: 6px solid transparent;
+        border-left: 6px solid transparent;
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        margin-left: -7px;
+        left: 50%;
+      }
+      .tooltip-static:before {
+        border-top-color: #ffcc33;
+      }
+      .ol-geocoder.gcd-txt-container {
+        position: fixed;
+        width: 150px;
+        height: 40px;
+        top: 5px;
+        right: 90px;
+        box-sizing: border-box;
+        border: 1px solid #101215;
+        border-radius: 4px;
+        z-index: 9999;
+      }
+      .ol-geocoder ul.gcd-txt-result {
+        top: 45px;
+      }
+  /*sidenav herramientas*/
+
+.moveSideButtonLayersOpened {
+        position: fixed; top: 40%; left: 275px; font-size: 8px;z-index: 1;
+        transition-timing-function: ease;  transition-duration: 0.25s;
+        height: 90px;
+        width: 45px;
+        border-bottom-right-radius: 90px;
+        border-top-right-radius: 90px;
+        padding-right: 7.5px;
+        cursor: pointer;
+        color: ghostwhite;
+        background-color: #417d97 !important;
+      }
+      .moveSideButtonLayersClosed {
+        position: fixed; top: 40%; left: -5px; font-size: 8px;z-index: 1;
+        transition-timing-function: ease; transition-duration: 0.25s;
+        height: 90px;
+        width: 45px;
+        border-bottom-right-radius: 90px;
+        border-top-right-radius: 90px;
+        padding-right: 7.5px;
+        cursor: pointer;
+        color: ghostwhite;
+        background-color: #417d97 !important;
+      }
+      .moveSideButtonToolsOpened {
+        position: fixed; top: 40%; right: 275px; font-size: 8px;z-index: 1;
+        transition-timing-function: ease;  transition-duration: 0.25s;
+        height: 90px;
+        width: 45px;
+        border-bottom-left-radius: 90px;
+        border-top-left-radius: 90px;
+        padding-left: 7.5px;
+        cursor: pointer;
+        color: ghostwhite;
+        background-color: #417d97 !important;
+
+      }
+      .moveSideButtonToolsClosed {
+        position: fixed; top: 40%; right: -5px; font-size: 8px;z-index: 1;
+        transition-timing-function: ease; transition-duration: 0.25s;
+        height: 90px;
+        width: 45px;
+        border-bottom-left-radius: 90px;
+        border-top-left-radius: 90px;
+        padding-left: 7.5px;
+        cursor: pointer;
+        color: ghostwhite;
+        background-color: #417d97 !important;
+
+      }
+
+md-sidenav {
+    box-sizing: border-box;
+    position: absolute;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    z-index: 60;
+    width: 275px;
+    max-width: 275px;
+    bottom: 0;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.md-button {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    min-height: 36px;
+    min-width: 46.5px;
+    line-height: 36px;
+    padding-top: 10px;
+}
+
+md-checkbox.md-default-theme.md-checked .md-icon, md-checkbox.md-checked .md-icon{
+  background-color: #c4dbdf;
+}
+
+.legend {
+  margin-top:5px;margin-bottom:5px;margin-left:2.5px;margin-right:2.5px;
+}
+
+.textLogin{
+        display: block;
+        position: absolute;
+        top: 1em;
+        left: 50%;
+        color: white;
+        z-index: 9999;
+        font: italic 14px Verdana;
+
+      }
+
+      .ol-custom-overviewmap,
+      .ol-custom-overviewmap.ol-uncollapsible {
+        top: auto;
+        right: auto;
+        left: 0;
+        bottom: 0;
+      }
+
+      .ol-custom-overviewmap:not(.ol-collapsed)  {
+        border: 1px solid black;
+      }
+
+      .ol-custom-overviewmap .ol-overviewmap-map {
+        border: none;
+        width: 250px;
+      }
+
+      .ol-custom-overviewmap .ol-overviewmap-box {
+        border: 2px solid red;
+      }
+
+      .ol-custom-overviewmap:not(.ol-collapsed) button{
+        bottom: auto;
+        right: auto;
+        left: 1px;
+        bottom: 1px;
+        display: none;
+      }
+
+  </style>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top" ng-app="NATURA" ng-controller="naturaController">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="height: 50px !important;" id="mainNav">
+    <a class="navbar-brand" href="/">THEMATIC CARTOGRAPHY AND VISUALIZATION</a>
+    <ul class="navbar-nav ml-auto" style="margin-right: 70px;">
+      <div id="coor" style="display: none;"></div>
+    </ul>
+  </nav>
+  <div class="content-wrapper main container toolRoute">
+    <div class="container-fluid">
+        <div id="contenedor" style="height:calc(100% - 80px); width:100%; left:0px;top:50px;position:absolute;">
+          <div id="olMap" style="height:100%;width:100%; left:0;top:0; position: absolute; background-color: #417d97;"></div>
+          <div id="overviewMap" style="height:200px;width:250px; left:1em;bottom:1em; position: absolute;  background-color: #417d97; border: ghostwhite 1px solid;"></div>
+        </div>
+    </div>
+  </div>
+  <div id="scale-line"></div>
+
+  <div id="containerCanvasPIB" style="max-width: 850px; max-height: 550px; width: 850px; height: 550px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas" style="max-width: 1000px; max-height: 600px; width: 1000px; height: 600px; position: absolute; z-index: -10;"></div>
+  <div id="containerCanvasButton" style="display: flex; flex-direction: column;position: absolute; top: 1000px;"></div>
+    <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <div style="display: none; position: fixed; bottom: -5px; right: 650px; ">Coordenadas WGS84 geográficas	</div>
+          <div id="mouse-position2" style="display: none; position: fixed; bottom: -5px; right: 500px;">	</div>
+          <div style="display: none; position: fixed; bottom: -5px; right: 450px;">UTM </div>
+          <div id="mouse-position3" style="display: none; position: fixed; bottom: -5px; right: 315px; "> </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <!-- Bootstrap core JavaScript-->
+    <script src="./vendor/jquery/jquery.min.js"></script>
+    <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="./vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="./vendor/chart.js/Chart.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="./js/sb-admin.min.js"></script>
+
+    <script src="./js/request.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/imagetracer.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/4.0.1/ol.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.js"></script>
+    <!-- jsPanel JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/jspanel.js"></script>
+  <!-- optionally jsPanel extensions -->
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/extensions/modal/jspanel.modal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/extensions/tooltip/jspanel.tooltip.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/extensions/hint/jspanel.hint.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/extensions/layout/jspanel.layout.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/extensions/contextmenu/jspanel.contextmenu.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/extensions/dock/jspanel.dock.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/ol-contextmenu"></script>
+
+  <script src="https://unpkg.com/ol-popup@3.0.0"></script>
+  <script src="./js/ol-geocoder.js"></script>
+  <script src="./js/featureanimation.js"></script>
+  <script src="./js/zoomanimation.js"></script>
+
+  <script type="text/javascript" src="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.js"></script>
+  <script type="text/javascript" src="js/regions.js"></script>
+  <script type="text/javascript" src="js/createSVG.js"></script>
+  <script>
+
+  //	ANGULAR
+  var sesion = angular.module('NATURA', ['ngMaterial', 'ngMessages']);
+  sesion.controller('naturaController',['$scope','$http','$mdSidenav','$mdToast', function ($scope, $http, $mdSidenav, $mdToast) {
+
+    var currentdate = new Date();
+    var datetime = "2018-" + currentdate.getMonth() + "-" + currentdate.getDate();
+    var centroids = {
+        "type": "FeatureCollection",
+        "name": "regions",
+        "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+        "features": [
+          { "type": "Feature", "properties": { "Codigo": "01", "Name": "ANDALUCIA", "Texto": "ANDALUCIA", companies: {"2008": [55, 21, 20, 31], "2012": [50,15,18,31], "2017": [51,13,20,36]} }, "geometry": { "type": "Point", "coordinates": [-497726.54,4486477.22]}},
+          { "type": "Feature", "properties": { "Codigo": "02", "Name": "ARAGON", "Texto": "ARAGÓN", companies: {"2008": [55,28,20,40], "2012": [51,21,19,41], "2017": [51,19,22,47]} }, "geometry": { "type": "Point", "coordinates": [-84974.57,5071322.18]}},
+          { "type": "Feature", "properties": { "Codigo": "03", "Name": "ASTURIAS", "Texto": "ASTURIAS", companies: {"2008": [59,22,20,34], "2012": [55,10,19,36], "2017": [53,16,21,41]} }, "geometry": { "type": "Point", "coordinates": [-668381.36,5353242.50]}},
+          { "type": "Feature", "properties": { "Codigo": "04", "Name": "BALEARES",  "Texto": "BALEARES", companies: {"2008": [64,38,29,43], "2012": [57,27,27,42], "2017": [56,28,32,51]} }, "geometry": { "type": "Point", "coordinates": [331852.41,4798049.73]}},
+          { "type": "Feature", "properties": { "Codigo": "05", "Name": "CANARIAS",  "Texto": "CANARIAS", companies: {"2008": [61,22,23,32], "2012": [56,15,22,32], "2017": [55,14,25,40]} }, "geometry": { "type": "Point", "coordinates": [-1751629.55,3268729.09]}},
+          { "type": "Feature", "properties": { "Codigo": "06", "Name": "CANTABRIA",  "Texto": "CANTABRIA", companies: {"2008": [57,28,19,35], "2012": [53,21,19,36], "2017": [52,19,21,42]} }, "geometry": { "type": "Point", "coordinates": [-451583.84,5334010.99]}},
+          { "type": "Feature", "properties": { "Codigo": "07", "Name": "CATILLAYLEON",  "Texto": "CASTILLAS Y LEÓN", companies: {"2008": [58,26,17,33], "2012": [55,21,17,35], "2017": [54,19,19,41]} }, "geometry": { "type": "Point", "coordinates": [-527078.35,5106534.40]}},
+          { "type": "Feature", "properties": { "Codigo": "08", "Name": "CASTILLALAMANCHA",  "Texto": "CASTILLA-LA MANCHA", companies: {"2008": [56,32,14,33], "2012": [52,22,14,33], "2017": [52,19,16,39]} }, "geometry": { "type": "Point", "coordinates": [-299601.76,4761650.52]}},
+          { "type": "Feature", "properties": { "Codigo": "09", "Name": "CATALUNA",  "Texto": "CATALUÑA", companies: {"2008": [62,32,28,48], "2012": [58,22,27,49], "2017": [56,19,31,55]} }, "geometry": { "type": "Point", "coordinates": [183109.17,5126668.50]}},
+          { "type": "Feature", "properties": { "Codigo": "10", "Name": "COMVALENCIANA",  "Texto": "COMUNIDAD VALENCIANA", companies: {"2008": [60,28,22,40], "2012": [55,19,21,39], "2017": [54,17,24,47]} }, "geometry": { "type": "Point", "coordinates": [-72867.56,4798049.73]}},
+          { "type": "Feature", "properties": { "Codigo": "11", "Name": "EXTREMADURA",  "Texto": "EXTREMADURA", companies: {"2008": [58,20,15,30], "2012": [54,17,15,31], "2017": [54,15,16,36]} }, "geometry": { "type": "Point", "coordinates": [-681175.40,4739636.66]}},
+          { "type": "Feature", "properties": { "Codigo": "12", "Name": "GALICIA",  "Texto": "GALICIA", companies: {"2008": [64,27,19,35], "2012": [60,23,20,37], "2017": [59,22,23,44]} }, "geometry": { "type": "Point", "coordinates": [-878077.19,5247178.53]}},
+          { "type": "Feature", "properties": { "Codigo": "13", "Name": "MADRID",  "Texto": "MADRID", companies: {"2008": [55,27,38,46], "2012": [50,20,36,48], "2017": [48,18,40,56]} }, "geometry": { "type": "Point", "coordinates": [-412117.06,4921862.54]}},
+          { "type": "Feature", "properties": { "Codigo": "14", "Name": "MURCIA",  "Texto": "MURCIA", companies: {"2008": [56,30,19,35], "2012": [51,19,18,33], "2017": [51,17,20,39]} }, "geometry": { "type": "Point", "coordinates": [-160180.62,4565971.73]}},
+          { "type": "Feature", "properties": { "Codigo": "15", "Name": "NAVARRA",  "Texto": "NAVARRA", companies: {"2008": [55,27,23,37], "2012": [51,20,21,37], "2017": [52,19,24,42]} }, "geometry": { "type": "Point", "coordinates": [-120971.49,5280415.38]}},
+          { "type": "Feature", "properties": { "Codigo": "16", "Name": "PVASCO",  "Texto": "PAÍS VASCO", companies: {"2008": [63,29,24,46], "2012": [55,23,23,43], "2017": [49,17,22,39]} }, "geometry": { "type": "Point", "coordinates": [-289817.82,5325450.04]}},
+          { "type": "Feature", "properties": { "Codigo": "17", "Name": "LARIOJA",  "Texto": "LA RIOJA", companies: {"2008": [57,29,20,44], "2012": [53,21,19,46], "2017": [53,19,21,54]} }, "geometry": { "type": "Point", "coordinates": [-284925.85,5177035.84]}}
+        ]
+        };
+        var centroidsPIB = {
+        "type": "FeatureCollection",
+        "name": "regions",
+        "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+        "features": [
+          { "type": "Feature", "properties": { "Codigo": "01", "Texto": "ANDALUCIA", gdp: [18625, 16666, 18470]}, "geometry": { "type": "Point", "coordinates": [-497726.54,4498477.22]}},
+          { "type": "Feature", "properties": { "Codigo": "02", "Texto": "ARAGÓN", gdp: [26650, 24267, 27403]}, "geometry": { "type": "Point", "coordinates": [-84974.57,5083322.18]}},
+          { "type": "Feature", "properties": { "Codigo": "03", "Texto": "ASTURIAS", gdp: [22336, 20005, 22046] }, "geometry": { "type": "Point", "coordinates": [-668381.36,5365242.50]}},
+          { "type": "Feature", "properties": { "Codigo": "04", "Texto": "BALEARES", gdp: [25717, 23224, 25772]}, "geometry": { "type": "Point", "coordinates": [331852.41,4810049.73]}},
+          { "type": "Feature", "properties": { "Codigo": "05", "Texto": "CANARIAS", gdp: [21186, 19017, 20425] }, "geometry": { "type": "Point", "coordinates": [-1751629.55,3280729.09]}},
+          { "type": "Feature", "properties": { "Codigo": "06", "Texto": "CANTABRIA", gdp: [22850, 20559, 22513] }, "geometry": { "type": "Point", "coordinates": [-451583.84,5346010.99]}},
+          { "type": "Feature", "properties": { "Codigo": "07", "Texto": "CASTILLAS Y LEÓN", gdp: [22421, 21150, 23555]}, "geometry": { "type": "Point", "coordinates": [-527078.35,5118534.40]}},
+          { "type": "Feature", "properties": { "Codigo": "08", "Texto": "CASTILLA-LA MANCHA", gdp: [19697, 17864, 19681]}, "geometry": { "type": "Point", "coordinates": [-299601.76,4773650.52]}},
+          { "type": "Feature", "properties": { "Codigo": "09", "Texto": "CATALUÑA", gdp: [28332, 26041, 29936] }, "geometry": { "type": "Point", "coordinates": [183109.17,5138668.50]}},
+          { "type": "Feature", "properties": { "Codigo": "10", "Texto": "COMUNIDAD VALENCIANA", gdp: [21878, 19288, 22055] }, "geometry": { "type": "Point", "coordinates": [-72867.56,4810049.73]}},
+          { "type": "Feature", "properties": { "Codigo": "11", "Texto": "EXTREMADURA", gdp:[16633, 15313, 17262] }, "geometry": { "type": "Point", "coordinates": [-681175.40,4751636.66]}},
+          { "type": "Feature", "properties": { "Codigo": "12", "Texto": "GALICIA", gdp: [21226, 19533, 22497] }, "geometry": { "type": "Point", "coordinates": [-878077.19,5259178.53]}},
+          { "type": "Feature", "properties": { "Codigo": "13", "Texto": "MADRID", gdp: [32155, 30455, 33809] }, "geometry": { "type": "Point", "coordinates": [-412117.06,4933862.54]}},
+          { "type": "Feature", "properties": { "Codigo": "14", "Texto": "MURCIA", gdp: [20354, 18168, 20585] }, "geometry": { "type": "Point", "coordinates": [-160180.62,4577971.73]}},
+          { "type": "Feature", "properties": { "Codigo": "15", "Texto": "NAVARRA", gdp: [30128, 27485, 30914] }, "geometry": { "type": "Point", "coordinates": [-120971.49,5292415.38]}},
+          { "type": "Feature", "properties": { "Codigo": "16", "Texto": "PAÍS VASCO", gdp: [31243, 29275, 33088] }, "geometry": { "type": "Point", "coordinates": [-289817.82,5337450.04]}},
+          { "type": "Feature", "properties": { "Codigo": "17", "Texto": "LA RIOJA", gdp: [25986, 23917, 26044] }, "geometry": { "type": "Point", "coordinates": [-284925.85,5189035.84]}}
+        ]
+        };
+
+    console.log(centroids);
+    var options = {
+            legend: {display: false},
+            scaleShowLabels: true,
+            scale: {
+                display: false,
+                ticks: {
+                  beginAtZero: true,
+                  min: 10, max: 70
+                },
+            },
+            scales: { yAxes: [{ display: false, ticks: { showLabelBackdrop: false, display: false} }],
+                      xAxes: [{ display: false, ticks: { showLabelBackdrop: false, display: false} }]}
+        };
+        var optionsPIB = {
+          cutoutPercentage: 90,
+          legend: {display: false},
+        };
+        var options1 = {
+            legend: {display: false},
+            scaleShowLabels: false,
+            scale: {
+                display: false,
+                ticks: {
+                  beginAtZero: true,
+                  min: 10000,
+                  max: 250000,
+                },
+            },
+            scales: { yAxes: [{ display: false, ticks: { showLabelBackdrop: false, display: false, min: 0, max: 800000 }}], xAxes: [{ display: false, ticks: { showLabelBackdrop: false, display: false} }] }
+        };
+        var options2 = {
+            legend: {display: false},
+            scaleShowLabels: false,
+            scale: {
+                display: false,
+                ticks: {
+                  beginAtZero: true,
+                  min: 500000,
+                  max: 800000,
+                },
+            },
+            scales: { yAxes: [{ display: false, ticks: { showLabelBackdrop: false, display: false, min: 0, max: 800000 }}], xAxes: [{ display: false, ticks: { showLabelBackdrop: false, display: false} }] }
+        };
+        /*{ticks: {min: 0, max: 10000}},
+    {ticks: {min: 0, max: 1000}},
+    {ticks: {min: 0, max: 10}},
+          var canvas = document.createElement('canvas'); canvas.id = 'andalucia'; canvas.style.display = 'block'; document.getElementById('containerCanvas').appendChild(canvas);
+          var ctx = document.getElementById('andalucia').getContext('2d');
+          var datasetAndalucia = [{label: '', data: centroids.features[0].properties.companies['2008'], backgroundColor: ['rgba(255, 0, 0, 0.2)'] },
+                                  {label: '', data: centroids.features[0].properties.companies['2012'], backgroundColor: ['rgba(0, 255, 0, 0.2)'] },
+                                  {label: '', data: centroids.features[0].properties.companies['G2'], backgroundColor: ['rgba(0, 0, 255, 0.2)'] }];
+          var andalucia = new Chart(ctx, {type: 'radar', data: { labels: ["", "", ""], datasets: datasetAndalucia}, options: options });
+        */
+
+    window.app = {};
+    var app = window.app;
+    //PRINT PDF
+    app.print = function(opt_options) {
+		  var options = opt_options || {};
+		  var button = document.createElement('button');
+		  button.className = 'print';
+		  var this_ = this;
+		  var print = function() {
+
+          var pdf = new jsPDF({orientation: 'landscape',});
+          var dims = {
+               A0: [1189, 841], A1: [841, 594], A2: [594, 420],
+               A3: [420, 297],  A4: [210, 297], A5: [210, 148], A8: [52, 74]
+           };
+
+          var format = 'A4';
+          var formatOver = 'A8';
+          var dim = dims[format];
+          var dimOver = dims[formatOver];
+          var width = Math.round(dim[1] * 300 / 25.4);
+          var height = Math.round(dim[0] * 300 / 25.4);
+          var widthOver = Math.round(dimOver[1] * 300 / 25.4);
+          var heightOver = Math.round(dimOver[0] * 300 / 25.4);
+          var size = /** @type {module:ol/size~Size} */ (olMap.getSize());
+          var sizeOver = /** @type {module:ol/size~Size} */ (overviewMap.getSize());
+          var extent = olMap.getView().calculateExtent(size);
+          var extentOver = overviewMap.getView().calculateExtent(sizeOver);
+        // Set print size
+        var printSize = [width, height];
+        var printSizeOver = [widthOver, heightOver];
+        olMap.setSize(printSize);
+        olMap.getView().fit(extent, {size: printSize});
+        overviewMap.setSize(printSizeOver);
+        overviewMap.getView().fit(extentOver, {size: printSizeOver});
+        olMap.getView().setZoom(olMap.getView().getZoom() + 1.275);
+        overviewMap.getView().setZoom(overviewMap.getView().getZoom() + 0.9);
+
+          olMap.once('postrender', function(event) {
+            overviewMap.once('postrender', function(event) {
+              olMap.updateSize();
+              olMap.render();
+            var collectCanvas = document.getElementsByTagName('canvas');
+            console.log(collectCanvas);
+          let canvasMap;
+          let canvasOverviewMap;
+
+          // tslint:disable-next-line:forin
+            for (let i = 0; i < collectCanvas.length; i ++) {
+              if (collectCanvas[i].offsetParent) {
+                var once = collectCanvas[i].offsetParent;
+                if (once['offsetParent']) {
+                  if (once['offsetParent'].id === 'olMap') {
+                    canvasMap = collectCanvas[i];
+                  }
+                }
+              }
+            }
+            for (let i = 0; i < collectCanvas.length; i ++) {
+              if (collectCanvas[i].offsetParent) {
+                var once = collectCanvas[i].offsetParent;
+                if (once['offsetParent']) {
+                  if (once['offsetParent'].id === 'overviewMap') {
+                    canvasOverviewMap = collectCanvas[i];
+                  }
+                }
+              }
+            }
+          var canvas = canvasMap;
+          var canvas2 = canvasOverviewMap;
+          var data = canvas.toDataURL('image/png');
+          var data2 = canvas2.toDataURL('image/png');
+          pdf.addImage(data, 'PNG', 5, 5, dim[1] - 10, dim[0] - 10);
+
+          olMap.getControls().forEach(function (control) {
+          // console.log(control);
+          if (control.element.className === 'ol-scale-line ol-unselectable') {
+            const scale = control.element.textContent;
+            const scale2 = scale.split(' ');
+            if (scale2[1] === 'km') {
+              const number = scale2[0] * 1000;
+              const scaleFinal = '1:' + number;
+              // pdf.text(dim[1] - 30, dim[0] - 27.5, scaleFinal);
+            } else {
+              const number = scale2[0];
+              const scaleFinal = '1:' + number;
+              // pdf.text(dim[1] - 30, dim[0] - 27.5, scaleFinal);
+            }
+          }
+        });
+          // pdf.addImage(data3, 'PNG', dim[0] - 45, dim[0] - 45, 25, 25); // canvas overview
+          pdf.setFillColor(255,255,255);
+          // pdf.rect( dim[1] - 100, dim[0] - 40, dim[1] - 9.5, dim[0] - 100, 'F'); // Relleno del cajetin
+          // pdf.rect( dim[1] - 100.25, dim[0] - 40.25, 95.15, 35.15); // Rectangulo del cajetin
+          // pdf.text('Static map...', dim[1] - 90, dim[0] - 20); // Texto en cajetin
+          pdf.rect( 4.5, 4.5, dim[1] - 9.5, dim[0] - 9.5); //Rectangulo negro exterior
+          pdf.addImage(data2, 'PNG', 5, dim[0] - 45, 69, 52); // canvas overview
+          pdf.rect( 4.5, dim[0] - 44.5, 70, 39.5); // Rectangulo del overview
+          //data3 = document.getElementById('scale-line-1').toDataURL('image/png');
+          //console.log(data3);
+          //pdf.addImage(data3, 'PNG', dim[0] - 45, dim[0] - 45, 25, 25); // canvas overview
+          pdf.save('map.pdf');
+            // Reset original map size
+            //olMap.setSize(size);
+            //olMap.getView().fit(extent, {size: size});
+            overviewMap.setSize(sizeOver);
+            overviewMap.getView().fit(extentOver, {size: sizeOver});
+          });
+        });
+
+		  };
+		  button.addEventListener('click', print, false);
+		  button.addEventListener('touchstart', print, false);
+		  var element = document.createElement('div');
+		  element.className = 'print ol-unselectable ol-control';
+		  element.appendChild(button);
+		  ol.control.Control.call(this, {element: element,target: options.target });
+		};
+		ol.inherits(app.print, ol.control.Control);
+    // PRINT PDF
+		//CENTRAR//
+		  app.centrar = function(opt_options) {
+		  var options = opt_options || {};
+		  var button = document.createElement('button');
+		 /*  button.innerHTML = 'B'; */
+		   button.className = 'centrar';
+		  var this_ = this;
+		  var centrar = function() {
+			var center = [-412728.56, 4904308.52];
+      olMap.getView().setCenter(center);
+			olMap.getView().setZoom(7);
+		  };
+		  button.addEventListener('click', centrar, false);
+		  button.addEventListener('touchstart', centrar, false);
+		  var element = document.createElement('div');
+		  element.className = 'centrar ol-unselectable ol-control';
+		  element.appendChild(button);
+		  ol.control.Control.call(this, {element: element,target: options.target });
+		};
+		ol.inherits(app.centrar, ol.control.Control);
+
+		var mousePositionControl2 = new ol.control.MousePosition({
+		  coordinateFormat: ol.coordinate.createStringXY(6),
+		  projection: 'EPSG:4326',
+		  className: 'custom-mouse-position',
+		  coordinateFormat: ol.coordinate.toStringHDMS,
+		  target: document.getElementById('mouse-position2'),
+		  undefinedHTML: ''
+		});
+	   var mousePositionControl3 = new ol.control.MousePosition({
+			  target: document.getElementById('mouse-position3'),
+			  className: 'custom-mouse-position',
+			  undefinedHTML: '',
+			  projection: myProjection,
+			  coordinateFormat : ol.coordinate.createStringXY(2),
+		  });
+
+  var source_capabase = new ol.source.XYZ({  url: 'https://{1-4}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'});
+	var capabase = new ol.layer.Tile({source: source_capabase,name: 'LIGHT',description: 'CARTO',visible: true, crossOrigin: 'Anonymous',
+  baseLayer: true, displayInLayerSwitcher: true,});
+  //AERIAL BING
+  var OSM = new ol.layer.Tile({ source: new ol.source.OSM(), visible:true,
+    baseLayer: true, displayInLayerSwitcher: true,  });
+    var stamen = new ol.layer.Tile({
+            source: new ol.source.Stamen({
+              layer: 'terrain'
+            }), baseLayer: true, displayInLayerSwitcher: true,
+          });
+  var source_aerial_bing = new ol.source.BingMaps({
+            key: 'ArI8uCPDtw0y4e58IBL66Qc-RmfMG3DvBCNS9Kdzj4BUS9SW6xNlRz9FRmW9NzKZ',
+            imagerySet: 'AerialWithLabels'
+          });
+		var aerial = new ol.layer.Tile({name:'aerial_bing',title: 'aerial_bing',
+    baseLayer: true, displayInLayerSwitcher: true,
+    preload: Infinity, description: 'Aerial',visible: true, source: source_aerial_bing});
+
+  var myProjectionName = 'EPSG:3857';
+  // proj4.defs(myProjectionName, "+proj=utm +zone=30 +ellps=GRS80 +units=m +no_defs");
+	var myProjection = ol.proj.get(myProjectionName);
+	// --- Se define el MAPA ---
+  var overviewMap = new ol.Map({
+    interactions: ol.interaction.defaults().extend([new ol.interaction.DragRotateAndZoom()]),
+    layers: [],
+    controls: [mousePositionControl2,mousePositionControl3],
+    view: new ol.View({
+      projection: myProjection,
+      center: [-1767006.43, 3278070.10],
+      zoom: 6
+    }),
+  target: document.getElementById('overviewMap'),
+  });
+
+  var olMap = new ol.Map({
+    interactions: ol.interaction.defaults().extend([new ol.interaction.DragRotateAndZoom()]),
+    layers: [],
+    view: new ol.View({
+        projection: myProjection,
+        center: [-412728.56, 4924308.52],
+        zoom: 6.5
+    }),
+    units: 'm',
+    controls: ol.control.defaults().extend ([
+      new ol.control.ScaleLine(),
+      mousePositionControl2,mousePositionControl3,
+      new ol.control.FullScreen(),
+      new app.centrar(),
+      new app.print(),
+    ]),
+    target: document.getElementById('olMap'),
+    });
+    //var scaleline = new ol.control.CanvasScaleLine();
+    //olMap.addControl(scaleline);
+
+   /*   let scale;
+    let canvasScale;
+    let data3;
+    if (document.getElementsByClassName('ol-scale-line-inner')[1]) {
+      //scale = document.getElementsByClassName('ol-scale-line-inner')[1];
+      //console.log(scale);
+      scale = document.querySelector(".ol-scale-line-inner");
+      console.log(scale);
+      html2canvas(scale).then(canvas => {
+                canvasScale = canvas;
+                console.log(canvas);
+                canvas.id = 'scale-line-1'; canvas.style.display = 'block';
+                document.getElementById('scale-line').appendChild(canvas);
+            });
+      } else {
+        scale = document.getElementsByClassName('ol-scale-line-inner')[0];
+      }
+
+      setTimeout(() => {
+      console.log(document.getElementById('scale-line-1').toDataURL('png'));
+    }, 3000);*/
+    // --- //
+
+    var charts = [];
+    var chartsPIB = [];
+    function buildCharts(i, ccaa) {
+      /*
+        var canvas2008 = document.createElement('canvas'); canvas2008.id = ccaa + '2008'; canvas2008.style.display = 'block';
+        canvas2008.style.width = 800; canvas2008.style.height = 400; document.getElementById('containerCanvas').appendChild(canvas2008);
+        var ctx2008 = document.getElementById(ccaa + '2008').getContext('2d');
+        var canvas2012 = document.createElement('canvas'); canvas2012.id = ccaa + '2012'; canvas2012.style.display = 'block';
+        canvas2012.style.width = 800; canvas2012.style.height = 400; document.getElementById('containerCanvas').appendChild(canvas2012);
+        var ctx2012 = document.getElementById(ccaa + '2012').getContext('2d');
+        var canvas2017 = document.createElement('canvas'); canvas2017.id = ccaa + '2017'; canvas2017.style.display = 'block';
+        canvas2017.style.width = 800; canvas2017.style.height = 400; document.getElementById('containerCanvas').appendChild(canvas2017);
+        var ctx2017 = document.getElementById(ccaa + '2017').getContext('2d');
+        var dataset2008 = [{label: '2008', data: centroids.features[i].properties.companies['2008'], type: "radar", backgroundColor: ['rgba(255, 0, 0, 0)'], borderColor: ['rgb(139,69,19)'] }
+        ];
+        var dataset2012 = [{label: '2012', data: centroids.features[i].properties.companies['2012'], type: "radar",backgroundColor: ['rgba(0, 255, 0, 0)'], borderColor: ['rgb(205,133,63)'] }
+        ];
+        var dataset2017 = [{label: '2017', data: centroids.features[i].properties.companies['2017'], type: "radar",backgroundColor: ['rgba(0, 0, 255, 0)'], borderColor: ['rgb(245,222,179)'] }
+        ];
+        var chart2008 = new Chart(ctx2008, {type: 'radar', data: { labels: ["G1", "G2", "G3", "G4"], datasets: dataset2008}, options: options });
+        var chart2012 = new Chart(ctx2012, {type: 'radar', data: { labels: ["G1", "G2", "G3", "G4"], datasets: dataset2012}, options: options });
+        var chart2017 = new Chart(ctx2017, {type: 'radar', data: { labels: ["G1", "G2", "G3", "G4"], datasets: dataset2017}, options: options });
+*/
+        var canvas = document.createElement('canvas'); canvas.id = ccaa; canvas.style.display = 'block';
+        canvas.style.width = 800; canvas.style.height = 400; document.getElementById('containerCanvas').appendChild(canvas);
+        var ctx = document.getElementById(ccaa).getContext('2d');
+        var dataset = [{label: '2008', data: centroids.features[i].properties.companies['2008'], type: "radar", backgroundColor: ['rgba(0,0,0,0)'], borderColor: ['hsl(340, 100%, 70%)'], borderWidth: 3 },
+                      {label: '2012', data: centroids.features[i].properties.companies['2012'], type: "radar",backgroundColor: ['rgba(0,0,0,0)'], borderColor: ['hsl(340, 100%, 45%)'], borderWidth: 3 },
+                      {label: '2017', data: centroids.features[i].properties.companies['2017'], type: "radar",backgroundColor: ['rgba(0,0,0,0)'], borderColor: ['hsl(340, 100%, 30%)'], borderWidth: 3 }
+        ];
+        var chart = new Chart(ctx, {type: 'radar', data: { labels: ["G1", "G2", "G3", "G4"], datasets: dataset}, options: options });
+
+        //callSVG(canvas2008, ccaa);
+        setTimeout(() => {
+          const img = canvas.toDataURL('image/png',1);
+          const svg = createSVG(img);
+          const downloadLink = document.createElement("a");
+          downloadLink.href = svg;
+          downloadLink.innerHTML = '' + ccaa + '.svg';
+          downloadLink.download = '' + ccaa + '.svg';
+          document.getElementById('containerCanvasButton').appendChild(downloadLink);
+        }, 5000);
+        /*
+        setTimeout(() => {
+          const img2008 = canvas2008.toDataURL('image/png',1);
+          const downloadLink2008 = document.createElement("a");
+          downloadLink2008.href = img2008;
+          downloadLink2008.innerHTML = '' + ccaa + '2008.png';
+          downloadLink2008.download = '' + ccaa + '2008.png';
+          document.getElementById('containerCanvasButton').appendChild(downloadLink2008);
+          //downloadLink2008.click();
+
+          const img2012 = canvas2012.toDataURL('image/png',1);
+          const downloadLink2012 = document.createElement("a");
+          downloadLink2012.href = img2012;
+          downloadLink2012.innerHTML = '' + ccaa + '2012.png';
+          downloadLink2012.download = '' + ccaa + '2012.png';
+          document.getElementById('containerCanvasButton').appendChild(downloadLink2012);
+          //downloadLink2012.click();
+
+          const img2017 = canvas2017.toDataURL('image/png',1);
+          const downloadLink2017 = document.createElement("a");
+          downloadLink2017.href = img2008;
+          downloadLink2017.innerHTML = '' + ccaa + '2017.png';
+          downloadLink2017.download = '' + ccaa + '2017.png';
+          document.getElementById('containerCanvasButton').appendChild(downloadLink2017);
+          //downloadLink2017.click();
+        }, 5000);*/
+
+        var canvasPIB = document.createElement('canvas'); canvasPIB.id = ccaa + 'PIB'; canvasPIB.style.display = 'none';
+        canvasPIB.style.width = 200; canvasPIB.style.height = 100; document.getElementById('containerCanvasPIB').appendChild(canvasPIB);
+        var ctxPIB = document.getElementById(ccaa + 'PIB').getContext('2d'); // centroidsPIB.features[i].properties.gdp
+        var gdp2008 = centroidsPIB.features[i].properties.gdp[0];
+        var gdp2012 = centroidsPIB.features[i].properties.gdp[1];
+        var gdp2017 = centroidsPIB.features[i].properties.gdp[2];
+        let color2008;
+        let color2012;
+        let color2017;
+        if (gdp2008 < 17000) color2008 = 'hsl(210, 50%, 80%)';
+        if (gdp2008 > 17000 && gdp2008 < 22000) color2008 = 'hsl(210, 50%, 70%)';
+        if (gdp2008 > 22000 && gdp2008 < 25000) color2008 = 'hsl(210, 50%, 60%)';
+        if (gdp2008 > 25000 && gdp2008 < 28000) color2008 = 'hsl(210, 50%, 50%)';
+        if (gdp2008 > 28000) color2008 = 'hsl(210, 50%, 40%)';
+
+        if (gdp2012 < 17000) color2012 = 'hsl(210, 50%, 80%)';
+        if (gdp2012 > 17000 && gdp2012 < 22000) color2012 = 'hsl(210, 50%, 70%)';
+        if (gdp2012 > 22000 && gdp2012 < 25000) color2012 = 'hsl(210, 50%, 60%)';
+        if (gdp2012 > 25000 && gdp2012 < 28000) color2012 = 'hsl(210, 50%, 50%)';
+        if (gdp2012 > 28000) color2012 = 'hsl(210, 50%, 40%)';
+
+        if (gdp2017 < 17000) color2017 = 'hsl(210, 50%, 80%)';
+        if (gdp2017 > 17000 && gdp2017 < 22000) color2017 = 'hsl(210, 50%, 70%)';
+        if (gdp2017 > 22000 && gdp2017 < 25000) color2017 = 'hsl(210, 50%, 60%)';
+        if (gdp2017 > 25000 && gdp2017 < 28000) color2017 = 'hsl(210, 50%, 50%)';
+        if (gdp2017 > 28000) color2017 = 'hsl(210, 50%, 40%)';
+
+
+        var datasetsPIB = [{label: '', data: [50, 50, 50], backgroundColor: [color2008, color2012, color2017], borderColor: ['rgb(255, 255, 255)'] } ];
+        var chartPIB = new Chart(ctxPIB, {type: 'doughnut', data: {labels: ["2008", "2012", "2017"], datasets:  datasetsPIB}, options: optionsPIB });
+        setTimeout(() => {
+          const imgPIB = canvasPIB.toDataURL('image/png',1);
+          const downloadLinkPIB = document.createElement("a");
+          const svgPIB = createSVG(imgPIB);
+          downloadLinkPIB.href = svgPIB;
+          downloadLinkPIB.innerHTML = '' + ccaa + 'PIB.svg';
+          downloadLinkPIB.download = '' + ccaa + 'PIB.svg';
+          document.getElementById('containerCanvasButton').appendChild(downloadLinkPIB);
+        }, 5000);
+      }
+      for (var i = 0; i<centroids.features.length; i++) {
+        var feature = centroids.features[i].properties['Name'];
+        buildCharts(i, feature);
+        var view = olMap.getView();
+      }
+    setTimeout(() => {
+        var years = ['2008', '2012', '2017'];
+        /*
+        for (var i = 0; i<centroids.features.length; i++) {
+            for (var j = 0; j<years.length; j++) {
+                var feature = centroids.features[i].properties['Name'];
+                var ccaa = feature + years[j];
+                var data = document.getElementById(ccaa).toDataURL('image/png',1);
+                var dataPIB = document.getElementById(feature + 'PIB').toDataURL('image/png',1);
+                charts.push(new ol.style.Icon(({anchor: [0.5, 0.5], src: data})));
+                chartsPIB.push(new ol.style.Icon( ({anchor: [0.5, 0.5], src: dataPIB})));
+            }
+      }
+      */
+      for (var i = 0; i<centroids.features.length; i++) {
+                var feature = centroids.features[i].properties['Name'];
+                var ccaa = feature;
+                var data = document.getElementById(ccaa).toDataURL('image/png',1);
+                var dataPIB = document.getElementById(feature + 'PIB').toDataURL('image/png',1);
+                charts.push(new ol.style.Icon(({anchor: [0.5, 0.5], src: data})));
+                chartsPIB.push(new ol.style.Icon( ({anchor: [0.5, 0.5], src: dataPIB})));
+      }
+
+     var styles = {
+        'ANDALUCIA': new ol.style.Style({image: charts[0]}),
+        'ARAGÓN': new ol.style.Style({image: charts[1]}),
+        'ASTURIAS': new ol.style.Style({image: charts[2]}),
+        'BALEARES': new ol.style.Style({image: charts[3]}),
+        'CANARIAS': new ol.style.Style({image: charts[4]}),
+        'CANTABRIA': new ol.style.Style({image: charts[5]}),
+        'CASTILLAS Y LEÓN': new ol.style.Style({image: charts[6]}),
+        'CASTILLA-LA MANCHA': new ol.style.Style({image: charts[7]}),
+        'CATALUÑA': new ol.style.Style({image: charts[8]}),
+        'COMUNIDAD VALENCIANA': new ol.style.Style({image: charts[9]}),
+        'EXTREMADURA': new ol.style.Style({image: charts[10]}),
+        'GALICIA': new ol.style.Style({image: charts[11]}),
+        'MADRID': new ol.style.Style({image: charts[12]}),
+        'MURCIA': new ol.style.Style({image: charts[13]}),
+        'NAVARRA': new ol.style.Style({image: charts[14]}),
+        'PAÍS VASCO': new ol.style.Style({image: charts[15]}),
+        'LA RIOJA': new ol.style.Style({image: charts[16]})
+      };
+      var stylesPIB = {
+        'ANDALUCIA': new ol.style.Style({image: chartsPIB[0]}),
+        'ARAGÓN': new ol.style.Style({image: chartsPIB[1]}),
+        'ASTURIAS': new ol.style.Style({image: chartsPIB[2]}),
+        'BALEARES': new ol.style.Style({image: chartsPIB[3]}),
+        'CANARIAS': new ol.style.Style({image: chartsPIB[4]}),
+        'CANTABRIA': new ol.style.Style({image: chartsPIB[5]}),
+        'CASTILLAS Y LEÓN': new ol.style.Style({image: chartsPIB[6]}),
+        'CASTILLA-LA MANCHA': new ol.style.Style({image: chartsPIB[7]}),
+        'CATALUÑA': new ol.style.Style({image: chartsPIB[8]}),
+        'COMUNIDAD VALENCIANA': new ol.style.Style({image: chartsPIB[9]}),
+        'EXTREMADURA': new ol.style.Style({image: chartsPIB[10]}),
+        'GALICIA': new ol.style.Style({image: chartsPIB[11]}),
+        'MADRID': new ol.style.Style({image: chartsPIB[12]}),
+        'MURCIA': new ol.style.Style({image: chartsPIB[13]}),
+        'NAVARRA': new ol.style.Style({image: chartsPIB[14]}),
+        'PAÍS VASCO': new ol.style.Style({image: chartsPIB[15]}),
+        'LA RIOJA': new ol.style.Style({image: chartsPIB[16]})
+      };
+/* new ol.style.Style({image: new ol.style.Circle({
+  fill: new ol.style.Fill({
+            color: 'rgba(55, 200, 150, 0.5)'
+        }),
+        stroke: new ol.style.Stroke({
+            width: 1,
+            color: 'rgba(55, 200, 150, 0.8)'
+        }),
+        radius: 20
+    }),})
+    */
+      var styleFunction = function(feature) {
+        return styles[feature.getProperties()['Texto']];
+      };
+      var styleFunctionPIB = function(feature) {
+        return stylesPIB[feature.getProperties()['Texto']];
+      };
+      // Vector layer for CCAA
+      var vectorSource = new ol.source.Vector({
+            features: (new ol.format.GeoJSON()).readFeatures(geojsonSpain)
+      });
+      var vectorLayer = new ol.layer.Vector({
+        source: vectorSource,
+        style: new ol.style.Style({
+          stroke: new ol.style.Stroke({
+            color: 'blue',
+            width: 0.5
+          }),
+          fill: new ol.style.Fill({
+            color: 'rgba(0, 0, 255, 0.05)'
+          })
+        }),
+        crossOrigin: 'Anonymous',
+        baseLayer: false, displayInLayerSwitcher: false,
+      });
+      // Vector layer for centroids
+      var vectorSourceCentroids = new ol.source.Vector({
+            features: (new ol.format.GeoJSON()).readFeatures(centroids)
+      });
+      var vectorLayerCentroids = new ol.layer.Vector({
+        source: vectorSourceCentroids,
+        style: styleFunction,
+        crossOrigin: 'Anonymous',
+        baseLayer: false, displayInLayerSwitcher: false,
+      });
+      // Vector layer for PIB
+      var vectorSourcePIB = new ol.source.Vector({
+            features: (new ol.format.GeoJSON()).readFeatures(centroidsPIB)
+      });
+      var vectorLayerPIB = new ol.layer.Vector({
+        source: vectorSourcePIB,
+        style: styleFunctionPIB,
+        crossOrigin: 'Anonymous',
+        baseLayer: false, displayInLayerSwitcher: false,
+      });
+      /*var layerImages = new ol.layer.Image({
+          source: new ol.source.ImageVector({
+              source: vectorSourceCentroids,
+              style: styleFunction
+          })
+      });*/
+      olMap.addLayer(vectorLayer);olMap.addLayer(vectorLayerCentroids);olMap.addLayer(vectorLayerPIB);
+      overviewMap.addLayer(vectorLayer);overviewMap.addLayer(vectorLayerCentroids);overviewMap.addLayer(vectorLayerPIB);
+
+      var select = new ol.interaction.Select({source: vectorLayerCentroids.getSource()});
+      var selectOverview = new ol.interaction.Select({source: vectorLayerCentroids.getSource()});
+      // olMap.addInteraction(select); overviewMap.addInteraction(selectOverview);
+
+
+      select.on('select', function(e) { // console.log(e);
+          if (e.selected[0]) {
+            if (e.selected[0].I) {
+              var selectedFeature = e.selected[0].I;
+              var texto = selectedFeature.Texto;
+              console.log(selectedFeature);
+              var coordinate = e.mapBrowserEvent.coordinate;
+              $mdToast.show($mdToast.simple().hideDelay(15000).textContent(texto).position('bottom right'));
+            }
+          }
+        });
+        selectOverview.on('select', function(e) {
+          if (e.selected[0]) {
+            if (e.selected[0].I) {
+              var selectedFeature = e.selected[0].I;
+              var texto = selectedFeature.Texto
+              var coordinate = e.mapBrowserEvent.coordinate;
+              $mdToast.show($mdToast.simple().hideDelay(15000).textContent(texto).position('bottom right'));
+            }
+          }
+        });
+        // Change VIEW
+        /*
+        setTimeout(() => {
+            var years = ['2008', '2012', '2017'];
+            for (let i = 0; i<centroids.features.length; i++) {
+              var feature = centroids.features[i].properties['Name'];
+                for (let j = 0; j<years.length; j++) {
+                    var ccaa = '' + feature + '' + years[j];
+                    console.log(ccaa);
+                    var img = document.getElementById(ccaa).toDataURL('image/png',1);
+                    callSVG(img, ccaa);
+                }
+            }
+        }, 3000);*/
+    }, 2500);
+    function callSVG(img, ccaa) {
+        ImageTracer.imageToSVG(img, function(svgstr){
+          // ImageTracer.appendSVGString(svgstr, 'svg' + ccaa);
+          // console.log(svgstr);
+          const svg = document.createElement('svg');
+          svg.id = 'svg' + ccaa;
+          svg.src= svgstr;
+          document.body.appendChild(svg);
+          const svgData = $("#svg" + ccaa)[0].outerHTML;
+          // const svgData = svgstr;
+          const svgBlob = new Blob([svgData], {type:"image/svg+xml;charset=utf-8"});
+          const svgUrl = URL.createObjectURL(svgBlob);
+          const downloadLink = document.createElement("a");
+          downloadLink.href = svgUrl;
+          downloadLink.innerHTML = ccaa;
+          downloadLink.download = ccaa + '.svg';
+          document.body.appendChild(downloadLink);
+          // downloadLink.click();
+      }, 'posterized2');
+    };
+    /* olMap.getView().on('change:center', function(evt){
+      overviewMap.getView().setCenter(olMap.getView().getCenter());
+    }); */
+        var popup = new Popup();
+        olMap.addOverlay(popup);
+        olMap.addControl (new ol.control.LayerSwitcherImage());
+
+      // Change VIEW
+      // aaa
+      olMap.on('click', function(evt) {
+        res = olMap.getView().getResolution();
+      });
+
+      var feature2string = function (feature)  {
+			   if (feature){
+            var str = '';
+            var propiedades = feature.getProperties();
+            var geomname = feature.getGeometryName();
+                var thing = feature.get('elemento');
+            str = '<p style="text-align:center; font-size:14px; font-weight:700; border-bottom:1px solid #000000; color:black;">'+thing+'</p>';
+            for (var p in propiedades) {
+              if (p != geomname) {
+
+                str +=  p + ': ' + feature.get(p)+ ' <br> ';
+              }
+            }
+            return str;
+          }
+		   }
+        var TextInfo = document.getElementById('TextInfo');
+
+     }]);
+
+  </script>
+</body>
+
+</html>

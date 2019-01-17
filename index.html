@@ -1,0 +1,1831 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>ThematicVisualization</title>
+  <!-- Bootstrap core CSS-->
+  <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="./vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="./css/sb-admin.css" rel="stylesheet">
+  <link href="./css/ol.css" rel="stylesheet">
+  <!-- ol-ext -->
+  <link rel="stylesheet" href="./css/ol-ext.min.css" />
+
+  <link rel="stylesheet" href="./css/ol-geocoder.min.css">
+  <!--<link href="https://cdn.jsdelivr.net/npm/ol-contextmenu@latest/dist/ol-contextmenu.min.css" rel="stylesheet">-->
+
+  <link rel="stylesheet" href="./css/ol-popup.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- ANGULAR MATERIAL -->
+  <link rel="stylesheet" href="./css/angular-material.min.css">
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="./js/angular.min.js"></script>
+  <script src="./js/angular-animate.min.js"></script>
+  <script src="./js/angular-aria.min.js"></script>
+  <script src="./js/angular-messages.min.js"></script>
+  <!-- Angular Material Library -->
+  <script src="./js/angular-material.min.js"></script>
+
+  <!-- jsPanel CSS -->
+  <!--<link href="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/jspanel.css" rel="stylesheet">-->
+  <script src="./js/html2canvas.js"></script>
+  <script src="./js/proj4.js"></script>
+  <script src="./js/proj4-src.js"></script>
+  <!-- JS -->
+  <script src="./js/jquery.min.js"></script>
+  <script src="./js/c79e2f3459.js"></script><!--font awesome-->
+  <script src="./js/angular-route.js"></script>
+  <script src="./js/jspdf.min.js"></script>
+  <!-- OL-ext -->
+  <link rel="stylesheet" href="./css/ol-ext.css" />
+  <link href="./css/rzslider.min.css">
+  <style>
+
+  .navbar-expand-lg .navbar-nav .nav-link{
+    padding-left: 5px;
+    font-size: 15px;
+  }
+  body {
+    font-size: 0.75rem;
+  }
+  #collapseComponents11 {
+    margin-bottom: 0;
+    margin-left: -40px;
+  }
+  #collapseComponents12 {
+    margin-bottom: 0;
+    margin-left: -40px;
+  }
+  .navbar-brand {
+    display: block;
+    padding-top: .3125rem;
+    padding-bottom: .3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    line-height: inherit;
+    white-space: nowrap;
+    margin-left: 15px;
+    position: relative;
+    float: left;
+  }
+  .ol-popup {
+    background-color: rgba(0,0,0,0.75);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    display: inline-flex;
+    width: auto;
+  }
+  .ol-popup-content {
+    border: 0px;
+    padding: 0;
+  }
+  .tooltip {
+    position: relative;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    color: white;
+    padding: 4px 8px;
+    opacity: 0.7;
+    white-space: nowrap;
+  }
+  .tooltip-measure {
+    opacity: 1;
+    font-weight: bold;
+  }
+  .tooltip-static {
+    background-color: #ffcc33;
+    color: black;
+    border: 1px solid white;
+  }
+  .tooltip-measure:before,
+  .tooltip-static:before {
+    border-top: 6px solid rgba(0, 0, 0, 0.5);
+    border-right: 6px solid transparent;
+    border-left: 6px solid transparent;
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    margin-left: -7px;
+    left: 50%;
+  }
+  .tooltip-static:before {
+    border-top-color: #ffcc33;
+  }
+  .ol-geocoder.gcd-txt-container {
+    position: fixed;
+    width: 150px;
+    height: 40px;
+    top: 5px;
+    right: 90px;
+    box-sizing: border-box;
+    border: 1px solid #101215;
+    border-radius: 4px;
+    z-index: 9999;
+  }
+  .ol-geocoder ul.gcd-txt-result {
+    top: 45px;
+  }
+  /*sidenav herramientas*/
+
+  .moveSideButtonLayersOpened {
+    position: fixed; top: 40%; left: 275px; font-size: 8px;z-index: 1;
+    transition-timing-function: ease;  transition-duration: 0.25s;
+    height: 90px;
+    width: 45px;
+    border-bottom-right-radius: 90px;
+    border-top-right-radius: 90px;
+    padding-right: 7.5px;
+    cursor: pointer;
+    color: ghostwhite;
+    background-color: #417d97 !important;
+  }
+  .moveSideButtonLayersClosed {
+    position: fixed; top: 40%; left: -5px; font-size: 8px;z-index: 1;
+    transition-timing-function: ease; transition-duration: 0.25s;
+    height: 90px;
+    width: 45px;
+    border-bottom-right-radius: 90px;
+    border-top-right-radius: 90px;
+    padding-right: 7.5px;
+    cursor: pointer;
+    color: ghostwhite;
+    background-color: #417d97 !important;
+  }
+  .moveSideButtonToolsOpened {
+    position: fixed; top: 40%; right: 275px; font-size: 8px;z-index: 1;
+    transition-timing-function: ease;  transition-duration: 0.25s;
+    height: 90px;
+    width: 45px;
+    border-bottom-left-radius: 90px;
+    border-top-left-radius: 90px;
+    padding-left: 7.5px;
+    cursor: pointer;
+    color: ghostwhite;
+    background-color: #417d97 !important;
+
+  }
+  .moveSideButtonToolsClosed {
+    position: fixed; top: 40%; right: -5px; font-size: 8px;z-index: 1;
+    transition-timing-function: ease; transition-duration: 0.25s;
+    height: 90px;
+    width: 45px;
+    border-bottom-left-radius: 90px;
+    border-top-left-radius: 90px;
+    padding-left: 7.5px;
+    cursor: pointer;
+    color: ghostwhite;
+    background-color: #417d97 !important;
+
+  }
+
+  md-sidenav {
+    box-sizing: border-box;
+    position: absolute;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    z-index: 60;
+    width: 275px;
+    max-width: 275px;
+    bottom: 0;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .md-button {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    min-height: 36px;
+    min-width: 46.5px;
+    line-height: 36px;
+    padding-top: 10px;
+    box-shadow: 0 2px 5px 0 rgba(255,255,255,1) !important;
+  }
+
+  md-checkbox.md-default-theme.md-checked .md-icon, md-checkbox.md-checked .md-icon{
+    background-color: #c4dbdf;
+  }
+
+  .legend {
+    margin-top:5px;margin-bottom:5px;margin-left:2.5px;margin-right:2.5px;
+  }
+
+  .textLogin{
+    display: block;
+    position: absolute;
+    top: 1em;
+    left: 50%;
+    color: white;
+    z-index: 9999;
+    font: italic 14px Verdana;
+
+  }
+
+  .ol-custom-overviewmap,
+  .ol-custom-overviewmap.ol-uncollapsible {
+    top: auto;
+    right: auto;
+    left: 0;
+    bottom: 0;
+  }
+
+  .ol-custom-overviewmap:not(.ol-collapsed)  {
+    border: 1px solid black;
+  }
+
+  .ol-custom-overviewmap .ol-overviewmap-map {
+    border: none;
+    width: 250px;
+  }
+
+  .ol-custom-overviewmap .ol-overviewmap-box {
+    border: 2px solid red;
+  }
+
+  .ol-custom-overviewmap:not(.ol-collapsed) button{
+    bottom: auto;
+    right: auto;
+    left: 1px;
+    bottom: 1px;
+    display: none;
+  }
+  .rzslider {
+      position: relative;
+      display: inline-block;
+      width: 30% !important;
+      height: 4px;
+      margin: 22.5px 15px 15px 15px !important;
+      vertical-align: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      margin-left: 25em !important;
+      margin-right: 15em !important;
+  }
+  #myProgress {
+  width: 100%;
+  background-color: #ddd;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: #282828 ;
+}
+md-list-item.md-3-line, md-list-item.md-3-line>.md-no-style {
+    height: 60px;
+    min-height: 50px;
+}
+.ol-zoom {
+    top: .5em;
+    left: 26.5em;
+}
+.ol-rotate {
+    top: .5em;
+    left: 29em;
+    transition: opacity .25s linear,visibility 0s linear;
+    display: none;
+}
+.centrar {
+    top: 0.5em;
+    left: 29em;
+}
+.ol-full-screen {
+    left: 31.5em;
+    /*left: 34em;*/
+    top: 0.5em;
+}
+/*
+#olMap .ol-zoom .ol-zoom-out {
+  margin-top: 204px;
+}
+#olMap .ol-zoomslider {
+  background-color: transparent;
+  top: 2.5em;
+}
+
+#olMap .ol-touch .ol-zoom .ol-zoom-out {
+  margin-top: 212px;
+}
+#olMap .ol-touch .ol-zoomslider {
+  top: 2.75em;
+}
+
+#olMap .ol-zoom-in.ol-has-tooltip:hover [role=tooltip],
+#olMap .ol-zoom-in.ol-has-tooltip:focus [role=tooltip] {
+  top: 3px;
+}
+
+#olMap .ol-zoom-out.ol-has-tooltip:hover [role=tooltip],
+#olMap .ol-zoom-out.ol-has-tooltip:focus [role=tooltip] {
+  top: 232px;
+}*/
+.checkboxdemoSelectAll .demo-legend {
+  color: #3F51B5; }
+
+.checkboxdemoSelectAll .demo-fieldset {
+  border-style: solid;
+  border-width: 1px;
+  height: 100%; }
+
+.checkboxdemoSelectAll .demo-select-all-checkboxes {
+  padding-left: 50px; }
+
+  .optionButtonUpper {
+    width: 50px;position: absolute;height: 30px;right: 60px;bottom: 0;font-size: 10px;min-height: 0px;min-width: 0px;padding: inherit;box-shadow: 0 0 0 1px rgba(255,255,255,1) !important;
+  }
+  .optionButtonStandardized {
+    width: 50px;position: absolute;height: 30px;right: 0;bottom: 0;font-size: 10px;min-height: 0px;min-width: 0px;padding: inherit;box-shadow: 0 0 0 1px rgba(255,255,255,1) !important;
+  }
+  .rzslider .rz-bubble {
+
+  	background: #0db9f0;
+  	border-radius: .4em;
+    margin-bottom: 10px;
+    /* border-bottom-left-radius: 40%;
+    border-bottom-right-radius: 40%;
+    border-radius: 40%;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%; */
+    border-radius: 45%;
+    color: white !important;
+    height: 40px;
+  }
+  .rzslider .rz-bubble:after {
+  	content: '';
+  	position: absolute;
+  	bottom: 0;
+  	left: 50%;
+  	width: 0;
+  	height: 0;
+    border: 12.5px solid transparent;
+    border-top-color: #0db9f0;
+    border-bottom: 0;
+    margin-left: -12.5px;
+    margin-bottom: -7.5px;
+  }
+  .rzslider .rz-bubble.rz-limit {
+    display: none;
+  }
+  .md-switch.md-default-theme.md-checked.md-primary .md-thumb, md-switch.md-checked.md-primary .md-thumb {
+    background-color: #0db9f0 !important;
+  }
+  </style>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top" ng-app="NATURA" ng-controller="naturaController">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="height: 50px !important; background-color: #282828 !important;" id="mainNav">
+    <a class="navbar-brand" style="color: white; cursor: pointer;">RELATION BETWEEN COMPANIES AND GROSS DOMESTIC PRODUCT IN SPAIN FROM 2008 TO 2017</a>
+    <ul class="navbar-nav ml-auto" style="margin-right: 70px;">
+      <div id="coor" style="display: none;"></div>
+    </ul>
+  </nav>
+  <div class="content-wrapper main container toolRoute">
+    <div class="container-fluid">
+      <div id="contenedor" style="height:calc(100% - 80px); width:100%; left:0px;top:50px;position:absolute;">
+        <div id="olMap" style="height:100%;width:100%; left:0;top:0; position: absolute; background-color: #e2f2fa;">
+          <!-- ["Trade, transport and cattering", "Building", "Proffesional and administrative activities", "Other"]-->
+          <md-whiteframe class="md-whiteframe-4dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout layout-align="center center"
+           style="background-color: snow;display: block;position: fixed;z-index: 9;margin: 5px;">
+           <!---->
+           <md-toolbar class="md-theme-light" style="background-color: #282828 !important; height: 50px; min-height: 10px !important;"> <h2 class="md-toolbar-tools"> <span>Layers</span> </h2>
+          </md-toolbar>
+            <md-content class="md-padding demo checkboxdemoSelectAll" style="padding-top: 10px; width: 310px;">
+              <md-list>
+                <md-list-item class="md-3-line">
+                  <div class="md-list-item-text">
+                    <md-checkbox ng-model="data.g1" ng-change="changeGroups()"> Trade, transport and cattering </md-checkbox>
+                  </div>
+                  <span ng-attr-style="border: 1px solid #333; background: hsl(350, 50%, 60%); height: 20px; width: 25px; margin-top: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                </md-list-item>
+                <md-list-item class="md-3-line">
+                  <div class="md-list-item-text">
+                    <md-checkbox ng-model="data.g2" ng-change="changeGroups()"> Building </md-checkbox>
+                  </div>
+                   <span ng-attr-style="border: 1px solid #333; background: hsl(50, 50%, 60%); height: 20px; width: 25px; margin-top: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                </md-list-item>
+                <md-list-item class="md-3-line">
+                  <div class="md-list-item-text">
+                    <md-checkbox ng-model="data.g3" ng-change="changeGroups()"> Proffesional and administrative activities </md-checkbox>
+                  </div>
+                <span ng-attr-style="border: 1px solid #333; background: hsl(110, 50%, 60%); height: 20px; width: 25px; margin-top: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                </md-list-item>
+                <md-list-item class="md-3-line">
+                  <div class="md-list-item-text">
+                    <md-checkbox ng-model="data.g4" ng-change="changeGroups()"> Other  </md-checkbox>
+                  </div>
+                  <span ng-attr-style="border: 1px solid #333; background: hsl(180, 50%, 60%); height: 20px; width: 25px; margin-top: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                </md-list-item>
+                <md-list-item class="md-3-line">
+                  <div class="md-list-item-text">
+                    <md-checkbox  ng-disabled="false" ng-model="data.gdp" ng-init="data.gdp=true"
+                    ng-checked="isChecked()" md-indeterminate="isIndeterminate()" ng-click="toggleAll()"> GDP </md-checkbox>
+                  </div>
+                  <span ng-attr-style="border: 1px solid #333; background: #000428; background: -webkit-linear-gradient(to right, hsl(210, 60%, 80%), hsl(210, 60%, 40%)); background: linear-gradient(to right, hsl(210, 60%, 80%), hsl(210, 60%, 40%)); height: 20px; width: 25px; margin-top: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                </md-list-item>
+                <div class="demo-select-all-checkboxes" flex="100" ng-repeat="item in items">
+                  <div class="md-list-item-text" style="cursor: pointer;">
+                    <!--<md-checkbox ng-disabled="true" ng-checked="exists(item, selected)" ng-click="toggle(item, selected); changeCoropleths()">
+                     {{ item.label }}
+                   </md-checkbox>-->
+                   <span>{{ item.label }}</span>
+                    <span ng-attr-style="border: 1px solid #333; background: {{item.color}}; height: 20px; width: 25px;position: absolute;
+    right: 32px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                  </div>
+                </div>
+              </md-list>
+            </md-content>
+              <md-toolbar class="md-theme-light" style="background-color: #282828 !important; height: 50px; min-height: 10px !important;"> <h2 class="md-toolbar-tools"> <span>Options</span> </h2>
+
+           </md-toolbar>
+           <md-content class="md-padding demo checkboxdemoSelectAll" style="padding-top: 0px; padding-bottom: 0px; overflow: hidden; width: 310px;">
+             <md-list>
+               <md-list-item class="md-3-line">
+                 <div class="md-list-item-text">
+                   <md-switch id="buttonOptionStandardized" class="md-primary" ng-model="data.opt1" ng-click="changeOptionStandardized()">
+                     Standardized
+                   </md-switch>
+                 </div>
+               </md-list-item>
+               <md-list-item class="md-3-line">
+                 <div class="md-list-item-text">
+                   <md-switch id="buttonOptionUpper" class="md-primary" ng-model="data.opt2" ng-click="changeOptionUpper()">
+                     Highest
+                   </md-switch>
+                 </div>
+               </md-list-item>
+             </md-list>
+             <!--<md-button id="buttonOptionUpper" ng-click="changeOptionUpper()" class="md-raised optionButtonUpper">Highest
+               <md-tooltip md-direction="bottom">Show the Highest of an activity group</md-tooltip>
+             </md-button>
+             <md-button id="buttonOptionStandardized" ng-click="changeOptionStandardized()" class="md-raised optionButtonStandardized">Standardized
+              <md-tooltip md-direction="bottom">Standardized values of activity groups</md-tooltip>
+            </md-button>-->
+           </md-content>
+          </md-whiteframe>
+          <div id="loaderContent" layout="row" layout-padding layout-wrap layout-fill style="position: absolute; z-index: 999999;" ng-cloak>
+
+            <md-whiteframe class="md-whiteframe-24dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout layout-align="center center"
+             style="height: 100%;    max-height: 100% !important;    width: 100%;    max-width: 100% !important;    background-color: snow;     display: grid;">
+              <span style="padding-left: 50vh;"> {{messageLoader}} </span>
+              <br>
+              <div id="messageLoader"></div>
+              <div id="myProgress">
+                <div id="myBar"></div>
+              </div>
+            </md-whiteframe>
+          </div>
+
+        </div>
+        <div id="overviewMap" class="md-whiteframe-4dp" style="height:150px;width:300px; left:1em;bottom:1em; position: absolute;  background-color: #e2f2fa; border: #282828 1px solid;"></div>
+      </div>
+    </div>
+  </div>
+  <div id="scale-line"></div>
+
+  <footer class="sticky-footer" style="background-color: #282828;">
+    <div layout style="margin-top: -10px; width: 90%;">
+      <div flex="10" layout layout-align="center center">
+      </div>
+      <!--<md-slider flex class="md-primary" md-discrete ng-model="yearSelected" ng-change="onChangeYear($event)" step="1" min="2008" max="2017"  aria-label="years">
+      </md-slider>-->
+      <md-button id="buttonPreviousTime" ng-click="previousTime()" class="md-raised" style="bottom: 7.5px; left: 20em;"><</md-button>
+      <md-button id="buttonPlayTimeSeries" ng-click="playTimeSeries()" class="md-raised" style="bottom: 7.5px; left: 20em;  display: block;">Play</md-button>
+      <md-button id="buttonPauseTimeSeries" ng-click="pauseTimeSeries()" class="md-raised" style="bottom: 7.5px; left: 20em; display: none;">||</md-button>
+      <md-button id="buttonNextTime" ng-click="nextTime()" class="md-raised" style="bottom: 7.5px; left: 20em;">></md-button>
+      <rzslider id="sliderRZ" rz-slider-model="slider.value" rz-slider-options="slider.options"></rzslider>
+    </div>
+    <div class="container">
+      <div class="text-center">
+        <div style="display: block; position: fixed; bottom: -5px; left: 20px;font-size: 13px;"> Lambert azimuthal equal-area projection: </div>
+        <div id="mouse-position3" style="display: block; position: fixed; bottom: -5px; left: 270px; font-size: 13px;"> </div>
+          <div style="display: block; position: fixed; bottom: -5px; right: 20px;font-size: 13px;">
+            Developed by <a style="color:ghostwhite;" href="https://www.linkedin.com/in/carlos-bayarri-b80838b4">Carlos Bayarri</a>.
+            Source data by <a style="color:ghostwhite;" href="https://www.ine.es/">INE</a>    </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+  <div id="containerCanvasPIB" style="max-width: 850px; max-height: 550px; width: 850px; height: 550px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas" style="max-width: 400px; max-height: 300px; width: 400px; height: 300px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2008" style="max-width: 300px; max-height: 300px !important; width: 300px; height: 300px !important; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2009" style="max-width: 300px; max-height: 300px; width: 300px; height: 300px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2010" style="max-width: 300px; max-height: 300px; width: 300px; height: 300px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2011" style="max-width: 300px; max-height: 300px; width: 300px; height: 300px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2012" style="max-width: 300px; max-height: 300px; width: 300px; height: 300px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2013" style="max-width: 300px; max-height: 200px; width: 300px; height: 300px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2014" style="max-width: 300px; max-height: 300px; width: 300px; height: 300px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2015" style="max-width: 300px; max-height: 300px; width: 300px; height: 300px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2016" style="max-width: 300px; max-height: 300px; width: 300px; height: 300px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2017" style="max-width: 300px; max-height: 300px; width: 300px; height: 300px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2008Over" style="max-width: 300px; max-height: 300px; width: 300px; height: 300px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2009Over" style="max-width: 300px; max-height: 300px; width: 300px; height: 300px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2010Over" style="max-width: 300px; max-height: 300px; width: 300px; height: 300px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2011Over" style="max-width: 300px; max-height: 300px; width: 300px; height: 300px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2012Over" style="max-width: 300px; max-height: 300px; width: 300px; height: 300px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2013Over" style="max-width: 300px; max-height: 300px; width: 300px; height: 300px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2014Over" style="max-width: 300px; max-height: 300px; width: 300px; height: 300px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2015Over" style="max-width: 300px; max-height: 300px; width: 300px; height: 300px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2016Over" style="max-width: 300px; max-height: 300px; width: 300px; height: 300px; position: fixed; z-index: -10;"></div>
+  <div id="containerCanvas2017Over" style="max-width: 300px; max-height: 300px; width: 300px; height: 300px; position: fixed; z-index: -10;"></div>
+  <!-- Logout Modal-->
+  <!-- Bootstrap core JavaScript-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-slider/6.6.1/rzslider.min.js"></script>
+  <script src="./vendor/jquery/jquery.min.js"></script>
+  <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="./vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="./vendor/chart.js/Chart.min.js"></script>
+  <script src="./js/ChartJS.min.js"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="./js/sb-admin.min.js"></script>
+
+  <script src="./js/request.js"></script>
+  <script src="./js/main.js"></script>
+  <script src="./js/imagetracer.js"></script>
+  <link rel='stylesheet' href='./css/rzslider.css'>
+  <script src="./js/ui-bootstrap-tpls.js"></script>
+
+
+  <script src="./js/ol.js"></script>
+  <!-- jsPanel JavaScript -->
+  <script src="./js/jspanel.js"></script>
+  <!-- optionally jsPanel extensions
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/extensions/modal/jspanel.modal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/extensions/tooltip/jspanel.tooltip.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/extensions/hint/jspanel.hint.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/extensions/layout/jspanel.layout.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/extensions/contextmenu/jspanel.contextmenu.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.0.0/dist/extensions/dock/jspanel.dock.js"></script>-->
+
+  <script src="./js/ol-contextmenu.js"></script>
+
+  <script src="./js/ol-popup.js"></script>
+  <script src="./js/ol-geocoder.js"></script>
+  <script src="./js/featureanimation.js"></script>
+  <script src="./js/zoomanimation.js"></script>
+
+  <script type="text/javascript" src="./js/ol-ext.js"></script>
+  <script type="text/javascript" src="js/basemap_LAEA.js"></script>
+  <script type="text/javascript" src="js/Africa_generalized_LAEA.js"></script>
+  <script>
+
+  //	ANGULAR
+  var sesion = angular.module('NATURA', ['ngMaterial', 'ngMessages', 'rzModule']);
+  sesion.controller('naturaController',['$scope', '$interval', '$timeout','$http','$mdSidenav','$mdToast', function ($scope, $interval,$timeout, $http, $mdSidenav, $mdToast) {
+    $scope.yearSelected = 2008;
+    // EXAMPLE list demo-legend
+    $scope.items = [
+      {label:'15313 - 17000', color:'hsl(210, 50%, 80%)', id:0, check: true},
+      {label:'17000 - 22000',color:'hsl(210, 50%, 70%)', id:1, check: true},
+      {label:'22000 - 25000',color:'hsl(210, 50%, 60%)', id:2, check: true},
+      {label:'25000 - 28000',color:'hsl(210, 50%, 50%)', id:3, check: true},
+      {label:'28000 - 33809',color:'hsl(210, 50%, 40%)', id:4, check: true}
+    ];
+$scope.selected = [$scope.items[0],$scope.items[1],$scope.items[2],$scope.items[3],$scope.items[4]];
+$scope.toggle = function (item, list) {
+  var idx = list.indexOf(item);
+  if (idx > -1) {
+    item.check = false;
+    list.splice(idx, 1);
+  }
+  else {
+    item.check = true;
+    list.push(item);
+  }
+};
+
+$scope.exists = function (item, list) {
+  return list.indexOf(item) > -1;
+};
+
+$scope.isIndeterminate = function() {
+  return ($scope.selected.length !== 0 &&
+      $scope.selected.length !== $scope.items.length);
+};
+
+$scope.isChecked = function() {
+  return $scope.selected.length === $scope.items.length;
+};
+
+$scope.toggleAll = function() {
+  if ($scope.selected.length === $scope.items.length) {
+    $scope.selected = [];
+    olMap.getLayers().forEach(function(layer) {
+      if (layer.get('name') == 'ccaaLayer') {
+        layer.setStyle(window.styleFunctionCCAAEmpty);
+      }
+    });
+    overviewMap.getLayers().forEach(function(layer) {
+      if (layer.get('name') == 'ccaaLayer') {
+        layer.setStyle(window.styleFunctionCCAAEmpty);
+      }
+    });
+  } else if ($scope.selected.length === 0 || $scope.selected.length > 0) {
+    $scope.selected = $scope.items.slice(0);
+    olMap.getLayers().forEach(function(layer) {
+      if (layer.get('name') == 'ccaaLayer') {
+        layer.setStyle(window.styleFunctionCCAA);
+      }
+    });
+    overviewMap.getLayers().forEach(function(layer) {
+      if (layer.get('name') == 'ccaaLayer') {
+        layer.setStyle(window.styleFunctionCCAA);
+      }
+    });
+  }
+};
+// EXAMPLE list legend
+    $scope.data = {};
+    $scope.data.g1 = true;
+    $scope.data.g2 = true;
+    $scope.data.g3 = true;
+    $scope.data.g4 = true;
+    $scope.data.opt1 = false;
+    $scope.data.opt2 = true;
+    $scope.changeCoropleths = function() {
+      console.log($scope.items);
+    }
+    $scope.changeGroups = function() {
+        onChangeYearBuildOvertlays();
+    }
+    function move() {
+      var element = document.getElementById("myBar");
+      var width = 0;
+      var id = $interval(frame, 20);
+      function frame() {
+        var element = document.getElementById("myBar");
+        var message = document.getElementById("messageLoader");
+        if (width == 0) message.innerHTML = 'Loading...';
+        if (width == 25) message.innerHTML = 'Loading data...';
+        if (width == 50) message.innerHTML = 'Loading styles...';
+        if (width == 75) message.innerHTML = 'Loading layers...';
+        if (width >= 100) {
+          clearInterval(id);
+          document.getElementById("loaderContent").style.zIndex = '0';
+          document.getElementById("loaderContent").style.display = 'none';
+        } else {
+          width++;
+          element.style.width = width + '%';
+        }
+      }
+    };
+    move();
+
+    var currentdate = new Date();
+    var datetime = "2018-" + currentdate.getMonth() + "-" + currentdate.getDate();
+    var centroidsRelative = {
+      "type": "FeatureCollection",
+      "name": "regions",
+      // "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+      "features": [
+        { "type": "Feature", "properties": { "Codigo": "01", "Texto": "ANDALUCIA",
+        companies: {"2008": [55, 21, 20, 31], "2009": [54,18,19,31], "2010": [53,16,20,31], "2011": [51,16,19,31], "2012": [50,15,18,31],
+        "2013": [50,13,18,31], "2014": [50,13,18,32], "2015": [50,12,19,33], "2016": [50,12,19,35], "2017": [51,13,20,36]},
+        gdp: {"2008": 18625,    "2009": 17747,    "2010": 17599,    "2011": 17318,    "2012": 16666,
+    "2013": 16379,    "2014": 16576,    "2015": 17271,    "2016": 17790,    "2017": 18470} },
+        "geometry": { "type": "Point", "coordinates": [458239.929513361130375, 204741.571606337733101]}},
+        { "type": "Feature", "properties": { "Codigo": "02", "Texto": "ARAGÓN",
+        companies: {"2008": [55,28,20,40], "2009": [54,25,20,40], "2010": [53,23,20,40], "2011": [52,22,20,41], "2012": [51,21,19,41],
+        "2013": [51,20,20,41], "2014": [51,19,20,42], "2015": [51,19,21,45], "2016": [51,19,22,46], "2017": [51,19,22,47]},
+        gdp: {"2008": 26650,    "2009": 25391,    "2010": 25603,    "2011": 25227,    "2012": 24267,
+    "2013": 24417,    "2014": 24694,    "2015": 25302,    "2016": 26097,    "2017": 27403} },
+        "geometry": { "type": "Point", "coordinates": [777596.700663719791919, 640771.168637164169922]}},
+        { "type": "Feature", "properties": { "Codigo": "03", "Texto": "ASTURIAS",
+        companies: {"2008": [59, 22, 20, 34], "2009": [57,21,20,35], "2010": [56,20,20,34], "2011": [55,19,20,35], "2012": [55,18,19,36],
+        "2013": [54,17,19,35], "2014": [53,16,19,37], "2015": [53,16,20,39], "2016": [53,16,21,40], "2017": [53,16,21,41]},
+        gdp: {"2008": 22336,    "2009": 21110,    "2010": 21250,    "2011": 20895,    "2012": 20005,
+    "2013": 19445,    "2014": 19508,    "2015": 20324,    "2016": 20855,    "2017": 22046} },
+        "geometry": { "type": "Point", "coordinates": [337239.427225407445803, 865040.20198526000604]}},
+        { "type": "Feature", "properties": { "Codigo": "04", "Texto": "BALEARES",
+        companies: {"2008": [64, 38, 29, 43], "2009": [62,34,28,44], "2010": [60,31,29,43], "2011": [58,29,28,42], "2012": [57,27,27,42],
+        "2013": [56,26,28,43], "2014": [55,25,29,43], "2015": [55,26,30,46], "2016": [55,27,31,48], "2017": [56,28,32,51]},
+        gdp: {"2008": 25717,    "2009": 24260,    "2010": 24084,    "2011": 23762,    "2012": 23224,
+    "2013": 22924,    "2014": 23473,    "2015": 24198,    "2016": 25063,    "2017": 25772} },
+        "geometry": { "type": "Point", "coordinates": [1099372.865221166284755, 471299.430027431808412]}},
+        { "type": "Feature", "properties": { "Codigo": "05", "Texto": "CANARIAS",
+        companies: {"2008": [61, 22, 23, 32], "2009": [60,18,22,32], "2010": [58,16,22,32], "2011": [56,15,22,32], "2012": [56,15,22,32],
+        "2013": [55,14,22,32], "2014": [54,13,22,33], "2015": [54,14,23,35], "2016": [54,14,24,37], "2017": [55,14,25,40]},
+        gdp: {"2008": 21186,    "2009": 20006,    "2010": 20091,    "2011": 19792,    "2012": 19017,
+    "2013": 18761,    "2014": 18803,    "2015": 19233,    "2016": 19821,    "2017": 20425} },
+        "geometry": { "type": "Point", "coordinates": [-654590.096956690074876, -740296.252594216028228]}},
+        { "type": "Feature", "properties": { "Codigo": "06", "Texto": "CANTABRIA",
+        companies: {"2008": [57,28,19,35], "2009": [56,25,19,35], "2010": [54,23,19,35], "2011": [54,22,19,36], "2012": [53,21,19,36],
+        "2013": [52,19,19,35], "2014": [52,19,19,36], "2015": [52,19,19,38], "2016": [51,19,20,40], "2017": [52,19,21,42],},
+        gdp: {"2008": 22850,    "2009": 21830,    "2010": 21754,    "2011": 21285,    "2012": 20559,
+    "2013": 19965,    "2014": 20360,    "2015": 20900,    "2016": 21574,    "2017": 22513} },
+        "geometry": { "type": "Point", "coordinates": [ 495389.810950808052439, 849204.767612678231671]}},
+        { "type": "Feature", "properties": { "Codigo": "07", "Texto": "CASTILLAS Y LEÓN",
+        companies: {"2008": [58,26,17,33], "2009": [57,24,17,34], "2010": [57,23,18,34], "2011": [56,22,18,35], "2012": [55,21,17,35],
+        "2013": [55,20,18,36], "2014": [55,20,17,36], "2015": [55,20,18,38], "2016": [54,20,19,39], "2017": [54,19,19,41],},
+        gdp: {"2008": 22421,    "2009": 21769,    "2010": 21827,    "2011": 21672,    "2012": 21150,
+    "2013": 20688,    "2014": 20877,    "2015": 21770,    "2016": 22723,    "2017": 23555} },
+        "geometry": { "type": "Point", "coordinates": [ 407794.684681791753974, 676267.577071775100194 ]}},
+        { "type": "Feature", "properties": { "Codigo": "08", "Texto": "CASTILLA-LA MANCHA",
+        companies: {"2008": [56,32,14,33], "2009": [54,27,14,34], "2010": [53,24,15,33], "2011": [52,23,15,33], "2012": [52,22,14,33],
+        "2013": [52,20,14,33], "2014": [51,19,14,34], "2015": [52,19,15,36], "2016": [52,19,16,38], "2017": [52,19,16,39],},
+        gdp: {"2008": 19697,    "2009": 18889,    "2010": 18765,    "2011": 18435,    "2012": 17864,
+    "2013": 17557,    "2014": 17298,    "2015": 18225,    "2016": 18849,    "2017": 19681} },
+        "geometry": { "type": "Point", "coordinates": [617283.731388677842915, 398721.10857066855533]}},
+        { "type": "Feature", "properties": { "Codigo": "09", "Texto": "CATALUÑA",
+        companies: {"2008": [62,32,28,48], "2009": [61,28,28,49], "2010": [60,26,28,48], "2011": [59,24,28,49], "2012": [58,22,27,49],
+        "2013": [57,20,28,49], "2014": [56,20,28,50], "2015": [56,19,29,51], "2016": [56,19,30,53], "2017": [56,19,31,55],},
+        gdp: {"2008": 28332,    "2009": 27128,    "2010": 27192,    "2011": 26677,    "2012": 26041,
+    "2013": 25945,    "2014": 26579,    "2015": 27790,    "2016": 28825,    "2017": 29936} },
+        "geometry": { "type": "Point", "coordinates": [966304.513947328552604, 705179.171812250511721]}},
+        { "type": "Feature", "properties": { "Codigo": "10", "Texto": "COMUNIDAD VALENCIANA",
+        companies: {"2008": [60,28,22,40], "2009": [58,24,21,40], "2010": [56,21,22,39], "2011": [56,20,21,39], "2012": [55,19,21,39],
+        "2013": [54,17,21,39], "2014": [53,17,21,41], "2015": [54,17,23,43], "2016": [54,17,24,45], "2017": [54,17,24,47],},
+        gdp: {"2008": 21878,    "2009": 20621,    "2010": 20511,    "2011": 20124,    "2012": 19288,
+    "2013": 19176,    "2014": 19669,    "2015": 20436,    "2016": 21232,    "2017": 22055} },
+        "geometry": { "type": "Point", "coordinates": [795654.143989861244336, 427279.482737099053338]}},
+        { "type": "Feature", "properties": { "Codigo": "11", "Texto": "EXTREMADURA",
+        companies: {"2008": [58,20,15,30], "2009": [57,19,15,30], "2010": [55,18,16,30], "2011": [54,17,15,31], "2012": [54,17,15,31],
+        "2013": [54,16,14,31], "2014": [53,15,14,32], "2015": [54,15,15,33], "2016": [54,15,16,35], "2017": [54,15,16,36],},
+        gdp: {"2008": 16633,    "2009": 16204,    "2010": 16381,    "2011": 15916,    "2012": 15313,
+    "2013": 15280,    "2014": 15274,    "2015": 16061,    "2016": 16558,    "2017": 17262} },
+        "geometry": { "type": "Point", "coordinates": [329882.510232402360998, 383834.708615303330589]}},
+        { "type": "Feature", "properties": { "Codigo": "12", "Texto": "GALICIA",
+        companies: {"2008": [64,27,19,35], "2009": [63,26,19,36], "2010": [46,13,20,63], "2011": [61,23,20,36], "2012": [60,23,20,37],
+        "2013": [60,22,21,37], "2014": [59,21,20,38], "2015": [60,22,21,41], "2016": [59,22,22,42], "2017": [59,22,23,44],},
+        gdp: {"2008": 21226,    "2009": 20490,    "2010": 20574,    "2011": 20143,    "2012": 19533,
+    "2013": 19508,    "2014": 19706,    "2015": 20669,    "2016": 21542,    "2017": 22497} },
+        "geometry": { "type": "Point", "coordinates": [180688.642392611596733, 791330.65891137951985]}},
+        { "type": "Feature", "properties": { "Codigo": "13", "Texto": "MADRID",
+        companies: {"2008": [57,29,20,44], "2009": [56,26,20,45], "2010": [55,24,20,45], "2011": [54,22,19,46], "2012": [53,21,19,46],
+        "2013": [54,20,19,46], "2014": [53,20,20,47], "2015": [54,19,21,52], "2016": [53,19,21,53], "2017": [53,19,21,54],},
+        gdp: {"2008": 32155,    "2009": 31405,    "2010": 31009,    "2011": 31046,    "2012": 30455,
+    "2013": 30188,    "2014": 30610,    "2015": 31807,    "2016": 32815,    "2017": 33809} },
+        "geometry": { "type": "Point", "coordinates": [525295.231024669716135, 542650.659049433190376]}},
+        { "type": "Feature", "properties": { "Codigo": "14", "Texto": "MURCIA",
+        companies: {"2008": [55,27,38,46], "2009": [53,24,37,47], "2010": [51,22,37,46], "2011": [50,21,37,47], "2012": [50,20,36,48],
+        "2013": [49,19,37,48], "2014": [49,18,37,49], "2015": [49,19,38,52], "2016": [48,18,39,54], "2017": [48,18,40,56],},
+        gdp: {"2008": 20354,    "2009": 19190,    "2010": 19213,    "2011": 18646,    "2012": 18168,
+    "2013": 18122,    "2014": 18191,    "2015": 19270,    "2016": 19865,    "2017": 20585} },
+        "geometry": { "type": "Point", "coordinates": [730906.995236641028896, 263119.14914819423575]}},
+        { "type": "Feature", "properties": { "Codigo": "15", "Texto": "NAVARRA",
+        companies: {"2008": [56,30,19,35], "2009": [54,25,18,34], "2010": [52,22,19,33], "2011": [52,20,18,33], "2012": [51,19,18,33],
+        "2013": [50,17,18,33], "2014": [50,16,18,34], "2015": [51,17,19,36], "2016": [51,17,20,38], "2017": [51,17,20,39],},
+        gdp: {"2008": 30128,    "2009": 28892,    "2010": 28752,    "2011": 28533,    "2012": 27485,
+    "2013": 27442,    "2014": 28044,    "2015": 29177,    "2016": 30006,    "2017": 30914} },
+        "geometry": { "type": "Point", "coordinates": [701385.227637472678907, 786001.32865517004393]}},
+
+        { "type": "Feature", "properties": { "Codigo": "16", "Texto": "PAÍS VASCO",
+        companies: {"2008": [55,27,23,37], "2009": [54,23,23,37], "2010": [52,22,23,36], "2011": [51,21,22,36], "2012": [51,20,21,37],
+        "2013": [51,19,20,36], "2014": [51,19,22,38], "2015": [52,19,24,40], "2016": [52,19,24,41], "2017": [52,19,24,42],},
+        gdp: {"2008": 31243,    "2009": 29828,    "2010": 30114,    "2011": 29842,    "2012": 29275,
+        "2013": 28858,    "2014": 29509,    "2015": 30736,    "2016": 31784,    "2017": 33088} },
+        "geometry": { "type": "Point", "coordinates": [613751.784084612503648, 843871.311155923176557]}},
+        { "type": "Feature", "properties": { "Codigo": "17", "Texto": "LA RIOJA",
+        companies: {"2008": [63,29,24,46], "2009": [61,28,25,45], "2010": [60,27,24,44], "2011": [58,26,24,44], "2012": [55,23,23,43],
+        "2013": [54,22,23,41], "2014": [53,20,23,40], "2015": [53,19,23,40], "2016": [54,20,23,41], "2017": [49,17,22,39],},
+        gdp: {"2008": 25986,    "2009": 24861,    "2010": 25052,    "2011": 24649,    "2012": 23917,    "2013": 23726,
+    "2014": 24348,    "2015": 25114,    "2016": 25317,    "2017": 26044} },
+        "geometry": { "type": "Point", "coordinates": [619161.295667340746149, 734955.489461891935207]}}
+      ]
+    };
+
+    var andaluciaCompanies = {
+      "2008": [453380,174032,162172,256046  ],
+      "2009": [449174,151220,159708,260042  ],
+      "2010": [439904,135902,163400,257952  ],
+      "2011": [432524,131150,160820,260188  ],
+      "2012": [426620,122578,155200,260270  ],
+      "2013": [422212,109834,152636,258360  ],
+      "2014": [417544,105388,149602,265326  ],
+      "2015": [419678,103398,156452,280660  ],
+      "2016": [419840,104230,161726,292898  ],
+      "2017": [425380,105720,166574,305816  ]
+    };
+    var aragonCompanies = {
+    "2008": ["73020","37362","26382","53098"  ],
+    "2009": ["72338","33848","26460","53920"  ],
+    "2010": ["71378","31384","27356","54292"  ],
+    "2011": ["70238","29632","26976","54870"  ],
+    "2012": ["68956","28256","26196","54824"  ],
+    "2013": ["68448","26364","26434","54888"  ],
+    "2014": ["67608","25422","26880","56318"  ],
+    "2015": ["67678","25192","28050","58826"  ],
+    "2016": ["66762","24844","29026","60018"  ],
+    "2017": ["66218","24350","29402","61836"  ]
+  };
+  var asturiasCompanies = {
+    "2008": ["63722","24198","21618","36710"  ],
+    "2009": ["62156","22606","21500","37444"  ],
+    "2010": ["60514","21258","21666","37286"  ],
+    "2011": ["59614","20668","21438","38034"  ],
+    "2012": ["58894","19782","20862","38396"  ],
+    "2013": ["57352","17856","20700","37830"  ],
+    "2014": ["56432","16882","20462","38908"  ],
+    "2015": ["56090","16870","21196","40746"  ],
+    "2016": ["55194","16900","21642","41614"  ],
+    "2017": ["55228","16926","21916","42666"  ],
+  };
+
+  var balearesCompanies = {
+    "2008": ["69078","40718","30772","46102"  ],
+    "2009": ["68222","37150","30608","47672"  ],
+    "2010": ["66066","34058","31960","47040"  ],
+    "2011": ["64114","32142","31662","47004"  ],
+    "2012": ["63266","30252","30350","46876"  ],
+    "2013": ["62458","29052","31262","47316"  ],
+    "2014": ["61134","28040","31480","47886"  ],
+    "2015": ["61288","28970","32888","51076"  ],
+    "2016": ["61214","29978","34094","53396"  ],
+    "2017": ["62504","30918","35978","56734"  ],
+  };
+
+  var canariasCompanies = {
+    "2008": ["127450","45318","47536","66638"  ],
+    "2009": ["125736","38702","46740","67584"  ],
+    "2010": ["122848","34518","47632","66910"  ],
+    "2011": ["118438","32440","46890","67208"  ],
+    "2012": ["117982","31400","45602","67646"  ],
+    "2013": ["116072","29258","46080","67722"  ],
+    "2014": ["113242","28002","45956","69836"  ],
+    "2015": ["114028","28460","48692","74534"  ],
+    "2016": ["113594","29178","50646","78400"  ],
+    "2017": ["115686","30216","53460","83828"  ],
+  };
+  var cantabriaCompanies = {
+    "2008": ["33338","16144","11184","20120"  ],
+    "2009": ["32878","14796","11144","20404"  ],
+    "2010": ["32248","13810","11526","20464"  ],
+    "2011": ["32012","13184","11412","21126"  ],
+    "2012": ["31524","12498","11130","21122"  ],
+    "2013": ["30986","11388","11238","20768"  ],
+    "2014": ["30456","10894","10932","21114"  ],
+    "2015": ["30224","10826","11292","22322"  ],
+    "2016": ["29912","10848","11560","23072"  ],
+    "2017": ["29890","10992","11912","24124"  ],
+  };
+
+  var castillayleonCompanies = {
+    "2008": ["148910","67594","44666","85248"  ],
+    "2009": ["147188","62414","44614","87036"  ],
+    "2010": ["144988","58356","46642","87958"  ],
+    "2011": ["142140","56134","45578","89166"  ],
+    "2012": ["140986","54548","44312","90142"  ],
+    "2013": ["139054","51232","44488","89532"  ],
+    "2014": ["136048","49086","43056","90756"  ],
+    "2015": ["135118","48590","44314","94216"  ],
+    "2016": ["132854","47890","45432","96552"  ],
+    "2017": ["131446","47114","45992","98686"  ],
+  };
+
+  var castillalamanchaCompanies = {
+    "2008": ["113516","65312","29060","67758"  ],
+    "2009": ["112136","56864","29032","70926"  ],
+    "2010": ["111250","51184","31018","70220"  ],
+    "2011": ["110106","48776","30732","70544"  ],
+    "2012": ["109362","45860","29674","70368"  ],
+    "2013": ["108420","41016","29698","69676"  ],
+    "2014": ["106428","38872","29468","71422"  ],
+    "2015": ["106986","38800","31158","74628"  ],
+    "2016": ["105546","38256","32148","76892"  ],
+    "2017": ["105128","37742","32258","79076"  ],
+  };
+
+  var catalunaCompanies = {
+    "2008": ["455808","233730","206896","355606"  ],
+    "2009": ["456292","210560","207938","364458"  ],
+    "2010": ["451516","191760","213908","362156"  ],
+    "2011": ["444386","179950","210796","368470"  ],
+    "2012": ["440154","170094","205276","368860"  ],
+    "2013": ["429242","154322","209522","368522"  ],
+    "2014": ["423986","147832","208484","372828"  ],
+    "2015": ["420956","145714","216500","385568"  ],
+    "2016": ["419360","146660","225726","400646"  ],
+    "2017": ["422900","145524","230946","418592"  ],
+  };
+
+  var comunidadvalencianaCompanies = {
+    "2008": ["299434","140512","109210","203030"  ],
+    "2009": ["295190","120352","107454","202692"  ],
+    "2010": ["288130","107088","110372","199142"  ],
+    "2011": ["285198","102226","108928","201558"  ],
+    "2012": ["282054","95394","106188","201332"  ],
+    "2013": ["277748","87744","108286","200544"  ],
+    "2014": ["266880","83360","106992","204478"  ],
+    "2015": ["268934","82814","113516","213802"  ],
+    "2016": ["266208","83344","117266","222294"  ],
+    "2017": ["267226","82980","119576","230348"  ],
+  };
+
+  var extremaduraCompanies = {
+    "2008": ["63638","22474","16900","32692"  ],
+    "2009": ["62708","21298","16796","33560"  ],
+    "2010": ["60476","19532","17564","33574"  ],
+    "2011": ["59710","19276","17132","34088"  ],
+    "2012": ["59888","18828","16600","34026"  ],
+    "2013": ["59466","17424","15888","33928"  ],
+    "2014": ["58266","16932","15726","34934"  ],
+    "2015": ["58766","16876","16694","36614"  ],
+    "2016": ["58660","16790","17450","38068"  ],
+    "2017": ["58238","16602","17702","39146"  ],
+  };
+  var galiciaCompanies = {
+    "2008": ["179108","75414","53894","98332"  ],
+    "2009": ["176854","71392","54160","100120"  ],
+    "2010": ["128056","35084","55185","176213"  ],
+    "2011": ["169840","65372","56612","101246"  ],
+    "2012": ["167318","63416","55838","102450"  ],
+    "2013": ["165656","60180","57186","102974"  ],
+    "2014": ["162904","58950","56144","105492"  ],
+    "2015": ["162804","59484","58228","110674"  ],
+    "2016": ["160492","59554","60488","114542"  ],
+    "2017": ["159204","59098","61506","118038"  ],
+  };
+  var lariojaCompanies = {
+    "2008": ["18194","9142","6288","14044"  ],
+    "2009": ["17904","8292","6294","14560"  ],
+    "2010": ["17722","7696","6520","14442"  ],
+    "2011": ["17386","7212","6290","14714"  ],
+    "2012": ["17258","6894","6044","14776"  ],
+    "2013": ["17274","6388","6200","14770"  ],
+    "2014": ["16968","6256","6344","15060"  ],
+    "2015": ["16976","6146","6580","16464"  ],
+    "2016": ["16606","6036","6770","16740"  ],
+    "2017": ["16602","5866","6754","17112"  ],
+  };
+  var madridCompanies = {
+    "2008": ["341856","167974","237690","291094"  ],
+    "2009": ["336822","152400","235878","298508"  ],
+    "2010": ["330388","140480","238012","298122"  ],
+    "2011": ["324230","135858","237296","305954"  ],
+    "2012": ["322194","131802","233722","310478"  ],
+    "2013": ["319388","122238","237574","312806"  ],
+    "2014": ["315352","118228","237238","318200"  ],
+    "2015": ["316662","119322","247726","333514"  ],
+    "2016": ["311376","117740","255154","348554"  ],
+    "2017": ["313280","115964","259850","363218"  ],
+  };
+  var murciaCompanies = {
+    "2008": ["79918","43244","27218","49770"  ],
+    "2009": ["78698","36280","26594","49700"  ],
+    "2010": ["76506","31824","27430","48632"  ],
+    "2011": ["75900","29812","26998","49002"  ],
+    "2012": ["74594","27836","26496","48286"  ],
+    "2013": ["73954","25224","26754","48360"  ],
+    "2014": ["73398","24104","26412","49650"  ],
+    "2015": ["74974","24388","27694","53006"  ],
+    "2016": ["75260","24612","28604","55540"  ],
+    "2017": ["75704","24592","29046","57806"  ],
+  };
+  var navarraCompanies = {
+    "2008": ["34040","16594","14130","22930"  ],
+    "2009": ["33964","14728","14338","23534"  ],
+    "2010": ["33344","13774","14368","23208"  ],
+    "2011": ["32726","13298","13902","23156"  ],
+    "2012": ["32652","12668","13704","23586"  ],
+    "2013": ["32828","12498","13202","23192"  ],
+    "2014": ["32902","12292","13828","24142"  ],
+    "2015": ["33376","12244","15116","25526"  ],
+    "2016": ["33404","12438","15466","26506"  ],
+    "2017": ["33248","12290","15530","27172"  ],
+  };
+  var paisvascoCompanies = {
+    "2008": ["136536","63008","52532","98530"  ],
+    "2009": ["132944","59974","53248","98138"  ],
+    "2010": ["131332","58724","52596","96912"  ],
+    "2011": ["126722","55978","52352","95940"  ],
+    "2012": ["121632","51370","50938","94070"  ],
+    "2013": ["119186","47924","50908","89400"  ],
+    "2014": ["116228","44336","50220","87706"  ],
+    "2015": ["115772","42326","50618","88434"  ],
+    "2016": ["118568","42804","51106","89954"  ],
+    "2017": ["107816","37660","48628","86476"  ]
+  };
+    var centroidsAbsolute = {
+      "type": "FeatureCollection",
+      "name": "regions",
+      // "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+      "features": [
+        { "type": "Feature", "properties": { "Codigo": "01", "Texto": "ANDALUCIA",
+        companies: andaluciaCompanies,
+        gdp: {"2008": 18625,    "2009": 17747,    "2010": 17599,    "2011": 17318,    "2012": 16666,
+    "2013": 16379,    "2014": 16576,    "2015": 17271,    "2016": 17790,    "2017": 18470} },
+        "geometry": { "type": "Point", "coordinates": [458239.929513361130375, 204741.571606337733101]}},
+        { "type": "Feature", "properties": { "Codigo": "02", "Texto": "ARAGÓN",
+        companies: aragonCompanies,
+        gdp: {"2008": 26650,    "2009": 25391,    "2010": 25603,    "2011": 25227,    "2012": 24267,
+    "2013": 24417,    "2014": 24694,    "2015": 25302,    "2016": 26097,    "2017": 27403} },
+        "geometry": { "type": "Point", "coordinates": [777596.700663719791919, 640771.168637164169922]}},
+        { "type": "Feature", "properties": { "Codigo": "03", "Texto": "ASTURIAS",
+        companies: asturiasCompanies,
+        gdp: {"2008": 22336,    "2009": 21110,    "2010": 21250,    "2011": 20895,    "2012": 20005,
+    "2013": 19445,    "2014": 19508,    "2015": 20324,    "2016": 20855,    "2017": 22046} },
+        "geometry": { "type": "Point", "coordinates": [337239.427225407445803, 865040.20198526000604]}},
+        { "type": "Feature", "properties": { "Codigo": "04", "Texto": "BALEARES",
+        companies: balearesCompanies,
+        gdp: {"2008": 25717,    "2009": 24260,    "2010": 24084,    "2011": 23762,    "2012": 23224,
+    "2013": 22924,    "2014": 23473,    "2015": 24198,    "2016": 25063,    "2017": 25772} },
+        "geometry": { "type": "Point", "coordinates": [1099372.865221166284755, 471299.430027431808412]}},
+        { "type": "Feature", "properties": { "Codigo": "05", "Texto": "CANARIAS",
+        companies: canariasCompanies,
+        gdp: {"2008": 21186,    "2009": 20006,    "2010": 20091,    "2011": 19792,    "2012": 19017,
+    "2013": 18761,    "2014": 18803,    "2015": 19233,    "2016": 19821,    "2017": 20425} },
+        "geometry": { "type": "Point", "coordinates": [-654590.096956690074876, -740296.252594216028228]}},
+        { "type": "Feature", "properties": { "Codigo": "06", "Texto": "CANTABRIA",
+        companies: cantabriaCompanies,
+        gdp: {"2008": 22850,    "2009": 21830,    "2010": 21754,    "2011": 21285,    "2012": 20559,
+    "2013": 19965,    "2014": 20360,    "2015": 20900,    "2016": 21574,    "2017": 22513} },
+        "geometry": { "type": "Point", "coordinates": [ 495389.810950808052439, 849204.767612678231671]}},
+        { "type": "Feature", "properties": { "Codigo": "07", "Texto": "CASTILLAS Y LEÓN",
+        companies: castillayleonCompanies,
+        gdp: {"2008": 22421,    "2009": 21769,    "2010": 21827,    "2011": 21672,    "2012": 21150,
+    "2013": 20688,    "2014": 20877,    "2015": 21770,    "2016": 22723,    "2017": 23555} },
+        "geometry": { "type": "Point", "coordinates": [ 407794.684681791753974, 676267.577071775100194 ]}},
+        { "type": "Feature", "properties": { "Codigo": "08", "Texto": "CASTILLA-LA MANCHA",
+        companies: castillalamanchaCompanies,
+        gdp: {"2008": 19697,    "2009": 18889,    "2010": 18765,    "2011": 18435,    "2012": 17864,
+    "2013": 17557,    "2014": 17298,    "2015": 18225,    "2016": 18849,    "2017": 19681} },
+        "geometry": { "type": "Point", "coordinates": [617283.731388677842915, 398721.10857066855533]}},
+        { "type": "Feature", "properties": { "Codigo": "09", "Texto": "CATALUÑA",
+        companies: catalunaCompanies,
+        gdp: {"2008": 28332,    "2009": 27128,    "2010": 27192,    "2011": 26677,    "2012": 26041,
+    "2013": 25945,    "2014": 26579,    "2015": 27790,    "2016": 28825,    "2017": 29936} },
+        "geometry": { "type": "Point", "coordinates": [966304.513947328552604, 705179.171812250511721]}},
+        { "type": "Feature", "properties": { "Codigo": "10", "Texto": "COMUNIDAD VALENCIANA",
+        companies: comunidadvalencianaCompanies,
+        gdp: {"2008": 21878,    "2009": 20621,    "2010": 20511,    "2011": 20124,    "2012": 19288,
+    "2013": 19176,    "2014": 19669,    "2015": 20436,    "2016": 21232,    "2017": 22055} },
+        "geometry": { "type": "Point", "coordinates": [795654.143989861244336, 427279.482737099053338]}},
+        { "type": "Feature", "properties": { "Codigo": "11", "Texto": "EXTREMADURA",
+        companies: extremaduraCompanies,
+        gdp: {"2008": 16633,    "2009": 16204,    "2010": 16381,    "2011": 15916,    "2012": 15313,
+    "2013": 15280,    "2014": 15274,    "2015": 16061,    "2016": 16558,    "2017": 17262} },
+        "geometry": { "type": "Point", "coordinates": [329882.510232402360998, 383834.708615303330589]}},
+        { "type": "Feature", "properties": { "Codigo": "12", "Texto": "GALICIA",
+        companies: galiciaCompanies,
+        gdp: {"2008": 21226,    "2009": 20490,    "2010": 20574,    "2011": 20143,    "2012": 19533,
+    "2013": 19508,    "2014": 19706,    "2015": 20669,    "2016": 21542,    "2017": 22497} },
+        "geometry": { "type": "Point", "coordinates": [180688.642392611596733, 791330.65891137951985]}},
+        { "type": "Feature", "properties": { "Codigo": "13", "Texto": "MADRID",
+        companies: madridCompanies,
+        gdp: {"2008": 32155,    "2009": 31405,    "2010": 31009,    "2011": 31046,    "2012": 30455,
+    "2013": 30188,    "2014": 30610,    "2015": 31807,    "2016": 32815,    "2017": 33809} },
+        "geometry": { "type": "Point", "coordinates": [525295.231024669716135, 542650.659049433190376]}},
+        { "type": "Feature", "properties": { "Codigo": "14", "Texto": "MURCIA",
+        companies: murciaCompanies,
+        gdp: {"2008": 20354,    "2009": 19190,    "2010": 19213,    "2011": 18646,    "2012": 18168,
+    "2013": 18122,    "2014": 18191,    "2015": 19270,    "2016": 19865,    "2017": 20585} },
+        "geometry": { "type": "Point", "coordinates": [730906.995236641028896, 263119.14914819423575]}},
+        { "type": "Feature", "properties": { "Codigo": "15", "Texto": "NAVARRA",
+        companies: navarraCompanies,
+        gdp: {"2008": 30128,    "2009": 28892,    "2010": 28752,    "2011": 28533,    "2012": 27485,
+    "2013": 27442,    "2014": 28044,    "2015": 29177,    "2016": 30006,    "2017": 30914} },
+        "geometry": { "type": "Point", "coordinates": [701385.227637472678907, 786001.32865517004393]}},
+
+        { "type": "Feature", "properties": { "Codigo": "16", "Texto": "PAÍS VASCO",
+        companies: paisvascoCompanies,
+        gdp: {"2008": 31243,    "2009": 29828,    "2010": 30114,    "2011": 29842,    "2012": 29275,
+        "2013": 28858,    "2014": 29509,    "2015": 30736,    "2016": 31784,    "2017": 33088} },
+        "geometry": { "type": "Point", "coordinates": [613751.784084612503648, 843871.311155923176557]}},
+        { "type": "Feature", "properties": { "Codigo": "17", "Texto": "LA RIOJA",
+        companies: lariojaCompanies,
+        gdp: {"2008": 25986,    "2009": 24861,    "2010": 25052,    "2011": 24649,    "2012": 23917,    "2013": 23726,
+    "2014": 24348,    "2015": 25114,    "2016": 25317,    "2017": 26044} },
+        "geometry": { "type": "Point", "coordinates": [619161.295667340746149, 734955.489461891935207]}}
+      ]
+    };
+    $scope.optionStandardized = false;
+    centroids = centroidsAbsolute;
+    $scope.paramRadius = 100;
+    /*document.getElementById('buttonOptionStandardized').style.background = 'rgb(250,250,250)';
+    document.getElementById('buttonOptionStandardized').style.textDecoration = 'line-through';*/
+    $scope.optionUpper = true;
+    /*document.getElementById('buttonOptionUpper').style.background = 'rgb(210,210,210)';*/
+    $scope.changeOptionStandardized = function() {
+      if ($scope.optionStandardized == true) {
+        $scope.optionStandardized = false;
+        centroids = centroidsAbsolute;
+        /*document.getElementById('buttonOptionStandardized').style.background = 'rgb(250,250,250)';
+        document.getElementById('buttonOptionStandardized').style.textDecoration = 'line-through';*/
+        /*var zoom = Math.round(olMap.getView().getZoom());
+        if (zoom == 7) {
+          $scope.paramRadius = 100;
+        } else {
+          $scope.paramRadius = 60;
+        }*/
+        $scope.paramRadius = 100;
+        window.onChangeYearBuildOvertlays();
+      } else {
+        $scope.optionStandardized = true;
+        centroids = centroidsRelative;
+        /*document.getElementById('buttonOptionStandardized').style.background = 'rgb(210,210,210)';
+        document.getElementById('buttonOptionStandardized').style.textDecoration = 'none';*/
+        $scope.paramRadius = 0.02;
+        window.onChangeYearBuildOvertlays();
+      }
+    };
+    $scope.changeOptionUpper = function() {
+      if ($scope.optionUpper == true) {
+        $scope.optionUpper = false;
+        window.onChangeYearBuildOvertlays();
+        /*document.getElementById('buttonOptionUpper').style.background = 'rgb(250,250,250)';
+        document.getElementById('buttonOptionUpper').style.textDecoration = 'line-through';*/
+      } else {
+        $scope.optionUpper = true;
+        window.onChangeYearBuildOvertlays();
+        /*document.getElementById('buttonOptionUpper').style.background = 'rgb(210,210,210)';
+        document.getElementById('buttonOptionUpper').style.textDecoration = 'none';*/
+      }
+
+    };
+    /*
+["2008",  ],
+"2009": [  ],
+"2010": [  ],
+"2011": [  ],
+"2012": [  ],
+"2013": [  ],
+"2014": [  ],
+"2015": [  ],
+"2016": [  ],
+"2017": [  ]
+]*/
+    console.log(centroids);
+    var options = {
+      responsive: true,
+      legend: {display: false},
+      scale: {
+        display: false,
+      },
+				legend: {
+					position: 'right',
+          display: false,
+				},
+				title: {
+					display: false,
+					text: 'Chart.js Polar Area Chart'
+				},
+				animation: {
+					animateRotate: true,
+					animateScale: true
+				},
+    };
+    var options0 = {
+      legend: {display: false},
+      scaleShowLabels: true,
+      scale: {
+        display: false,
+        ticks: {
+          beginAtZero: true,
+          min: 10, max: 70
+        },
+      },
+      scales: { yAxes: [{ display: false, ticks: { showLabelBackdrop: false, display: false} }],
+      xAxes: [{ display: false, ticks: { showLabelBackdrop: false, display: false} }]}
+    };
+    var optionsPolar = {
+      responsive: true,
+      legend: {display: false},
+      scale: {
+        display: false,
+        ticks: {
+          beginAtZero: true, showLabelBackdrop: false, display: false,
+          min: 10, max: 70
+        },
+      },
+				legend: {
+					position: 'right',
+          display: false,
+				},
+				title: {
+					display: false,
+					text: 'Chart.js Polar Area Chart'
+				},
+				scale: {
+          display: false,
+					ticks: {
+						beginAtZero: true, showLabelBackdrop: false, display: false
+					},
+					reverse: false
+				},
+				animation: {
+					animateRotate: true,
+					animateScale: true
+				},
+    };
+    var optionsPIB = {
+      cutoutPercentage: 90,
+      legend: {display: false},
+    };
+    var options1 = {
+      legend: {display: false},
+      scaleShowLabels: false,
+      scale: {
+        display: false,
+        ticks: {
+          beginAtZero: true,
+          min: 10000,
+          max: 250000,
+        },
+      },
+      scales: { yAxes: [{ display: false, ticks: { showLabelBackdrop: false, display: false, min: 0, max: 800000 }}], xAxes: [{ display: false, ticks: { showLabelBackdrop: false, display: false} }] }
+    };
+    var options2 = {
+      legend: {display: false},
+      scaleShowLabels: false,
+      scale: {
+        display: false,
+        ticks: {
+          beginAtZero: true,
+          min: 500000,
+          max: 800000,
+        },
+      },
+      scales: { yAxes: [{ display: false, ticks: { showLabelBackdrop: false, display: false, min: 0, max: 800000 }}], xAxes: [{ display: false, ticks: { showLabelBackdrop: false, display: false} }] }
+    };
+
+    window.app = {};
+    var app = window.app;
+    //CENTRAR//
+    app.centrar = function(opt_options) {
+      var options = opt_options || {};
+      var button = document.createElement('button');
+      button.className = 'centrar';
+      var this_ = this;
+      var centrar = function() {
+        var center = [500000, 500000];
+        olMap.getView().setCenter(center);
+        olMap.getView().setZoom(7);
+      };
+      button.addEventListener('click', centrar, false);
+      button.addEventListener('touchstart', centrar, false);
+      var element = document.createElement('div');
+      element.className = 'centrar ol-unselectable ol-control';
+      element.appendChild(button);
+      ol.control.Control.call(this, {element: element,target: options.target });
+    };
+    ol.inherits(app.centrar, ol.control.Control);
+
+    /*var mousePositionControl2 = new ol.control.MousePosition({
+      coordinateFormat: ol.coordinate.createStringXY(6),
+      projection: 'EPSG:4326',
+      className: 'custom-mouse-position',
+      coordinateFormat: ol.coordinate.toStringHDMS,
+      target: document.getElementById('mouse-position2'),
+      undefinedHTML: ''
+    });*/
+    var mousePositionControl3 = new ol.control.MousePosition({
+      target: document.getElementById('mouse-position3'),
+      className: 'custom-mouse-position',
+      undefinedHTML: '',
+      projection: myProjection,
+      coordinateFormat : ol.coordinate.createStringXY(2),
+    });
+
+    var source_capabase = new ol.source.XYZ({  url: 'https://{1-4}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'});
+    var capabase = new ol.layer.Tile({source: source_capabase,name: 'LIGHT',description: 'CARTO',visible: true, crossOrigin: 'Anonymous' });
+    //AERIAL BING
+    var OSM = new ol.layer.Tile({ source: new ol.source.OSM(), visible:true});
+      var stamen = new ol.layer.Tile({
+        source: new ol.source.Stamen({
+          layer: 'terrain'
+        })
+      });
+      var source_aerial_bing = new ol.source.BingMaps({
+        key: 'ArI8uCPDtw0y4e58IBL66Qc-RmfMG3DvBCNS9Kdzj4BUS9SW6xNlRz9FRmW9NzKZ',
+        imagerySet: 'AerialWithLabels'
+      });
+      var aerial = new ol.layer.Tile({name:'aerial_bing',title: 'aerial_bing',
+      preload: Infinity, description: 'Aerial',visible: true, source: source_aerial_bing});
+
+      // var myProjectionName = 'EPSG:3857';
+      var myProjectionName = 'LAEA'; // Lambert acimutal equivalente
+      // var myProjection = ol.proj.get(myProjectionName);
+      proj4.defs('LAEA','+proj=laea +lat_0=40 +lon_0=-4 +x_0=500000 +y_0=500000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs');
+      var myProjection = ol.proj.get('LAEA');
+      // --- Se define el MAPA ---
+      var overviewMap = new ol.Map({
+        interactions: ol.interaction.defaults().extend([new ol.interaction.DragRotateAndZoom()]),
+        layers: [],
+        controls: [mousePositionControl3],
+        view: new ol.View({
+          projection: myProjection,
+          // center: [-1767006.43, 3278070.10],
+          center: [-650000, -740000],
+          zoom: 6
+        }),
+        target: document.getElementById('overviewMap'),
+      });
+      var olMap = new ol.Map({
+        interactions: ol.interaction.defaults({
+          DragRotate: false
+        }),
+        layers: [],
+        view: new ol.View({
+          projection: myProjection,
+          // center: [-412728.56, 4924308.52],
+          center: [400000, 500000],
+          zoom: 7.2,
+          minZoom: 7.2,
+          maxZoom: 9,
+          extent: [100000,25000,900000,900000 ]
+        }),
+        units: 'm',
+        controls: ol.control.defaults().extend ([
+          new ol.control.ScaleLine(),
+          mousePositionControl3,
+          new ol.control.FullScreen(),
+          new app.centrar()
+        ]),
+        target: document.getElementById('olMap'),
+      });
+      var dragPan;
+      olMap.getInteractions().forEach(function(interaction) {
+        if (interaction instanceof ol.interaction.DragRotate) {
+          dragPan = interaction;
+        }
+      }, this);
+      if (dragPan) {
+        olMap.removeInteraction(dragPan);
+      }
+/* BUILDING CHARTS */
+
+function buildChartsAllYears(i, ccaa) {
+  var years = [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017];
+  years.forEach(function(year) {
+    /*
+    var id = ccaa + year;
+    var container = 'containerCanvas' + year;
+    var canvas = document.createElement('canvas'); canvas.id = id; canvas.style.display = 'block';
+    canvas.style.width = 800; canvas.style.height = 400; document.getElementById(container).appendChild(canvas);
+    var ctx = document.getElementById(id).getContext('2d');
+    var dataset = [{label: year, data: centroids.features[i].properties.companies[year], type: "radar", backgroundColor: ['rgba(0,0,0, 1)'], borderColor: ['rgb(248,248,255, 1)'] }];
+    var chart = new Chart(ctx, {type: 'radar', data: { labels: ["G1", "G2", "G3", "G4"], datasets: dataset}, options: options });
+*/
+
+        // var data = canvas.toDataURL('image/png',1);
+        var gdp = centroids.features[i].properties['gdp'];
+        let colorGDP;
+        if (gdp[year] < 17000) colorGDP = 'hsl(210, 50%, 80%)'; //'rgb(255, 255, 0)'; // Yellow
+        if (gdp[year] > 17000 && gdp[year] < 22000) colorGDP = 'hsl(210, 50%, 70%)'; //'rgb(218, 178, 0)'; // Golden
+        if (gdp[year] > 22000 && gdp[year] < 25000) colorGDP = 'hsl(210, 50%, 60%)'; //'rgb(255, 145, 0)'; // Orange
+        if (gdp[year] > 25000 && gdp[year] < 28000) colorGDP = 'hsl(210, 50%, 50%)'; //'rgb(184, 67, 0)'; // Red
+        if (gdp[year] > 28000) colorGDP = 'hsl(210, 50%, 40%)'; //'rgb(112, 41, 0)'; // Brown
+        if (gdp[year] == 0) colorGDP = 'hsl(210, 50%, 00%)'; //'rgba(255, 255, 255, 0)'; // No color
+        var newStyle = new ol.style.Style({stroke: new ol.style.Stroke({color: '#282828',width: 0.75}),fill: new ol.style.Fill({color: colorGDP}) });
+        // coropleths.push(newStyle);
+        if (year == 2008) coropleths2008.push(newStyle);
+        if (year == 2009) coropleths2009.push(newStyle);
+        if (year == 2010) coropleths2010.push(newStyle);
+        if (year == 2011) coropleths2011.push(newStyle);
+        if (year == 2012) coropleths2012.push(newStyle);
+        if (year == 2013) coropleths2013.push(newStyle);
+        if (year == 2014) coropleths2014.push(newStyle);
+        if (year == 2015) coropleths2015.push(newStyle);
+        if (year == 2016) coropleths2016.push(newStyle);
+        if (year == 2017) coropleths2017.push(newStyle);
+
+  });
+}
+
+/* BUILDING CHARTS */
+var newValue = 2008;
+var coropleths2008 = [];
+var coropleths2009 = [];
+var coropleths2010 = [];
+var coropleths2011 = [];
+var coropleths2012 = [];
+var coropleths2013 = [];
+var coropleths2014 = [];
+var coropleths2015 = [];
+var coropleths2016 = [];
+var coropleths2017 = [];
+var textStyleP = new ol.style.Text({ text: 'Portugal', scale: 1, fill: new ol.style.Fill({ color: '#000000'}), font : '14px Arial',offsetX : 0, offsetY : 0 });
+var textStyleF = new ol.style.Text({ text: 'France', scale: 1, fill: new ol.style.Fill({ color: '#000000'}), font : '14px Arial',offsetX : -50, offsetY : -100 });
+var styleP = new ol.style.Style({stroke: new ol.style.Stroke({color: '#282828',width: 0.75}),fill: new ol.style.Fill({color: '#e7e7e9'}), text: textStyleP  });
+var styleF = new ol.style.Style({stroke: new ol.style.Stroke({color: '#282828',width: 0.75}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+var styleA = new ol.style.Style({stroke: new ol.style.Stroke({color: '#282828',width: 0.75}),fill: new ol.style.Fill({color: '#e7e7e9'}), text: textStyleF });
+var coropleths = [];
+var layersToRemove = [];
+
+$mdToast.show($mdToast.simple().content("Year: " + newValue).position("bottom right").hideDelay(1500));
+
+for (var i = 0; i<centroids.features.length; i++) {
+  var feature = centroids.features[i].properties['Texto'];
+  buildChartsAllYears(i, feature);
+}
+/* BUILDING LAYER */
+setTimeout(() => {
+var stylesPIB = {  '01': coropleths[0],  '02': coropleths[1],  '03':  coropleths[2],  '04':  coropleths[3],  '05':  coropleths[4],  '06':  coropleths[5],
+  '07':  coropleths[6],  '08':  coropleths[7],  '09':  coropleths[8],  '10':  coropleths[9], '11':  coropleths[10],  '12':  coropleths[11],  '13':  coropleths[12],
+  '14':  coropleths[13],  '15':  coropleths[14],  '16':  coropleths[15],  '17': coropleths[16], 'A': styleA, 'F': styleF, 'P': styleP
+};
+var stylesPIB2008 = {  '01': coropleths2008[0],  '02': coropleths2008[1],  '03':  coropleths2008[2],  '04':  coropleths2008[3],  '05':  coropleths2008[4],  '06':  coropleths2008[5],
+  '07':  coropleths2008[6],  '08':  coropleths2008[7],  '09':  coropleths2008[8],  '10':  coropleths2008[9], '11':  coropleths2008[10],  '12':  coropleths2008[11],  '13':  coropleths2008[12],
+  '14':  coropleths2008[13],  '15':  coropleths2008[14],  '16':  coropleths2008[15],  '17': coropleths2008[16], 'A': styleA, 'F': styleF, 'P': styleP
+};
+var stylesPIB2009 = {  '01': coropleths2009[0],  '02': coropleths2009[1],  '03':  coropleths2009[2],  '04':  coropleths2009[3],  '05':  coropleths2009[4],  '06':  coropleths2009[5],
+  '07':  coropleths2009[6],  '08':  coropleths2009[7],  '09':  coropleths2009[8],  '10':  coropleths2009[9], '11':  coropleths2009[10],  '12':  coropleths2009[11],  '13':  coropleths2009[12],
+  '14':  coropleths2009[13],  '15':  coropleths2009[14],  '16':  coropleths2009[15],  '17': coropleths2009[16], 'A': styleA, 'F': styleF, 'P': styleP
+};
+var stylesPIB2010 = {  '01': coropleths2010[0],  '02': coropleths2010[1],  '03':  coropleths2010[2],  '04':  coropleths2010[3],  '05':  coropleths2010[4],  '06':  coropleths2010[5],
+  '07':  coropleths2010[6],  '08':  coropleths2010[7],  '09':  coropleths2010[8],  '10':  coropleths2010[9], '11':  coropleths2010[10],  '12':  coropleths2010[11],  '13':  coropleths2010[12],
+  '14':  coropleths2010[13],  '15':  coropleths2010[14],  '16':  coropleths2010[15],  '17': coropleths2010[16], 'A': styleA, 'F': styleF, 'P': styleP
+};
+var stylesPIB2011 = {  '01': coropleths2011[0],  '02': coropleths2011[1],  '03':  coropleths2011[2],  '04':  coropleths2011[3],  '05':  coropleths2011[4],  '06':  coropleths2011[5],
+  '07':  coropleths2011[6],  '08':  coropleths2011[7],  '09':  coropleths2011[8],  '10':  coropleths2011[9], '11':  coropleths2011[10],  '12':  coropleths2011[11],  '13':  coropleths2011[12],
+  '14':  coropleths2011[13],  '15':  coropleths2011[14],  '16':  coropleths2011[15],  '17': coropleths2011[16], 'A': styleA, 'F': styleF, 'P': styleP
+};
+var stylesPIB2012 = {  '01': coropleths2012[0],  '02': coropleths2012[1],  '03':  coropleths2012[2],  '04':  coropleths2012[3],  '05':  coropleths2012[4],  '06':  coropleths2012[5],
+  '07':  coropleths2012[6],  '08':  coropleths2012[7],  '09':  coropleths2012[8],  '10':  coropleths2012[9], '11':  coropleths2012[10],  '12':  coropleths2012[11],  '13':  coropleths2012[12],
+  '14':  coropleths2012[13],  '15':  coropleths2012[14],  '16':  coropleths2012[15],  '17': coropleths2012[16], 'A': styleA, 'F': styleF, 'P': styleP
+};
+var stylesPIB2013 = {  '01': coropleths2013[0],  '02': coropleths2013[1],  '03':  coropleths2013[2],  '04':  coropleths2013[3],  '05':  coropleths2013[4],  '06':  coropleths2013[5],
+  '07':  coropleths2013[6],  '08':  coropleths2013[7],  '09':  coropleths2013[8],  '10':  coropleths2013[9], '11':  coropleths2013[10],  '12':  coropleths2013[11],  '13':  coropleths2013[12],
+  '14':  coropleths2013[13],  '15':  coropleths2013[14],  '16':  coropleths2013[15],  '17': coropleths2013[16], 'A': styleA, 'F': styleF, 'P': styleP
+};
+var stylesPIB2014 = {  '01': coropleths2014[0],  '02': coropleths2014[1],  '03':  coropleths2014[2],  '04':  coropleths2014[3],  '05':  coropleths2014[4],  '06':  coropleths2014[5],
+  '07':  coropleths2014[6],  '08':  coropleths2014[7],  '09':  coropleths2014[8],  '10':  coropleths2014[9], '11':  coropleths2014[10],  '12':  coropleths2014[11],  '13':  coropleths2014[12],
+  '14':  coropleths2014[13],  '15':  coropleths2014[14],  '16':  coropleths2014[15],  '17': coropleths2014[16], 'A': styleA, 'F': styleF, 'P': styleP
+};
+var stylesPIB2015 = {  '01': coropleths2015[0],  '02': coropleths2015[1],  '03':  coropleths2015[2],  '04':  coropleths2015[3],  '05':  coropleths2015[4],  '06':  coropleths2015[5],
+  '07':  coropleths2015[6],  '08':  coropleths2015[7],  '09':  coropleths2015[8],  '10':  coropleths2015[9], '11':  coropleths2015[10],  '12':  coropleths2015[11],  '13':  coropleths2015[12],
+  '14':  coropleths2015[13],  '15':  coropleths2015[14],  '16':  coropleths2015[15],  '17': coropleths2015[16], 'A': styleA, 'F': styleF, 'P': styleP
+};
+var stylesPIB2016 = {  '01': coropleths2016[0],  '02': coropleths2016[1],  '03':  coropleths2016[2],  '04':  coropleths2016[3],  '05':  coropleths2016[4],  '06':  coropleths2016[5],
+  '07':  coropleths2016[6],  '08':  coropleths2016[7],  '09':  coropleths2016[8],  '10':  coropleths2016[9], '11':  coropleths2016[10],  '12':  coropleths2016[11],  '13':  coropleths2016[12],
+  '14':  coropleths2016[13],  '15':  coropleths2016[14],  '16':  coropleths2016[15],  '17': coropleths2016[16], 'A': styleA, 'F': styleF, 'P': styleP
+};
+var stylesPIB2017 = {  '01': coropleths2017[0],  '02': coropleths2017[1],  '03':  coropleths2017[2],  '04':  coropleths2017[3],  '05':  coropleths2017[4],  '06':  coropleths2017[5],
+  '07':  coropleths2017[6],  '08':  coropleths2017[7],  '09':  coropleths2017[8],  '10':  coropleths2017[9], '11':  coropleths2017[10],  '12':  coropleths2017[11],  '13':  coropleths2017[12],
+  '14':  coropleths2017[13],  '15':  coropleths2017[14],  '16':  coropleths2017[15],  '17': coropleths2017[16], 'A': styleA, 'F': styleF, 'P': styleP
+};
+
+window.styleFunctionCCAA = function(feature) {
+  var year = $scope.slider.value;
+  if (year == 2008) return stylesPIB2008[feature.getProperties()['Codigo']];
+  if (year == 2009) return stylesPIB2009[feature.getProperties()['Codigo']];
+  if (year == 2010) return stylesPIB2010[feature.getProperties()['Codigo']];
+  if (year == 2011) return stylesPIB2011[feature.getProperties()['Codigo']];
+  if (year == 2012) return stylesPIB2012[feature.getProperties()['Codigo']];
+  if (year == 2013) return stylesPIB2013[feature.getProperties()['Codigo']];
+  if (year == 2014) return stylesPIB2014[feature.getProperties()['Codigo']];
+  if (year == 2015) return stylesPIB2015[feature.getProperties()['Codigo']];
+  if (year == 2016) return stylesPIB2016[feature.getProperties()['Codigo']];
+  if (year == 2017) return stylesPIB2017[feature.getProperties()['Codigo']];
+};
+window.styleFunctionCCAAEmpty = function(feature) {
+  var year = $scope.slider.value;
+  if (year == 2008) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+  if (year == 2009) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+  if (year == 2010) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+  if (year == 2011) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+  if (year == 2012) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+  if (year == 2013) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+  if (year == 2014) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+  if (year == 2015) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+  if (year == 2016) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+  if (year == 2017) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+};
+
+// Vector layer for CCAA
+var vectorSource = new ol.source.Vector({
+  features: (new ol.format.GeoJSON()).readFeatures(geojsonSpain)
+});
+var vectorLayer = new ol.layer.Vector({
+  name: 'ccaaLayer',
+  source: vectorSource,
+  style: styleFunctionCCAA,
+  crossOrigin: 'Anonymous',
+});
+// Vector layer for Africa
+var vectorSourceAfrica = new ol.source.Vector({
+  features: (new ol.format.GeoJSON()).readFeatures(africa_generalized_LAEA)
+});
+var vectorLayerAfrica = new ol.layer.Vector({
+  name: 'africaLayer',
+  source: vectorSourceAfrica,
+  style: new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) }),
+  crossOrigin: 'Anonymous',
+});
+// Vector layer for centroids
+var vectorSourceCentroids = new ol.source.Vector({
+  features: (new ol.format.GeoJSON()).readFeatures(centroids)
+});
+var vectorLayerCentroids = new ol.layer.Vector({
+  name: 'companiesLayer',
+  source: vectorSourceCentroids,
+  crossOrigin: 'Anonymous',
+});
+olMap.addLayer(vectorLayer);
+olMap.addLayer(vectorLayerAfrica);
+//olMap.addLayer(vectorLayerCentroids); // olMap.addLayer(vectorLayerPIB);
+overviewMap.addLayer(vectorLayer);
+//overviewMap.addLayer(vectorLayerCentroids); // overviewMap.addLayer(vectorLayerPIB);
+}, 1000);
+// onChangeYearBuildOvertlays
+window.onChangeYearBuildOvertlays = function() {
+  olMap.getOverlays().clear();
+  overviewMap.getOverlays().clear();
+  var sumg4 = []; var sumg3 = []; var sumg2 = []; var sumg1 = [];
+    for (var i = 0; i<centroids.features.length; i++) {
+      var year = $scope.slider.value;
+      if ($scope.data.g1 == true) {
+        sumg1.push(parseInt(centroids.features[i].properties.companies[year][0]));
+
+      }
+      if ($scope.data.g2 == true) {
+
+        sumg2.push(parseInt(centroids.features[i].properties.companies[year][1]));
+      }
+      if ($scope.data.g3 == true) {
+
+        sumg3.push(parseInt(centroids.features[i].properties.companies[year][2]));
+      }
+      if ($scope.data.g4 == true) {
+        sumg4.push(parseInt(centroids.features[i].properties.companies[year][3]));
+      }
+    }
+    if (sumg4.length == 17) {
+      var maxsumg4 = Math.max.apply(null, sumg4);
+      var keymaxsumg4 = sumg4.indexOf(Math.max.apply(null, sumg4));
+    }
+    if (sumg3.length == 17) {
+      var maxsumg3 = Math.max.apply(null, sumg3);
+      var keymaxsumg3 = sumg3.indexOf(Math.max.apply(null, sumg3));
+    }
+    if (sumg2.length == 17) {
+      var maxsumg2 = Math.max.apply(null, sumg2);
+      var keymaxsumg2 = sumg2.indexOf(Math.max.apply(null, sumg2));
+    }
+
+    if (sumg1.length == 17) {
+      var maxsumg1 = Math.max.apply(null, sumg1);
+      var keymaxsumg1 = sumg1.indexOf(Math.max.apply(null, sumg1));
+    }
+  for (var i = 0; i<centroids.features.length; i++) {
+    var ccaa = centroids.features[i].properties['Texto'];
+    var year = $scope.slider.value;
+    var canvas = document.createElement('canvas');
+    var canvasOver = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    var ctxOver = canvasOver.getContext('2d');
+    var container = 'containerCanvas' + year;
+    var containerOver = 'containerCanvas' + year + 'Over';
+    canvas.style.width = 300; canvas.style.height = 300; document.getElementById(container).appendChild(canvas);
+    canvasOver.style.width = 300; canvasOver.style.height = 300; document.getElementById(containerOver).appendChild(canvasOver);
+    var array = [];
+    var labels = [];
+    var colors = [];
+    var borderColors = [];
+    var borderWidths = [];
+    if ($scope.data.g1 == true) {
+      array.push(parseInt(centroids.features[i].properties.companies[year][0]));
+      //labels.push("Trade, transport and cattering");
+      labels.push("");
+      colors.push('hsl(350, 50%, 60%)');
+      //borderColors.push('hsl(350, 50%, 60%)');
+      borderWidths.push(2.5);
+      if (i != keymaxsumg1) {
+        borderColors.push('transparent');
+      } else {
+        if ($scope.optionUpper == true) {
+          borderColors.push('hsl(350, 50%, 100%)');
+        } else {
+          borderColors.push('transparent');
+        }
+
+      }
+      //var borderColors = bordercolorsg1;
+
+    }
+    if ($scope.data.g2 == true) {
+      array.push(parseInt(centroids.features[i].properties.companies[year][1]));
+      //labels.push("Building");
+      colors.push('hsl(50, 50%, 60%)');
+      labels.push("");
+      borderWidths.push(2.5);
+      if (i != keymaxsumg2) {
+        borderColors.push('transparent');
+      } else {
+        if ($scope.optionUpper == true) {
+          borderColors.push('hsl(50, 50%, 100%)');
+        } else {
+          borderColors.push('transparent');
+        }
+
+      }
+      //borderColors.push('hsl(50, 50%, 60%)');
+      //var borderColors = bordercolorsg2;
+
+
+    }
+    if ($scope.data.g3 == true) {
+      array.push(parseInt(centroids.features[i].properties.companies[year][2]));
+      //labels.push("Proffesional activities");
+      labels.push("");
+      colors.push('hsl(110, 50%, 60%)');
+      borderWidths.push(2.5);
+      if (i != keymaxsumg3) {
+        borderColors.push('transparent');
+      } else {
+        if ($scope.optionUpper == true) {
+          borderColors.push('hsl(110, 50%, 100%)');
+        } else {
+          borderColors.push('transparent');
+        }
+      }
+      //borderColors.push('hsl(110, 50%, 60%)');
+      //var borderColors = bordercolorsg3;
+    }
+    if ($scope.data.g4 == true) {
+      array.push(parseInt(centroids.features[i].properties.companies[year][3]));
+      colors.push('hsl(180, 50%, 60%)');
+      //labels.push("Other");
+      labels.push("");
+      borderWidths.push(2.5);
+      if (i != keymaxsumg4) {
+        borderColors.push('transparent');
+      } else {
+        if ($scope.optionUpper == true) {
+          borderColors.push('hsl(180, 50%, 100%)');
+        } else {
+          borderColors.push('transparent');
+        }
+      }
+      //var borderColors = bordercolorsg4;
+
+    }
+    var sum = array.reduce((a, b) => a + b, 0);
+    var max = Math.max.apply(null, array);
+    //console.log(array);
+    //console.log(max);
+    //console.log(sum);
+    // var area = sum/0.02;
+    var area = sum/$scope.paramRadius;
+    var radius = Math.sqrt(area/Math.PI);
+    var chartOptions = {
+      rotation: -0.5 * Math.PI,
+      cutoutPercentage: 0,
+      circumference: 2 * Math.PI,
+      // outerRadius: 50,
+      outerRadius: radius,
+      animation: { animateRotate: false, animateScale: false },
+      responsive: true,
+      title: { display: false },
+      legend: { display: false },
+      tooltips: {enabled: true}
+    }; //polarArea
+    var dataset = [{label: year, data: array, type: "pie", backgroundColor: colors, borderColor: borderColors, borderWidth: borderWidths }];
+    var chart = new Chart(ctx, {type: 'pie', data: { labels: labels, datasets: dataset}, options: chartOptions });
+    var chartOver = new Chart(ctxOver, {type: 'pie', data: { labels: labels, datasets: dataset}, options: chartOptions });
+
+    var pie = new ol.Overlay({
+      position: centroids.features[i].geometry.coordinates,
+      positioning: 'center-center',
+      element: canvas
+    });
+    var pieOver = new ol.Overlay({
+      position: centroids.features[i].geometry.coordinates,
+      positioning: 'center-center',
+      element: canvasOver
+    });
+    olMap.addOverlay(pie);
+    overviewMap.addOverlay(pieOver);
+    olMap.updateSize(); olMap.render();
+    overviewMap.updateSize(); overviewMap.render();
+  }
+  olMap.getLayers().forEach(function(layer) {
+    if (layer.get('name') == 'ccaaLayer') {
+      layer.setStyle(window.styleFunctionCCAA);
+    }
+  });
+  overviewMap.getLayers().forEach(function(layer) {
+    if (layer.get('name') == 'ccaaLayer') {
+      layer.setStyle(window.styleFunctionCCAA);
+    }
+  });
+}
+
+/* CHANGING SLIDER TIME */
+$scope.slider = {
+    value: 2008,
+    min: 2008,
+    max: 2017,
+    options: {
+        step: 1,
+        floor: 2008,
+        ceil: 2017,
+        minLimit: 2008,
+        maxLimit: 2017,
+        onChange: function() {
+            console.log('On change ' + $scope.slider.value);
+            onChangeYearBuildOvertlays();
+        }
+    }
+};
+$scope.pauseTimeSeries = function() {
+  $interval.cancel(window.tt);
+  document.getElementById('buttonPlayTimeSeries').style.display = 'block';
+  document.getElementById('buttonPauseTimeSeries').style.display = 'none';
+}
+$scope.previousTime = function() {
+  if ($scope.slider.value != 2008) {
+    $scope.slider.value = $scope.slider.value - 1;
+    onChangeYearBuildOvertlays();
+    document.getElementById('buttonPreviousTime').style.border = 'none';
+    document.getElementById('buttonNextTime').style.border = 'none';
+  } else {
+    document.getElementById('buttonPreviousTime').style.background = 'red';
+    $timeout(function () {
+      document.getElementById('buttonPreviousTime').style.background = 'rgb(250,250,250)';
+    }, 1000);
+  }
+}
+$scope.nextTime = function() {
+  if ($scope.slider.value != 2017) {
+    $scope.slider.value = $scope.slider.value + 1;
+    onChangeYearBuildOvertlays();
+    document.getElementById('buttonNextTime').style.border = 'none';
+    document.getElementById('buttonPreviousTime').style.border = 'none';
+  } else {
+    document.getElementById('buttonNextTime').style.background = 'red';
+    $timeout(function () {
+      document.getElementById('buttonNextTime').style.background = 'rgb(250,250,250)';
+    }, 1000);
+  }
+}
+$scope.playTimeSeries = function() {
+  document.getElementById('buttonPlayTimeSeries').style.display = 'none';
+  document.getElementById('buttonPauseTimeSeries').style.display = 'block';
+  var years = [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017];
+  let initYear = 0;
+  for (var i = 0; i < years.length; i++) {
+    if ($scope.slider.value == years[i]) {
+      initYear = i;
+    }
+  }
+  // $scope.slider.value = years[0];
+  var tt = $interval(function(){startTime()},1000);
+  window.tt = tt;
+  var counter = initYear;
+
+  function startTime() {
+    if(counter == 9) {
+      $scope.slider.value = years[0];
+      counter = 0;
+    } else {
+      counter++;
+    }
+    $scope.slider.value = years[counter];
+    onChangeYearBuildOvertlays();
+  }
+}
+onChangeYearBuildOvertlays();
+var popup = new Popup();
+olMap.addOverlay(popup);
+
+// Change VIEW
+// aaa
+olMap.on('click', function(evt) {
+  res = olMap.getView().getResolution();
+});
+
+var feature2string = function (feature)  {
+  if (feature){
+    var str = '';
+    var propiedades = feature.getProperties();
+    var geomname = feature.getGeometryName();
+    var thing = feature.get('elemento');
+    str = '<p style="text-align:center; font-size:14px; font-weight:700; border-bottom:1px solid #000000; color:black;">'+thing+'</p>';
+    for (var p in propiedades) {
+      if (p != geomname) {
+
+        str +=  p + ': ' + feature.get(p)+ ' <br> ';
+      }
+    }
+    return str;
+  }
+}
+var TextInfo = document.getElementById('TextInfo');
+
+
+}]);
+
+</script>
+</body>
+
+</html>
