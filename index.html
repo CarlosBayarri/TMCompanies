@@ -484,7 +484,8 @@ md-list-item.md-3-line, md-list-item.md-3-line>.md-no-style {
                     <md-checkbox ng-model="data.g4" ng-change="changeGroups()"> Other  </md-checkbox>
                   </div>
                   <span ng-attr-style="border: 1px solid #333; background: hsl(180, 50%, 60%); height: 20px; width: 25px; margin-top: 15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                </md-list-item>
+                  <md-tooltip md-direction="right">Extractive industries, information and communication, financial and insurance act., house selling act., public administration and defense, artistic act.</md-tooltip>
+                 </md-list-item>
                 <md-subheader class="md-no-sticky">Gross Domestic Product per capita
                   <md-tooltip md-direction="top">This is a monetary measure of the market value of all the final goods and services produced in a period of time.</md-tooltip>
 
@@ -1550,16 +1551,16 @@ window.styleFunctionCCAA = function(feature) {
 };
 window.styleFunctionCCAAEmpty = function(feature) {
   var year = $scope.slider.value;
-  if (year == 2008) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
-  if (year == 2009) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
-  if (year == 2010) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
-  if (year == 2011) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
-  if (year == 2012) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
-  if (year == 2013) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
-  if (year == 2014) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
-  if (year == 2015) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
-  if (year == 2016) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
-  if (year == 2017) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+  if (year == 2008) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#282828',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+  if (year == 2009) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#282828',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+  if (year == 2010) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#282828',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+  if (year == 2011) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#282828',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+  if (year == 2012) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#282828',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+  if (year == 2013) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#282828',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+  if (year == 2014) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#282828',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+  if (year == 2015) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#282828',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+  if (year == 2016) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#282828',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
+  if (year == 2017) return  new ol.style.Style({stroke: new ol.style.Stroke({color: '#282828',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) });
 };
 
 // Vector layer for CCAA
@@ -1579,7 +1580,7 @@ var vectorSourceAfrica = new ol.source.Vector({
 var vectorLayerAfrica = new ol.layer.Vector({
   name: 'africaLayer',
   source: vectorSourceAfrica,
-  style: new ol.style.Style({stroke: new ol.style.Stroke({color: '#aba39a',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) }),
+  style: new ol.style.Style({stroke: new ol.style.Stroke({color: '#282828',width: 1}),fill: new ol.style.Fill({color: '#e7e7e9'}) }),
   crossOrigin: 'Anonymous',
 });
 // Vector layer for centroids
