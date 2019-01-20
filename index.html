@@ -577,7 +577,7 @@ md-list-item.md-3-line, md-list-item.md-3-line>.md-no-style {
         <div id="mouse-position3" style="display: block; position: fixed; bottom: -5px; left: 270px; font-size: 13px;"> </div>
           <div style="display: block; position: fixed; bottom: -5px; right: 20px;font-size: 13px;">
             Developed by <a style="color:ghostwhite;" href="https://github.com/CarlosBayarri">Carlos Bayarri</a>.
-            Source data by <a style="color:ghostwhite;" href="https://www.ine.es/">INE</a>    </div>
+            Data source by <a style="color:ghostwhite;" href="https://www.ine.es/">INE</a>    </div>
       </div>
     </div>
   </footer>
@@ -708,7 +708,7 @@ md-list-item.md-3-line, md-list-item.md-3-line>.md-no-style {
       } else if (window.innerHeight <= 800) {
         window.defaultZoom = window.defaultZoom - 0.00; //window.defaultZoom = 6.9;
       }
-      // console.log(window.outerWidth, window.innerWidth, zoomLevel);
+      console.log(window.outerWidth, window.innerWidth, zoomLevel);
       olMap.updateSize();
       olMap.getView().setZoom(window.defaultZoom);
     }
