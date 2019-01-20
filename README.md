@@ -13,10 +13,7 @@ https://carlosbayarri.github.io/TMCompanies/
 
 ## Requirements
 The project has zero dependencies.
-The project is tested in Chrome Version 71.0.3578.98 (Official Build) (64-bit) and Firefox Quantum 64.0 (64-bit), for different resolutions: 1920 x 1080 and 1600 x 900.
-
-## Test
-The project is tested with Karma.
+It is tested in Chrome Version 71.0.3578.98 (Official Build) (64-bit) and Firefox Quantum 64.0 (64-bit), for different resolutions: 1920 x 1080 and 1600 x 900.
 
 ## License
 The project is released under the
