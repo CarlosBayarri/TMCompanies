@@ -7,6 +7,15 @@ RELATION BETWEEN COMPANIES AND GROSS DOMESTIC PRODUCT IN SPAIN FROM 2008 TO 2017
 ## Description
 The purpose of this project is to collect, develop and analyze statistical data, and construct several suitable representations about this data, explaining a history, what is happened. We want to explain a little part of the business world in Spain along the crisis.
 
+## Data
+Data source: [INE](https://www.ine.es/).
+The is an excel file in this project with all the data used:
+- Tabs for each region contain all the active companies in each sector.
+- Tab about NaturalBreaksGDP contains the process to classify the Gross Domestic Product by means of natural breaks.
+- Tab about ValuesStatic contains the values for the static map.
+- Tab about RelativeValuesCompanies contains the standardized values of companies.
+- Tab about AbsoluteValuesCompanies contains the absolute values of companies. 
+
 ## Usage
 The website opens by opening the index.html (double click) or by opening the following URL in the browser:
 https://carlosbayarri.github.io/TMCompanies/
