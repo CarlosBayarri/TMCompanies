@@ -1794,8 +1794,9 @@ $scope.slider = {
         minLimit: 2008,
         maxLimit: 2017,
         onChange: function() {
-            console.log('On change ' + $scope.slider.value);
+            // console.log('On change ' + $scope.slider.value);
             onChangeYearBuildOvertlays();
+            // $mdToast.show($mdToast.simple().content("Year: " + $scope.slider.value).position("bottom right").hideDelay(1500));
         }
     }
 };
