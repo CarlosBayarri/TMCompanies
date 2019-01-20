@@ -698,15 +698,15 @@ md-list-item.md-3-line, md-list-item.md-3-line>.md-no-style {
         zoomLevel = "unknown";
       }
       if (window.innerHeight >= 500 && window.innerHeight <= 600) {
-        zoomLevel = "2";
-        window.defaultZoom = 6.50;
+        window.defaultZoom = window.defaultZoom - 0.25; //window.defaultZoom = 6.50;
       }  else if (window.innerHeight <= 650) {
-        zoomLevel = "1";
-        window.defaultZoom = 6.70;
-      }
-      else if (window.innerHeight <= 800) {
-        zoomLevel = "1";
-        window.defaultZoom = 6.9;
+        window.defaultZoom = window.defaultZoom - 0.15; //window.defaultZoom = 6.70;
+      } else if (window.innerHeight <= 700) {
+        window.defaultZoom = window.defaultZoom - 0.10; //window.defaultZoom = 6.9;
+      } else if (window.innerHeight <= 750) {
+        window.defaultZoom = window.defaultZoom - 0.05; //window.defaultZoom = 6.9;
+      } else if (window.innerHeight <= 800) {
+        window.defaultZoom = window.defaultZoom - 0.00; //window.defaultZoom = 6.9;
       }
       // console.log(window.outerWidth, window.innerWidth, zoomLevel);
       olMap.updateSize();
