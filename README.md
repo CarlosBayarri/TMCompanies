@@ -1,4 +1,4 @@
-# ![Cover](https://github.com/CarlosBayarri/TMCompanies/blob/main/cover_tmcompanies.jpg)
+# ![Cover](https://github.com/CarlosBayarri/TMCompanies/master/cover_tmcompanies.jpg)
 
 # TMCompanies
 RELATION BETWEEN COMPANIES AND GROSS DOMESTIC PRODUCT IN SPAIN FROM 2008 TO 2017
@@ -28,4 +28,4 @@ It is tested in Chrome Version 71.0.3578.98 (Official Build) (64-bit) and Firefo
 
 ## [License](https://github.com/CarlosBayarri/TMCompanies/LICENSE.md)
 
-MIT © [Carlos Bayarri Cebrecos ](https://github.com/CarlosBayarri/TMCompanies/blob/main/LICENSE)
+MIT © [Carlos Bayarri Cebrecos ](https://github.com/CarlosBayarri/TMCompanies/master/LICENSE)
