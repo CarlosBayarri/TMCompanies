@@ -1,4 +1,4 @@
-# ![Cover](https://firebasestorage.googleapis.com/v0/b/portfolio-15d76.appspot.com/o/projects%2Fpd9abzIE0QElbjCt4BOp%2FCBC%20-%20SIGNIS%20(2).jpg?alt=media&token=86174fd7-7207-4e86-8340-fecc50eb57ef)
+# ![Cover](https://github.com/CarlosBayarri/TMCompanies/blob/main/cover_tmcompanies.jpg)
 
 # TMCompanies
 RELATION BETWEEN COMPANIES AND GROSS DOMESTIC PRODUCT IN SPAIN FROM 2008 TO 2017
@@ -26,6 +26,6 @@ https://carlosbayarri.github.io/TMCompanies/
 The project has zero dependencies.
 It is tested in Chrome Version 71.0.3578.98 (Official Build) (64-bit) and Firefox Quantum 64.0 (64-bit), for different resolutions: 1920 x 1080 and 1600 x 900.
 
-## License
-The project is released under the
-[MIT license](https://opensource.org/licenses/MIT).
+## [License](https://github.com/CarlosBayarri/TMCompanies/LICENSE.md)
+
+MIT © [Carlos Bayarri Cebrecos ](https://github.com/CarlosBayarri/TMCompanies/blob/main/LICENSE)
